@@ -1,5 +1,12 @@
+import {
+	sanityProjectId,
+	sanityDataset,
+	sanityTitle,
+	sanityApiVersion,
+} from '@/sanityConfig';
+
 import { defineConfig } from 'sanity';
-import { deskTool } from 'sanity/desk';
+import { structureTool } from 'sanity/structure';
 import { media } from 'sanity-plugin-media';
 import schemas from './sanity/schemas';
 // import { dashboardTool } from '@sanity/dashboard';
@@ -21,14 +28,14 @@ const singletonActions = new Set(['publish', 'discardChanges', 'restore']);
 const singletonTypes = new Set(['siteInfo']);
 
 const config = defineConfig({
-	projectId: '3u071r2z',
-	dataset: 'production',
-	title: 'Next Sanity Template',
-	apiVersion: '2024-02-06',
+	projectId: sanityProjectId,
+	dataset: sanityDataset,
+	title: sanityTitle,
+	apiVersion: sanityApiVersion,
 	useCdn: false,
 	basePath: '/admin',
 	plugins: [
-		deskTool({
+		structureTool({
 			structure: (S) =>
 				S.list()
 					.title('Content')
