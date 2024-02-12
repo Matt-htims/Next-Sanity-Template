@@ -64,7 +64,8 @@ export default function Footer({ data }: SiteInfoProps) {
 					</div>
 				</div>
 				<p className="text-center text-white/50 text-base">
-					Copyright © {new Date().getFullYear()} {data.siteName}
+					Copyright © {new Date().getFullYear()}{' '}
+					{data.siteName ? data.siteName : ''}
 				</p>
 			</div>
 		</footer>
