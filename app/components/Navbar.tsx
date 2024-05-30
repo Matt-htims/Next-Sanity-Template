@@ -94,8 +94,10 @@ function NavLink({ menuItem, mobileMenu, onClickFunction }: NavLinkProps) {
 				<Link
 					href={`/${sanitiseSlug(menuItem.page?.slug ?? '')}`}
 					className={`${
-						mobileMenu ? 'text-nav-mobile' : 'text-nav text-underline'
-					} ${path === '/' + menuItem.page?.slug && 'after:scale-x-100 decoration-current'}`}
+						mobileMenu
+							? 'text-nav-mobile'
+							: 'text-nav text-underline'
+					} ${path === '/' + menuItem.page?.slug && 'decoration-current after:scale-x-100'}`}
 				>
 					{menuItem.page?.name}
 				</Link>
@@ -131,7 +133,7 @@ export default function Navbar({ data }: SiteInfoProps) {
 					initial="initial"
 					animate="animate"
 					variants={navContainerAnimation}
-					className="contained z-40 flex items-center justify-between py-2"
+					className="contained z-40 flex items-center justify-between py-5"
 				>
 					<motion.div
 						variants={navIconAnimation}
@@ -139,11 +141,17 @@ export default function Navbar({ data }: SiteInfoProps) {
 						animate="animate"
 						className="flex-initial"
 					>
-						<Link href="/" aria-label="Back to homepage" className="relative">
+						<Link
+							href="/"
+							aria-label="Back to homepage"
+							className="relative"
+						>
 							{data?.siteLogo?.textAsLogo ? (
-								<span className="text-nav">{data.siteLogo?.textLogo}</span>
+								<span className="text-nav">
+									{data.siteLogo?.textLogo}
+								</span>
 							) : data?.siteLogo?.imageLogo?.asset?.url ? (
-								<div className="w-full relative">
+								<div className="relative w-full">
 									<Image
 										src={data.siteLogo.imageLogo?.asset.url}
 										alt={
@@ -152,12 +160,14 @@ export default function Navbar({ data }: SiteInfoProps) {
 												: 'Logo'
 										}
 										width={
-											data.siteLogo.imageLogo?.asset.metadata?.dimensions
-												?.width ?? 50
+											data.siteLogo.imageLogo?.asset
+												.metadata?.dimensions?.width ??
+											50
 										}
 										height={
-											data.siteLogo.imageLogo?.asset.metadata?.dimensions
-												?.height ?? 50
+											data.siteLogo.imageLogo?.asset
+												.metadata?.dimensions?.height ??
+											50
 										}
 										priority={true}
 									/>
@@ -167,8 +177,8 @@ export default function Navbar({ data }: SiteInfoProps) {
 							)}
 						</Link>
 					</motion.div>
-					<div className="lg:block  flex-shrink-0 hidden">
-						<ul className="flex space-x-5">
+					<div className="hidden  flex-shrink-0 lg:block">
+						<ul className="flex space-x-10">
 							{data?.navMenu?.map((menuItem, index: number) => (
 								<NavLink key={index} menuItem={menuItem} />
 							))}
@@ -177,7 +187,7 @@ export default function Navbar({ data }: SiteInfoProps) {
 					<button
 						aria-label="Menu"
 						onClick={handleTray}
-						className="right-0 lg:hidden cursor-pointer space-y-[8px] text-white"
+						className="right-0 cursor-pointer space-y-[8px] text-white lg:hidden"
 					>
 						<div
 							className={`${hamburgerLine} ${
@@ -197,8 +207,8 @@ export default function Navbar({ data }: SiteInfoProps) {
 				</motion.div>
 			</header>
 			<div
-				onClick={handleTray}
-				className={`fixed bottom-0 backdrop-blur-[1px] top-0 z-20 h-screen w-full overflow-hidden bg-black/20 opacity-0 transition-all duration-[400ms] ${
+				onClick={closeTray}
+				className={`fixed bottom-0 top-0 z-20 h-screen w-full overflow-hidden bg-black/20 opacity-0 backdrop-blur-[1px] transition-all duration-[400ms] ${
 					open ? 'opacity-100' : 'z-[-1]'
 				}`}
 			></div>

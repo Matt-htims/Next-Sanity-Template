@@ -4,11 +4,11 @@
 
 @layer base {
 	.contained {
-		@apply m-auto box-content max-w-site overflow-x-hidden overflow-y-clip px-2 md:px-4 lg:overflow-x-visible;
+		@apply m-auto box-content max-w-site overflow-x-hidden overflow-y-clip px-5 md:px-10 lg:overflow-x-visible;
 	}
 
 	.text-h1 {
-		@apply font-heading font-bold text-[40px] leading-none sm:text-6xl md:text-[70px] lg:text-[80px];
+		@apply font-heading text-[40px] font-bold leading-none sm:text-6xl md:text-[70px] lg:text-[80px];
 	}
 
 	.text-h2-large {
@@ -28,7 +28,7 @@
 	}
 
 	.text-body {
-		@apply text-lg font-normal leading-[28px] sm:text-xl sm:leading-[30px] text-pretty;
+		@apply text-pretty text-lg font-normal leading-[28px] sm:text-xl sm:leading-[30px];
 	}
 
 	.text-body-small {

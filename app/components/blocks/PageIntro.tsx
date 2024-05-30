@@ -19,7 +19,7 @@ type PageIntroProps = {
 
 export default function PageIntro({ data }: PageIntroProps) {
 	return (
-		<section className="contained my-10 flex justify-center overflow-visible">
+		<section className="contained my-28 flex justify-center overflow-visible">
 			<motion.div
 				variants={animateContainer}
 				initial="initial"
@@ -30,21 +30,27 @@ export default function PageIntro({ data }: PageIntroProps) {
 				{data.image?.asset?.url ? (
 					<motion.div
 						variants={animateFadeUp}
-						className="w-20 h-25 rounded-site overflow-hidden origin-bottom relative mb-2"
+						className="h-64 w-52 relative mb-5 origin-bottom overflow-hidden rounded-site"
 					>
 						<Image
 							src={data.image.asset.url}
-							width={data.image.asset.metadata.dimensions?.width ?? 145}
-							height={data.image.asset.metadata.dimensions?.height ?? 200}
+							width={
+								data.image.asset.metadata.dimensions?.width ??
+								145
+							}
+							height={
+								data.image.asset.metadata.dimensions?.height ??
+								200
+							}
 							alt={data.image.alt}
 							sizes='"(max-width: 768px) 25vw, 20vw"'
-							className="mb-2 md:mb-4 w-full"
+							className="mb-5 w-full md:mb-10"
 						/>
 					</motion.div>
 				) : (
 					''
 				)}
-				<motion.h2 variants={animateFadeUp} className="text-h1 mb-2">
+				<motion.h2 variants={animateFadeUp} className="text-h1 mb-5">
 					{data.heading}
 				</motion.h2>
 				<motion.h3

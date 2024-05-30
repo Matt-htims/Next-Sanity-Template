@@ -48,15 +48,17 @@ export default function StandaloneText({ data }: StandaloneTextProps) {
 					variants={textAnimation}
 					initial="initial"
 					animate={isInView ? 'animate' : 'initial'}
-					className="contained mb-1.5 grid grid-cols-12 gap-2 sm:mb-3"
+					className="contained mb-3.5 grid grid-cols-12 gap-5 sm:mb-8"
 				>
 					<div
 						className={`col-span-12 sm:col-span-10 ${width(
-							data.positionOptions?.width
+							data.positionOptions?.width,
 						)} ${alignment(
-							data.positionOptions?.alignment
+							data.positionOptions?.alignment,
 						)} ${textStyle(data.textOptions?.textStyle)} ${
-							data.textOptions.centreAlignText ? 'text-center' : ''
+							data.textOptions.centreAlignText
+								? 'text-center'
+								: ''
 						}`}
 					>
 						<CustomTag>{breakText(data.simpleText)}</CustomTag>
@@ -65,29 +67,33 @@ export default function StandaloneText({ data }: StandaloneTextProps) {
 			);
 		} else if (data.textAnimation == 'scrollReveal') {
 			return (
-				<section className="contained mb-1.5 grid grid-cols-12 gap-2 sm:mb-3">
+				<section className="contained mb-3.5 grid grid-cols-12 gap-5 sm:mb-8">
 					<RevealOnScrollText
 						text={data.simpleText}
 						className={`col-span-12 sm:col-span-10 ${width(
-							data.positionOptions?.width
+							data.positionOptions?.width,
 						)} ${alignment(
-							data.positionOptions?.alignment
+							data.positionOptions?.alignment,
 						)} ${textStyle(data.textOptions?.textStyle)} ${
-							data.textOptions.centreAlignText ? 'text-center' : ''
+							data.textOptions.centreAlignText
+								? 'text-center'
+								: ''
 						}`}
 					/>
 				</section>
 			);
 		} else {
 			return (
-				<section className="contained mb-1.5 grid grid-cols-12 gap-2 sm:mb-3">
+				<section className="contained mb-3.5 grid grid-cols-12 gap-5 sm:mb-8">
 					<CustomTag
 						className={`col-span-12 sm:col-span-10 ${width(
-							data.positionOptions?.width
+							data.positionOptions?.width,
 						)} ${alignment(
-							data.positionOptions?.alignment
+							data.positionOptions?.alignment,
 						)} ${textStyle(data.textOptions?.textStyle)} ${
-							data.textOptions.centreAlignText ? 'text-center' : ''
+							data.textOptions.centreAlignText
+								? 'text-center'
+								: ''
 						}`}
 					>
 						{breakText(data.simpleText)}
@@ -99,7 +105,7 @@ export default function StandaloneText({ data }: StandaloneTextProps) {
 		return (
 			<motion.section
 				ref={ref}
-				className="contained mb-1.5 grid grid-cols-12 gap-2 sm:mb-3"
+				className="contained mb-3.5 grid grid-cols-12 gap-5 sm:mb-7"
 				variants={textAnimation}
 				initial="initial"
 				animate={isInView ? 'animate' : 'initial'}
@@ -109,7 +115,7 @@ export default function StandaloneText({ data }: StandaloneTextProps) {
 					initial="initial"
 					animate={isInView ? 'animate' : 'initial'}
 					className={`col-span-12 sm:col-span-10 ${width(
-						data.positionOptions?.width
+						data.positionOptions?.width,
 					)} ${alignment(data.positionOptions?.alignment)}`}
 				>
 					<RichText data={data.richText} />

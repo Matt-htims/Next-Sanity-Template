@@ -16,7 +16,7 @@ export default function LogoGrid({ data }: LogoGridProps) {
 				variants={animateContainer}
 				initial="initial"
 				whileInView="animate"
-				className="flex-wra xs:gap-3 flex items-center justify-center gap-2 sm:gap-5 sm:px-0 md:gap-6 lg:gap-10"
+				className="lg:gap-24 flex items-center justify-center gap-2 xs:gap-7 sm:gap-12 sm:px-0 md:gap-14"
 			>
 				{data.logos.map((logo, index) => (
 					<motion.div

@@ -30,14 +30,14 @@ export default function ImageText({ data }: ImageTextProps) {
 	return (
 		<section
 			ref={ref}
-			className="contained mb-10 mt-4 grid grid-cols-12 items-center overflow-visible overflow-x-clip min-[980px]:mb-20 min-[980px]:mt-15"
+			className="contained mb-24 min-[980px]:mb-52 min-[980px]:mt-36 mt-10 grid grid-cols-12 items-center overflow-visible overflow-x-clip"
 		>
 			<motion.div
 				style={{ y }}
-				className={`relative col-span-12 aspect-[3/2] min-[980px]:aspect-[29/25] overflow-hidden rounded-site min-[980px]:col-span-6 xl:col-span-5 ${
+				className={`relative col-span-12 aspect-[3/2] overflow-hidden rounded-site min-[980px]:col-span-6 min-[980px]:aspect-[29/25] xl:col-span-5 ${
 					data.imageSide == 'left'
-						? 'mb-4 min-[980px]:col-start-1 min-[980px]:mb-0 xl:col-start-2'
-						: 'mb-4 min-[980px]:col-start-7 min-[980px]:mb-0 xl:col-start-7 min-[980px]:order-2'
+						? 'mb-10 min-[980px]:col-start-1 min-[980px]:mb-0 xl:col-start-2'
+						: 'mb-10 min-[980px]:order-2 min-[980px]:col-start-7 min-[980px]:mb-0 xl:col-start-7'
 				}`}
 			>
 				<Image

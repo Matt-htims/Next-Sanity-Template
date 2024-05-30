@@ -11,21 +11,21 @@ export default function Spacer({ data }: PaddingProps) {
 	function spacerSizeCalc(padding: string) {
 		switch (padding) {
 			case '10px':
-				return 'mt-0.5 sm:mt-1';
+				return 'mt-1.5 sm:mt-2.5';
 			case '20px':
-				return 'mt-1 sm:mt-2';
+				return 'mt-2.5 sm:mt-5';
 			case '50px':
-				return 'mt-2 sm:mt-5';
+				return 'mt-6 sm:mt-12';
 			case '100px':
-				return 'mt-5 sm:mt-10';
+				return 'mt-12 sm:mt-24';
 			case '150px':
-				return 'mt-7 sm:mt-15';
+				return 'mt-20 sm:mt-36';
 			case '200pxSm':
-				return 'mt-8 sm:mt-12 md:mt-20';
+				return 'mt-20 sm:mt-28 md:mt-52';
 			case '200px':
-				return 'mt-15 sm:mt-20';
+				return 'mt-32 sm:mt-52';
 			case '250px':
-				return 'mt-12 sm:mt-25';
+				return 'mt-36 sm:mt-60';
 			default:
 				return '';
 		}
