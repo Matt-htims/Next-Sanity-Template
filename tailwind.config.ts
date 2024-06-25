@@ -34,6 +34,18 @@ const config: Config = {
 			primary: clay,
 			secondary: lush,
 			accent: balls,
+			'button-default': {
+				DEFAULT: black,
+				text: white,
+			},
+			'button-primary': {
+				DEFAULT: lush,
+				text: white,
+			},
+			'button-secondary': {
+				DEFAULT: clay,
+				text: white,
+			},
 		},
 		extend: {
 			fontFamily: {

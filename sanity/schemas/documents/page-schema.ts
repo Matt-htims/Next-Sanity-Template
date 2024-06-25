@@ -54,6 +54,9 @@ const page = {
 					type: 'StandaloneText',
 				},
 				{
+					type: 'ButtonBlock',
+				},
+				{
 					type: 'VideoBlock',
 				},
 				{

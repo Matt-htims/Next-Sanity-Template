@@ -42,7 +42,7 @@ export type SiteInfo = {
 	facebookLink: string;
 	twitterLink: string;
 	bookingLink: ButtonType;
-	navMenu: Array<MenuItem>;
+	navMenu: Array<ButtonType>;
 };
 
 export type SiteInfoProps = {

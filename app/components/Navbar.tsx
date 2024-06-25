@@ -7,6 +7,8 @@ import { usePathname } from 'next/navigation';
 import { sanitiseSlug } from '../utils/slugFunctions';
 import Button from './atoms/Button';
 
+import ButtonBlock from './blocks/ButtonBlock';
+
 // Prop imports
 import { SiteInfoProps } from '@/types/SiteInfo';
 import { MenuItem } from '@/types/SiteInfo';
@@ -178,11 +180,14 @@ export default function Navbar({ data }: SiteInfoProps) {
 						</Link>
 					</motion.div>
 					<div className="hidden  flex-shrink-0 lg:block">
-						<ul className="flex space-x-10">
-							{data?.navMenu?.map((menuItem, index: number) => (
-								<NavLink key={index} menuItem={menuItem} />
-							))}
-						</ul>
+						<ButtonBlock
+							className="gap-5 md:gap-10"
+							data={{
+								_key: 'sldkfj',
+								_type: 'buttons',
+								buttons: data.navMenu,
+							}}
+						/>
 					</div>
 					<button
 						aria-label="Menu"
@@ -217,17 +222,22 @@ export default function Navbar({ data }: SiteInfoProps) {
 					open ? 'left-0' : 'left-[-100%]'
 				}`}
 			>
-				<Link href="/" onClick={handleTray} className="text-nav-mobile">
-					Home
-				</Link>
-				{data?.navMenu?.map((menuItem, index: number) => (
+				{/* {data?.navMenu?.map((menuItem, index: number) => (
 					<NavLink
 						key={index}
 						menuItem={menuItem}
 						mobileMenu={true}
 						onClickFunction={handleTray}
 					/>
-				))}
+				))} */}
+				<ButtonBlock
+					className="flex-col gap-8 text-white md:gap-8"
+					data={{
+						_key: 'sldkfj',
+						_type: 'buttons',
+						buttons: data.navMenu,
+					}}
+				/>
 			</div>
 		</>
 	);

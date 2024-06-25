@@ -65,12 +65,6 @@ const siteInfo = {
 			type: 'url',
 			group: 'footer',
 		},
-		{
-			name: 'bookingLink',
-			title: 'Booking Link',
-			type: 'button',
-			group: 'footer',
-		},
 	],
 };
 

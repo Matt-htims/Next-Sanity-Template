@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-import { ButtonType } from '@/types/Button';
+import { OldButtonType } from '@/types/Button';
 
 type ButtonProps = {
-	button: ButtonType;
+	button: OldButtonType;
 	onClickFunction?: any;
 };
 

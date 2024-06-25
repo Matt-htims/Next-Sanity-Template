@@ -12,7 +12,7 @@ const StandaloneText = dynamic(
 	() => import('../components/blocks/StandaloneText/StandaloneText'),
 	{
 		ssr: true,
-	}
+	},
 );
 
 const Spacer = dynamic(() => import('../components/blocks/Spacer'), {
@@ -27,7 +27,7 @@ const ImageCarousel = dynamic(
 	() => import('../components/blocks/ImageCarousel'),
 	{
 		ssr: true,
-	}
+	},
 );
 
 const ImageText = dynamic(() => import('../components/blocks/ImageText'), {
@@ -38,10 +38,14 @@ const FadeExplainer = dynamic(
 	() => import('../components/blocks/FadeExplainer'),
 	{
 		ssr: true,
-	}
+	},
 );
 
 const LogoGrid = dynamic(() => import('../components/blocks/LogoGrid'), {
+	ssr: true,
+});
+
+const ButtonBlock = dynamic(() => import('../components/blocks/ButtonBlock'), {
 	ssr: true,
 });
 
@@ -65,6 +69,8 @@ export default function BlockRenderer(block: any, index: number) {
 			return <LogoGrid key={index} data={block} />;
 		case 'FadeExplainer':
 			return <FadeExplainer key={index} data={block} />;
+		case 'ButtonBlock':
+			return <ButtonBlock key={index} data={block} />;
 		default:
 			return null;
 	}

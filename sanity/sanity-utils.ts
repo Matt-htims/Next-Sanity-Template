@@ -16,23 +16,14 @@ export async function getSiteInfo(): Promise<SiteInfo> {
             twitterLink,
             bookingLink,
             siteName,
-            navMenu[] {
-                _key,
-                addSubpages,
-                displayName,
-                customLink,
-                link,
-                page-> {
-                    "slug": slug.current,
-                    name,
-                    _id,
+            navMenu [] {
+                    ...,
+                    page-> {
+                        "slug" : slug.current,
+                        name,
+                        id,
+                    },
                 },
-                subPages[]->{
-                    "slug": slug.current,
-                    name,
-                    _id,
-                }
-            },
             siteLogo{
                 ...,
                 imageLogo{
@@ -52,7 +43,7 @@ export async function getSiteInfo(): Promise<SiteInfo> {
                     },
                 }
             },
-        }`
+        }`,
 	);
 }
 
@@ -78,7 +69,7 @@ export async function getSiteInfoMeta(): Promise<MetaSite> {
                 }
             }
            }
-        }`
+        }`,
 	);
 }
 
@@ -89,7 +80,7 @@ export async function getPages(): Promise<Page[]> {
             _createdAt,
             "slug": slug.current,
             name,
-        }`
+        }`,
 	);
 }
 
@@ -150,6 +141,14 @@ export async function getPage(slug: string): Promise<Page> {
                         },
                     },
                 },
+                buttons [] {
+                    ...,
+                    page-> {
+                        "slug" : slug.current,
+                        name,
+                        id,
+                    },
+                },
                 images[] {
                     ...,
                     asset-> {
@@ -186,7 +185,7 @@ export async function getPage(slug: string): Promise<Page> {
                 }
             },
         }`,
-		{ slug }
+		{ slug },
 	);
 }
 
@@ -195,6 +194,6 @@ export async function getPageSeo(slug: string): Promise<Meta> {
 		groq`*[_type == "page" && slug.current == $slug][0]{
             seo
         }`,
-		{ slug }
+		{ slug },
 	);
 }
