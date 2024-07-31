@@ -41,30 +41,6 @@ const siteInfo = {
 			group: 'header',
 			of: [{ type: 'navItem' }],
 		},
-		{
-			name: 'address',
-			title: 'Address Info',
-			type: 'addressInfo',
-			group: 'footer',
-		},
-		{
-			name: 'instaLink',
-			title: 'Instagram Link',
-			type: 'url',
-			group: 'footer',
-		},
-		{
-			name: 'facebookLink',
-			title: 'Facebook Link',
-			type: 'url',
-			group: 'footer',
-		},
-		{
-			name: 'twitterLink',
-			title: 'Twitter Link',
-			type: 'url',
-			group: 'footer',
-		},
 	],
 };
 

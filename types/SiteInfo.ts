@@ -37,11 +37,6 @@ export type SiteInfo = {
 	_createdAt: Date;
 	siteName: string;
 	siteLogo: SiteLogo;
-	address: AddressType;
-	instaLink: string;
-	facebookLink: string;
-	twitterLink: string;
-	bookingLink: ButtonType;
 	navMenu: Array<ButtonType>;
 };
 

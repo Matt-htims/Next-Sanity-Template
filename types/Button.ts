@@ -22,12 +22,3 @@ export type ButtonType = {
 		| undefined;
 	buttonSize?: 'default' | 'sm' | 'lg' | 'xs' | 'nav';
 };
-
-export type OldButtonType = {
-	_type: string;
-	url: string;
-	newTab: boolean;
-	buttonText: string;
-	buttonType: string;
-	buttonAnimation?: string;
-};

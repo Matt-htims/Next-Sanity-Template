@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import { motion } from 'framer-motion';
 
 import { ImageType } from '@/types/Image';
+import { MotionText } from '../atoms/Text';
 
 type PageIntroProps = {
 	data: {
@@ -30,7 +31,7 @@ export default function PageIntro({ data }: PageIntroProps) {
 				{data.image?.asset?.url ? (
 					<motion.div
 						variants={animateFadeUp}
-						className="h-64 w-52 relative mb-5 origin-bottom overflow-hidden rounded-site"
+						className="relative mb-5 h-64 w-52 origin-bottom overflow-hidden rounded-site"
 					>
 						<Image
 							src={data.image.asset.url}
@@ -50,15 +51,22 @@ export default function PageIntro({ data }: PageIntroProps) {
 				) : (
 					''
 				)}
-				<motion.h2 variants={animateFadeUp} className="text-h1 mb-5">
-					{data.heading}
-				</motion.h2>
-				<motion.h3
+				<MotionText
+					as="h2"
+					textStyle="h1"
+					className="mb-5"
 					variants={animateFadeUp}
-					className="text-h2 text-pretty font-normal"
+				>
+					{data.heading}
+				</MotionText>
+				<MotionText
+					as="h3"
+					textStyle="h2"
+					className="text-pretty font-normal"
+					variants={animateFadeUp}
 				>
 					{data.subheading}
-				</motion.h3>
+				</MotionText>
 			</motion.div>
 		</section>
 	);

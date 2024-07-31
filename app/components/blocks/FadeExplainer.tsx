@@ -7,6 +7,7 @@ import {
 	useMotionValueEvent,
 	useTransform,
 } from 'framer-motion';
+import { Text } from '../atoms/Text';
 
 import { ImageType } from '@/types/Image';
 import imageText from '@/sanity/schemas/blocks/imageText-schema';
@@ -68,7 +69,7 @@ export default function FadeExplainer({ data }: FadeExplainerProps) {
 					target: textRef1,
 					offset: ['start end', 'start start'],
 				}
-			: { axis: 'x' }
+			: { axis: 'x' },
 	);
 
 	useMotionValueEvent(scrollText1, 'change', (latest) => {
@@ -84,7 +85,7 @@ export default function FadeExplainer({ data }: FadeExplainerProps) {
 					target: textRef2,
 					offset: ['start end', 'start start'],
 				}
-			: { axis: 'x' }
+			: { axis: 'x' },
 	);
 
 	useMotionValueEvent(scrollText2, 'change', (latest) => {
@@ -100,7 +101,7 @@ export default function FadeExplainer({ data }: FadeExplainerProps) {
 					target: textRef3,
 					offset: ['start end', 'start start'],
 				}
-			: { axis: 'x' }
+			: { axis: 'x' },
 	);
 
 	useMotionValueEvent(scrollText3, 'change', (latest) => {
@@ -116,7 +117,7 @@ export default function FadeExplainer({ data }: FadeExplainerProps) {
 					target: textRef4,
 					offset: ['start end', 'start start'],
 				}
-			: { axis: 'x' }
+			: { axis: 'x' },
 	);
 
 	useMotionValueEvent(scrollText4, 'change', (latest) => {
@@ -162,7 +163,9 @@ export default function FadeExplainer({ data }: FadeExplainerProps) {
 							sizes="(max-width: 640px) 150vw, 100vw"
 							style={{ objectFit: 'cover' }}
 							placeholder="blur"
-							blurDataURL={imageTextPair.image.asset.metadata.lqip}
+							blurDataURL={
+								imageTextPair.image.asset.metadata.lqip
+							}
 							className={`relative transition duration-[1200ms] ${
 								imageZs[index]
 							} ${textScrolls[index] >= 1 ? 'opacity-0' : 'opacity-100'}`}
@@ -178,11 +181,13 @@ export default function FadeExplainer({ data }: FadeExplainerProps) {
 						textScrolls[index] >= 1 ? 'opacity-0' : 'opacity-100'
 					} ${index < fadeExplainerNumber - 1 ? 'h-[100vh]' : 'h-[70vh]'}`}
 				>
-					<div className="text-offwhite absolute z-50 col-span-12 col-start-1 sm:col-span-9 sm:col-start-1 min-[990px]:col-span-7 min-[990px]:col-start-6 min-[990px]:max-w-[700px]">
-						<h2 className="font-heading mb-2 text-[40px] italic leading-none sm:text-[50px] md:mb-3 md:text-[60px] min-[1095px]:text-[70px] ">
+					<div className="absolute z-50 col-span-12 col-start-1 text-offwhite sm:col-span-9 sm:col-start-1 min-[990px]:col-span-7 min-[990px]:col-start-6 min-[990px]:max-w-[700px]">
+						<Text as="h2" textStyle="h2" className="mb-2 italic">
 							{breakText(imageTextPair.heading)}
-						</h2>
-						<p className="text-body">{imageTextPair.body}</p>
+						</Text>
+						<Text as="p" textStyle="body">
+							{imageTextPair.body}
+						</Text>
 					</div>
 				</div>
 			))}

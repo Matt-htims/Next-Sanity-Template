@@ -4,12 +4,15 @@ import { Button } from '../../ui/Button';
 import { cn } from '@/lib/utils';
 import { ButtonType } from '@/types/Button';
 
+import { CustomLink } from '../CustomLink';
+
 import { motion, cubicBezier } from 'framer-motion';
+import ButtonInnerAnimation from '../atoms/ButtonInnerAnimation';
 
 type ButtonBlockProps = {
 	data: {
-		_key: string;
-		_type: string;
+		_key?: string;
+		_type?: string;
 		buttons: ButtonType[];
 	};
 	className?: string;
@@ -40,7 +43,9 @@ export default function ButtonBlock({ data, className }: ButtonBlockProps) {
 									rel="noindex nofollow"
 									href={button.link}
 								>
-									{button.displayName}
+									<ButtonInnerAnimation>
+										{button.displayName}
+									</ButtonInnerAnimation>
 								</a>
 							</Button>
 						</motion.div>
@@ -53,11 +58,13 @@ export default function ButtonBlock({ data, className }: ButtonBlockProps) {
 							size={button.buttonSize}
 							asChild
 						>
-							<Link href={'/' + button.page?.slug ?? ''}>
-								{button.pageTitle
-									? button.pageTitle
-									: button.page?.name}
-							</Link>
+							<CustomLink href={'/' + button.page?.slug ?? ''}>
+								<ButtonInnerAnimation>
+									{button.pageTitle
+										? button.pageTitle
+										: button.page?.name}
+								</ButtonInnerAnimation>
+							</CustomLink>
 						</Button>
 					</motion.div>
 				);

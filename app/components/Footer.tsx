@@ -9,8 +9,7 @@ import instagram from '@/public/icon-instagram.svg';
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-
-import Button from './atoms/Button';
+import { Text } from './atoms/Text';
 
 export default function Footer({ data }: SiteInfoProps) {
 	return (
@@ -23,9 +22,9 @@ export default function Footer({ data }: SiteInfoProps) {
 						className="relative"
 					>
 						{data?.siteLogo?.textAsLogo ? (
-							<span className="text-nav text-2xl">
+							<Text as="span" textStyle="h3">
 								{data.siteLogo?.textLogo}
-							</span>
+							</Text>
 						) : data?.siteLogo?.imageLogo?.asset?.url ? (
 							<div className="relative w-full">
 								<Image
@@ -49,26 +48,6 @@ export default function Footer({ data }: SiteInfoProps) {
 							''
 						)}
 					</Link>
-					<div className="flex space-x-5">
-						{data?.twitterLink && (
-							<Link aria-label="Twitter" href={data.twitterLink}>
-								<Image src={twitter} alt="Twitter" />
-							</Link>
-						)}
-						{data?.facebookLink && (
-							<Link
-								aria-label="Facebook"
-								href={data.facebookLink}
-							>
-								<Image src={facebook} alt="Facebook" />
-							</Link>
-						)}
-						{data?.instaLink && (
-							<Link aria-label="Instagram" href={data.instaLink}>
-								<Image src={instagram} alt="Facebook" />
-							</Link>
-						)}
-					</div>
 				</div>
 				<p className="text-center text-base text-white/50">
 					Copyright © {new Date().getFullYear()}{' '}

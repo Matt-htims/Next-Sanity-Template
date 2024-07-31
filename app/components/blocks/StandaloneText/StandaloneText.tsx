@@ -1,14 +1,17 @@
 'use client';
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { cn } from '@/lib/utils';
 import { breakText } from '@/app/utils/breakText';
 import RichText from '../../atoms/RichText';
+import { Text } from '../../atoms/Text';
 
 // Components
 import RevealOnScrollText from './RevealOnScrollText';
 
 // Standalone Text Helpers
 import { textStyle, alignment, width } from './standaloneTextHelpers';
+import { TextWithOptions } from '@/types/TextWithOptions';
 
 type StandaloneTextProps = {
 	data: {
@@ -16,17 +19,13 @@ type StandaloneTextProps = {
 		_type: string;
 		title: string;
 		useSimpleText: boolean;
-		simpleText: string;
+		simpleText: TextWithOptions;
 		richText: Array<any>;
 		textAnimation: string;
-		textOptions: {
-			textStyle: string;
-			textType: string;
-			centreAlignText: boolean;
-		};
 		positionOptions: {
 			alignment: string;
 			width: string;
+			maxWidth?: number;
 		};
 	};
 };
@@ -34,11 +33,6 @@ type StandaloneTextProps = {
 export default function StandaloneText({ data }: StandaloneTextProps) {
 	const ref = useRef(null);
 	const isInView = useInView(ref, { amount: 0.4, once: true });
-
-	const CustomTag =
-		data.useSimpleText && data.textOptions?.textType
-			? (data.textOptions?.textType as keyof JSX.IntrinsicElements)
-			: ('p' as keyof JSX.IntrinsicElements);
 
 	if (data.useSimpleText) {
 		if (data.textAnimation == 'fadeIn') {
@@ -50,32 +44,38 @@ export default function StandaloneText({ data }: StandaloneTextProps) {
 					animate={isInView ? 'animate' : 'initial'}
 					className="contained mb-3.5 grid grid-cols-12 gap-5 sm:mb-8"
 				>
-					<div
-						className={`col-span-12 sm:col-span-10 ${width(
-							data.positionOptions?.width,
-						)} ${alignment(
-							data.positionOptions?.alignment,
-						)} ${textStyle(data.textOptions?.textStyle)} ${
-							data.textOptions.centreAlignText
-								? 'text-center'
-								: ''
-						}`}
+					<Text
+						as={data.simpleText.textOptions.textType}
+						textStyle={data.simpleText.textOptions.textStyle}
+						style={{ maxWidth: data.positionOptions.maxWidth }}
+						className={cn(
+							'col-span-12 sm:col-span-10',
+							width(data.positionOptions.width),
+							alignment(data.positionOptions.alignment),
+							{
+								'text-center':
+									data.simpleText.textOptions.textCentered,
+							},
+						)}
 					>
-						<CustomTag>{breakText(data.simpleText)}</CustomTag>
-					</div>
+						{breakText(data.simpleText.text)}
+					</Text>
 				</motion.section>
 			);
 		} else if (data.textAnimation == 'scrollReveal') {
 			return (
-				<section className="contained mb-3.5 grid grid-cols-12 gap-5 sm:mb-8">
+				<section
+					style={{ maxWidth: data.positionOptions.maxWidth }}
+					className="contained mb-3.5 grid grid-cols-12 gap-5 sm:mb-8"
+				>
 					<RevealOnScrollText
-						text={data.simpleText}
+						text={data.simpleText.text}
 						className={`col-span-12 sm:col-span-10 ${width(
 							data.positionOptions?.width,
 						)} ${alignment(
 							data.positionOptions?.alignment,
-						)} ${textStyle(data.textOptions?.textStyle)} ${
-							data.textOptions.centreAlignText
+						)} ${textStyle(data.simpleText.textOptions?.textStyle ?? 'h2')} ${
+							data.simpleText.textOptions.textCentered
 								? 'text-center'
 								: ''
 						}`}
@@ -85,19 +85,22 @@ export default function StandaloneText({ data }: StandaloneTextProps) {
 		} else {
 			return (
 				<section className="contained mb-3.5 grid grid-cols-12 gap-5 sm:mb-8">
-					<CustomTag
-						className={`col-span-12 sm:col-span-10 ${width(
-							data.positionOptions?.width,
-						)} ${alignment(
-							data.positionOptions?.alignment,
-						)} ${textStyle(data.textOptions?.textStyle)} ${
-							data.textOptions.centreAlignText
-								? 'text-center'
-								: ''
-						}`}
+					<Text
+						as={data.simpleText.textOptions.textType}
+						textStyle={data.simpleText.textOptions.textStyle}
+						style={{ maxWidth: data.positionOptions.maxWidth }}
+						className={cn(
+							'col-span-12 sm:col-span-10',
+							width(data.positionOptions.width),
+							alignment(data.positionOptions.alignment),
+							{
+								'text-center':
+									data.simpleText.textOptions.textCentered,
+							},
+						)}
 					>
-						{breakText(data.simpleText)}
-					</CustomTag>
+						{breakText(data.simpleText.text)}
+					</Text>
 				</section>
 			);
 		}
@@ -117,6 +120,7 @@ export default function StandaloneText({ data }: StandaloneTextProps) {
 					className={`col-span-12 sm:col-span-10 ${width(
 						data.positionOptions?.width,
 					)} ${alignment(data.positionOptions?.alignment)}`}
+					style={{ maxWidth: data.positionOptions.maxWidth }}
 				>
 					<RichText data={data.richText} />
 				</motion.div>

@@ -1,5 +1,7 @@
 import { PortableText } from '@portabletext/react';
 
+import { Text } from './Text';
+
 const myPortableTextComponents = {
 	marks: {
 		link: ({ value, children }) => {
@@ -25,12 +27,36 @@ const myPortableTextComponents = {
 	},
 
 	block: {
-		h1: ({ children }) => <h1 className="text-h1">{children}</h1>,
-		h2: ({ children }) => <h2 className="text-h2">{children}</h2>,
-		h3: ({ children }) => <h3 className="text-h3">{children}</h3>,
-		h4: ({ children }) => <h4 className="text-h4">{children}</h4>,
-		h5: ({ children }) => <h5 className="text-h5">{children}</h5>,
-		normal: ({ children }) => <p className="text-body">{children}</p>,
+		h1: ({ children }) => (
+			<Text as="h1" textStyle="h1">
+				{children}
+			</Text>
+		),
+		h2: ({ children }) => (
+			<Text as="h2" textStyle="h2">
+				{children}
+			</Text>
+		),
+		h3: ({ children }) => (
+			<Text as="h3" textStyle="h3">
+				{children}
+			</Text>
+		),
+		h4: ({ children }) => (
+			<Text as="h4" textStyle="h4">
+				{children}
+			</Text>
+		),
+		h5: ({ children }) => (
+			<Text as="h5" textStyle="h5">
+				{children}
+			</Text>
+		),
+		normal: ({ children }) => (
+			<Text as="p" textStyle="body">
+				{children}
+			</Text>
+		),
 	},
 };
 

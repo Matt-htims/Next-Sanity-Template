@@ -1,10 +1,10 @@
-import { DocumentsIcon } from '@sanity/icons';
+import { DocumentIcon } from '@sanity/icons';
 
 const page = {
 	name: 'page',
 	title: 'Pages',
 	type: 'document',
-	icon: DocumentsIcon,
+	icon: DocumentIcon,
 	fields: [
 		{
 			name: 'seo',
@@ -35,7 +35,7 @@ const page = {
 		},
 		{
 			name: 'content',
-			title: 'Content',
+			title: 'Blocks',
 			type: 'array',
 			of: [
 				{
@@ -72,6 +72,48 @@ const page = {
 					type: 'ThemeSwitch',
 				},
 			],
+			options: {
+				insertMenu: {
+					filter: true,
+					groups: [
+						{
+							name: 'intro',
+							title: 'Intro',
+							of: ['PageIntro'],
+						},
+						{
+							name: 'text',
+							title: 'Text',
+							of: ['StandaloneText', 'ImageText'],
+						},
+						{
+							name: 'storytelling',
+							title: 'Storytelling',
+							of: ['ImageText', 'FadeExplainer', 'LogoGrid'],
+						},
+						{
+							name: 'media',
+							title: 'Media',
+							of: [
+								'ImageBlock',
+								'ImageCarousel',
+								'ImageText',
+								'VideoBlock',
+							],
+						},
+						{
+							name: 'cta',
+							title: 'Call To Action',
+							of: ['ButtonBlock'],
+						},
+						{
+							name: 'misc',
+							title: 'Miscellaneous',
+							of: ['Spacer', 'ThemeSwitch'],
+						},
+					],
+				},
+			},
 		},
 	],
 };

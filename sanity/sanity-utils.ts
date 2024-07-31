@@ -1,4 +1,3 @@
-import { Project } from '@/types/Project';
 import { Page } from '@/types/Page';
 import { SiteInfo } from '@/types/SiteInfo';
 import { Meta, MetaSite } from '@/types/Meta';

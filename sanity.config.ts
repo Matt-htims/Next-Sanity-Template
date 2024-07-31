@@ -19,7 +19,7 @@ import {
 
 import { simplerColorInput } from 'sanity-plugin-simpler-color-input';
 
-import { ControlsIcon } from '@sanity/icons';
+import { ControlsIcon, DocumentsIcon } from '@sanity/icons';
 
 // Define the actions that should be available for singleton documents
 const singletonActions = new Set(['publish', 'discardChanges', 'restore']);
@@ -49,11 +49,15 @@ const config = defineConfig({
 								// Instead of rendering a list of documents, we render a single
 								// document, specifying the `documentId` manually to ensure
 								// that we're editing the single instance of the document
-								S.document().schemaType('siteInfo').documentId('siteInfo')
+								S.document()
+									.schemaType('siteInfo')
+									.documentId('siteInfo'),
 							),
 
 						// Regular document types
-						S.documentTypeListItem('page').title('Pages'),
+						S.documentTypeListItem('page')
+							.title('Pages')
+							.icon(DocumentsIcon),
 					]),
 		}),
 		media(),
@@ -73,14 +77,18 @@ const config = defineConfig({
 	schema: {
 		types: schemas,
 		templates: (templates) =>
-			templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
+			templates.filter(
+				({ schemaType }) => !singletonTypes.has(schemaType),
+			),
 	},
 	document: {
 		// For singleton types, filter out actions that are not explicitly included
 		// in the `singletonActions` list defined above
 		actions: (input, context) =>
 			singletonTypes.has(context.schemaType)
-				? input.filter(({ action }) => action && singletonActions.has(action))
+				? input.filter(
+						({ action }) => action && singletonActions.has(action),
+					)
 				: input,
 	},
 });

@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import localFont from 'next/font/local';
 import '../globals.scss';
 import { getSiteInfo, getSiteInfoMeta } from '@/sanity/sanity-utils';
 import createMetadataObject from '../utils/createMetadataObject';
-import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -12,6 +10,8 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import SmoothScrolling from '../components/SmoothScrolling';
+import Providers from '../components/Providers';
+import PageTransition from '../components/PageTransition';
 
 const FallbackSeo = {
 	title: 'No meta sent',
@@ -42,17 +42,19 @@ export default async function RootLayout({
 					data-website-id="8d538029-7728-4485-81f1-4972e7bf67f2"
 				/> */}
 			</head>
-			<body
-				className={`font-inter relative -z-20 w-full overflow-x-clip bg-background transition-colors duration-1000 ease-in-out font-body text-text antialiased ${inter.variable}`}
-			>
-				<Navbar data={siteInfo} />
-				{/* <InitialAnimation /> */}
-				<main className="min-h-screen overflow-x-clip">
-					<SmoothScrolling>{children}</SmoothScrolling>
-					{/* {children} */}
-				</main>
-				<Footer data={siteInfo} />
-			</body>
+			<Providers>
+				<body
+					className={`font-inter relative -z-20 w-full overflow-x-clip bg-background font-body text-text antialiased transition-colors duration-1000 ease-in-out ${inter.variable}`}
+				>
+					<Navbar data={siteInfo} />
+					<PageTransition />
+					<main className="min-h-screen overflow-x-clip">
+						<SmoothScrolling>{children}</SmoothScrolling>
+						{/* {children} */}
+					</main>
+					<Footer data={siteInfo} />
+				</body>
+			</Providers>
 		</html>
 	);
 }

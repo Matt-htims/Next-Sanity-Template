@@ -23,10 +23,9 @@ const standaloneText = {
 		{
 			name: 'simpleText',
 			title: 'Simple Text',
-			type: 'text',
+			type: 'textWithOptions',
 			description:
 				'Use / for line breaks and surround words to highlight with []',
-			rows: 6,
 			hidden: ({ parent }: any) => parent?.useSimpleText == false,
 		},
 		{
@@ -87,61 +86,6 @@ const standaloneText = {
 			],
 		},
 		{
-			name: 'textOptions',
-			title: 'Text Options',
-			type: 'object',
-			hidden: ({ parent }: any) => parent?.useSimpleText == false,
-			options: {
-				collapsible: true,
-				collapsed: true,
-				columns: 2,
-				modal: { type: 'popover' },
-			},
-			fields: [
-				{
-					name: 'textType',
-					title: 'Text Type',
-					type: 'string',
-					initialValue: 'h3',
-					options: {
-						list: [
-							{ value: 'h1', title: 'H1' },
-							{ value: 'h2', title: 'H2' },
-							{ value: 'h3', title: 'H3' },
-							{ value: 'h4', title: 'H4' },
-							{ value: 'p', title: 'Paragraph' },
-						],
-					},
-				},
-				{
-					name: 'textStyle',
-					title: 'Text Style',
-					type: 'string',
-					initialValue: 'h3',
-					hidden: ({ parent }: any) => parent?.useSimpleText == true,
-					options: {
-						list: [
-							{ value: 'h1', title: 'H1' },
-							{ value: 'h2', title: 'H2' },
-							{
-								value: 'h2Large',
-								title: 'H2 - Larger on mobile',
-							},
-							{ value: 'h3', title: 'H3' },
-							{ value: 'h4', title: 'H4' },
-							{ value: 'body', title: 'Body' },
-						],
-					},
-				},
-				{
-					name: 'centreAlignText',
-					title: 'Center Align Text',
-					type: 'boolean',
-					initialValue: false,
-				},
-			],
-		},
-		{
 			name: 'positionOptions',
 			title: 'Position Options',
 			type: 'object',
@@ -186,12 +130,18 @@ const standaloneText = {
 						],
 					},
 				},
+				{
+					name: 'maxWidth',
+					title: 'Max Width',
+					description: 'In px. Optional',
+					type: 'number',
+				},
 			],
 		},
 	],
 	preview: {
 		select: {
-			text: 'simpleText',
+			text: 'simpleText.text',
 			richText: 'richText',
 			useSimpleText: 'useSimpleText',
 		},
