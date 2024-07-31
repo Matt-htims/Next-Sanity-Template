@@ -58,7 +58,7 @@ export const CustomLink = ({
 				state: false,
 			}));
 		}, 700);
-	}, [href, onClick, router]);
+	}, [href, onClick, router, setPageTransition]);
 
 	return (
 		<button className={className} onClick={onClickHandler}>
