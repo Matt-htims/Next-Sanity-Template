@@ -42,6 +42,9 @@ const page = {
 					type: 'PageIntro',
 				},
 				{
+					type: 'TextStack',
+				},
+				{
 					type: 'ImageBlock',
 				},
 				{
@@ -84,7 +87,7 @@ const page = {
 						{
 							name: 'text',
 							title: 'Text',
-							of: ['StandaloneText', 'ImageText'],
+							of: ['TextStack', 'StandaloneText', 'ImageText'],
 						},
 						{
 							name: 'storytelling',

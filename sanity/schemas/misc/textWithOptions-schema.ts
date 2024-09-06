@@ -4,7 +4,7 @@ const textWithOptions = {
 	type: 'object',
 
 	fields: [
-		{ name: 'text', title: 'Text', type: 'text', rows: 5 },
+		{ name: 'text', title: 'Text', type: 'text', rows: 2 },
 		{
 			name: 'textOptions',
 			title: 'Text Options',
@@ -51,6 +51,7 @@ const textWithOptions = {
 					title: 'Text Centered',
 					type: 'boolean',
 					initialValue: false,
+					hidden: true,
 				},
 			],
 		},

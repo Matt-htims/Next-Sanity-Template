@@ -18,6 +18,7 @@ import button from './misc/button-schema';
 import textWithOptions from './misc/textWithOptions-schema';
 import buttonBlock from './blocks/buttonBlock-schema';
 import navItem from './misc/navItem-schema';
+import textStack from './blocks/textStack-schema';
 
 const miscSchemas = [
 	seo,
@@ -41,6 +42,7 @@ const blockSchemas = [
 	videoBlock,
 	logoGrid,
 	buttonBlock,
+	textStack,
 ];
 
 const documentSchemas = [page, siteInfo];

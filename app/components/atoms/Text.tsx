@@ -9,19 +9,17 @@ import { motion } from 'framer-motion';
 const textVariants = cva('font-heading font-bold', {
 	variants: {
 		textStyle: {
-			default:
-				'text-[18px] leading-[28px] md:text-[20px] md:leading-[30px] font-body font-normal',
-			h1: 'text-[50px] leading-[60px] md:text-[64px] md:leading-[74px]',
-			h2: 'text-[28px] leading-[40px] md:text-[36px] md:leading-[46px]',
-			h3: 'text-[18px] leading-[24px] md:text-[28px] md:leading-[40px]',
-			h4: 'text-[18px] leading-[24px]',
-			h5: 'text-[20px] leading-[30px]',
-			h6: 'text-[16px] leading-[24px]',
-			body: 'text-[18px] leading-[28px] md:text-[20px] md:leading-[30px] font-body font-normal',
+			h1: 'text-[50px] leading-[60px] md:text-h1',
+			h2: 'text-[28px] leading-[40px] md:text-h2',
+			h3: 'text-[18px] leading-[24px] md:text-h3 font-light',
+			h4: 'text-h4 font-normal',
+			h5: 'text-h5 font-medium',
+			h6: 'text-h6 font-medium',
+			body: 'text-body-small md:text-body font-body font-light',
 		},
 	},
 	defaultVariants: {
-		textStyle: 'default',
+		textStyle: 'body',
 	},
 });
 
@@ -48,6 +46,4 @@ const Text = React.forwardRef<HTMLElement, TextProps>(
 
 Text.displayName = 'Text';
 
-const MotionText = motion(Text);
-
-export { Text, textVariants, MotionText };
+export { Text, textVariants };

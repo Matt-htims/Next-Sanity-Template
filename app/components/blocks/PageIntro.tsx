@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import { motion } from 'framer-motion';
 
 import { ImageType } from '@/types/Image';
-import { MotionText } from '../atoms/Text';
+import { MotionText } from '../atoms/MotionText';
 
 type PageIntroProps = {
 	data: {

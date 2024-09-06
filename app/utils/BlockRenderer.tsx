@@ -49,6 +49,10 @@ const ButtonBlock = dynamic(() => import('../components/blocks/ButtonBlock'), {
 	ssr: true,
 });
 
+const TextStack = dynamic(() => import('../components/blocks/TextStack'), {
+	ssr: true,
+});
+
 export default function BlockRenderer(block: any, index: number) {
 	switch (block._type) {
 		case 'ImageCarousel':
@@ -71,6 +75,8 @@ export default function BlockRenderer(block: any, index: number) {
 			return <FadeExplainer key={index} data={block} />;
 		case 'ButtonBlock':
 			return <ButtonBlock key={index} data={block} />;
+		case 'TextStack':
+			return <TextStack key={index} data={block} />;
 		default:
 			return null;
 	}
