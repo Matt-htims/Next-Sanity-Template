@@ -41,12 +41,7 @@ const imageText = {
 		{
 			name: 'richText',
 			title: 'Text',
-			type: 'array',
-			of: [
-				{
-					type: 'block',
-				},
-			],
+			type: 'richText',
 		},
 	],
 };

@@ -3,12 +3,11 @@ const { createThemes } = require('tw-colors');
 
 // Colors
 const black = '#000000';
-const offblack = '#121212';
-const lush = '#446959';
-const clay = '#C76647';
+const offBlack = '#121212';
+const green = '#446959';
+const orange = '#C76647';
 const white = '#FFFFFF';
-const offwhite = '#F5F5F5';
-const balls = '#DCED5A';
+const offWhite = '#F5F5F5';
 
 // Container
 const site = '1420px';
@@ -27,23 +26,18 @@ const config: Config = {
 			transparent: 'transparent',
 			current: 'currentColor',
 			black,
-			offblack,
+			offBlack,
 			white,
-			offwhite,
-			background: white,
-			primary: clay,
-			secondary: lush,
-			accent: balls,
-			'button-default': {
-				DEFAULT: black,
-				text: white,
-			},
+			offWhite,
+			primary: orange,
+			secondary: green,
+			text: black,
 			'button-primary': {
-				DEFAULT: lush,
+				DEFAULT: green,
 				text: white,
 			},
 			'button-secondary': {
-				DEFAULT: clay,
+				DEFAULT: orange,
 				text: white,
 			},
 		},
@@ -51,6 +45,16 @@ const config: Config = {
 			fontFamily: {
 				body: ['var(--font-inter)'],
 				heading: ['var(--font-inter)'],
+			},
+			fontSize: {
+				h1: ['64px', '68px'],
+				h2: ['48px', '54px'],
+				h3: ['32px', '38px'],
+				h4: ['28px', '34px'],
+				h5: ['24px', '30px'],
+				h6: ['16px', '22px'],
+				body: ['24px', '34px'],
+				'body-small': ['16px', '22px'],
 			},
 			maxWidth: {
 				site,
@@ -68,12 +72,12 @@ const config: Config = {
 			light: {
 				background: white,
 				text: black,
-				offColor: offwhite,
+				offColor: offWhite,
 			},
 			dark: {
 				background: black,
 				text: white,
-				offColor: offblack,
+				offColor: offBlack,
 			},
 		}),
 	],

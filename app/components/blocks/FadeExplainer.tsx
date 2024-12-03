@@ -181,7 +181,7 @@ export default function FadeExplainer({ data }: FadeExplainerProps) {
 						textScrolls[index] >= 1 ? 'opacity-0' : 'opacity-100'
 					} ${index < fadeExplainerNumber - 1 ? 'h-[100vh]' : 'h-[70vh]'}`}
 				>
-					<div className="absolute z-50 col-span-12 col-start-1 text-offwhite sm:col-span-9 sm:col-start-1 min-[990px]:col-span-7 min-[990px]:col-start-6 min-[990px]:max-w-[700px]">
+					<div className="text-offWhite absolute z-50 col-span-12 col-start-1 sm:col-span-9 sm:col-start-1 min-[990px]:col-span-7 min-[990px]:col-start-6 min-[990px]:max-w-[700px]">
 						<Text as="h2" textStyle="h2" className="mb-2 italic">
 							{breakText(imageTextPair.heading)}
 						</Text>

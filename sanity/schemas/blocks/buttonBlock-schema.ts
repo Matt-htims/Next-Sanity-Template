@@ -1,6 +1,6 @@
 import { LaunchIcon } from '@sanity/icons';
 
-const buttonBlock = {
+export const buttonBlock = {
 	name: 'ButtonBlock',
 	title: 'Button Block',
 	type: 'object',

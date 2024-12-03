@@ -7,13 +7,26 @@ import {
 	useTransform,
 	useMotionValueEvent,
 } from 'framer-motion';
+import { Text } from '../../atoms/Text';
 
 export default function RevealOnScrollText({
 	text,
+	textStyle,
 	className,
 }: {
 	text: string;
 	className: any;
+	textStyle:
+		| 'body'
+		| 'h1'
+		| 'h2'
+		| 'h3'
+		| 'h4'
+		| 'h5'
+		| 'h6'
+		| 'body-small'
+		| null
+		| undefined;
 }) {
 	const textref = useRef(null);
 
@@ -29,7 +42,7 @@ export default function RevealOnScrollText({
 	let wordReveal: any = useTransform(
 		scrollYProgress,
 		[0, 1],
-		[-10, wordNo + 10]
+		[-10, wordNo + 10],
 	);
 
 	useMotionValueEvent(scrollYProgress, 'change', (latest) => {
@@ -37,7 +50,12 @@ export default function RevealOnScrollText({
 		setWordRevealState(wordReveal.current);
 	});
 	return (
-		<div className={className} ref={textref}>
+		<Text
+			as="div"
+			textStyle={textStyle}
+			className={className}
+			ref={textref}
+		>
 			<span className="sr-only">{text}</span>
 			<span aria-hidden>
 				{text.split(' ').map((word, index) => (
@@ -57,7 +75,7 @@ export default function RevealOnScrollText({
 					</motion.span>
 				))}
 			</span>
-		</div>
+		</Text>
 	);
 }
 

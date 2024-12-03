@@ -1,5 +1,5 @@
 'use client';
-import Image from 'next/image';
+import CustomImage from '../atoms/CustomImage';
 import { ImageType } from '@/types/Image';
 
 import Marquee from 'react-fast-marquee';
@@ -48,14 +48,10 @@ function Card({ data }: { data: ImageType }) {
 				data.carouselSize ?? '',
 			)}`}
 		>
-			<Image
-				src={data.asset.url}
-				alt={data.alt}
-				fill
+			<CustomImage
+				image={data}
 				sizes={imageSize(data.carouselSize ?? '')}
-				style={{ objectFit: 'cover' }}
-				placeholder="blur"
-				blurDataURL={data.asset.metadata.lqip}
+				className="h-full w-full object-cover"
 			/>
 		</div>
 	);

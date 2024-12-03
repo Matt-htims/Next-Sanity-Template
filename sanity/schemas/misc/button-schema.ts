@@ -43,9 +43,9 @@ const button = {
 			name: 'buttonType',
 			title: 'Button Type',
 			type: 'string',
-			initialValue: 'default',
+			initialValue: 'primary',
 			options: {
-				list: ['default', 'primary', 'secondary', 'outline', 'link'],
+				list: ['primary', 'secondary', 'outline', 'link'],
 			},
 		},
 		{

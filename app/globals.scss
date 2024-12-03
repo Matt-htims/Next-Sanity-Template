@@ -7,34 +7,6 @@
 		@apply m-auto box-content max-w-site overflow-x-hidden overflow-y-clip px-5 md:px-10 lg:overflow-x-visible;
 	}
 
-	.text-h1 {
-		@apply font-heading text-[40px] font-bold leading-none sm:text-6xl md:text-[70px] lg:text-[80px];
-	}
-
-	.text-h2-large {
-		@apply font-heading text-[32px] font-bold leading-none sm:text-4xl lg:text-5xl;
-	}
-
-	.text-h2 {
-		@apply font-heading text-2xl font-bold leading-[1.1] sm:text-3xl sm:leading-[1.1] md:text-4xl md:leading-[1.1] lg:text-5xl lg:leading-[1.1];
-	}
-
-	.text-h3 {
-		@apply font-heading text-2xl font-bold leading-[34px] sm:text-3xl sm:leading-[40px] lg:text-4xl lg:leading-[46px];
-	}
-
-	.text-h4 {
-		@apply font-heading text-xl font-bold leading-[28px] sm:text-2xl sm:leading-[34px] lg:text-[36px] lg:leading-[34px];
-	}
-
-	.text-body {
-		@apply text-pretty text-lg font-normal leading-[28px] sm:text-xl sm:leading-[30px];
-	}
-
-	.text-body-small {
-		@apply font-body text-base font-normal leading-[26px] sm:text-[17px] sm:leading-[27px];
-	}
-
 	.text-nav {
 		@apply text-lg font-medium;
 	}

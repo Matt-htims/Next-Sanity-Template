@@ -49,7 +49,7 @@ export default function Footer({ data }: SiteInfoProps) {
 						)}
 					</Link>
 				</div>
-				<p className="text-center text-base text-white/50">
+				<p className="text-center text-base text-text/50">
 					Copyright © {new Date().getFullYear()}{' '}
 					{data.siteName ? data.siteName : ''}
 				</p>

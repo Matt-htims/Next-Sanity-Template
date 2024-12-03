@@ -53,6 +53,13 @@ const TextStack = dynamic(() => import('../components/blocks/TextStack'), {
 	ssr: true,
 });
 
+const TestimonialSlider = dynamic(
+	() => import('../components/blocks/TestimonialSlider'),
+	{
+		ssr: true,
+	},
+);
+
 export default function BlockRenderer(block: any, index: number) {
 	switch (block._type) {
 		case 'ImageCarousel':
@@ -77,6 +84,8 @@ export default function BlockRenderer(block: any, index: number) {
 			return <ButtonBlock key={index} data={block} />;
 		case 'TextStack':
 			return <TextStack key={index} data={block} />;
+		case 'TestimonialSlider':
+			return <TestimonialSlider key={index} data={block} />;
 		default:
 			return null;
 	}

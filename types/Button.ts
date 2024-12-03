@@ -13,7 +13,6 @@ export type ButtonType = {
 	pageTitle?: string;
 	buttonType?:
 		| 'link'
-		| 'default'
 		| 'primary'
 		| 'secondary'
 		| 'outline'

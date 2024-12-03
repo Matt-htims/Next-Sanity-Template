@@ -1,5 +1,5 @@
 'use client';
-import Image from 'next/image';
+import CustomImage from '../atoms/CustomImage';
 import RichText from '../atoms/RichText';
 import { useRef } from 'react';
 
@@ -30,7 +30,7 @@ export default function ImageText({ data }: ImageTextProps) {
 	return (
 		<section
 			ref={ref}
-			className="contained mb-24 min-[980px]:mb-52 min-[980px]:mt-36 mt-10 grid grid-cols-12 items-center overflow-visible overflow-x-clip"
+			className="contained mb-24 mt-10 grid grid-cols-12 items-center overflow-visible overflow-x-clip min-[980px]:mb-52 min-[980px]:mt-36"
 		>
 			<motion.div
 				style={{ y }}
@@ -40,14 +40,10 @@ export default function ImageText({ data }: ImageTextProps) {
 						: 'mb-10 min-[980px]:order-2 min-[980px]:col-start-7 min-[980px]:mb-0 xl:col-start-7'
 				}`}
 			>
-				<Image
-					src={data.image.asset.url}
-					alt={data.image.alt}
-					fill
-					sizes='"(max-width: 768px) 100vw, 90vw"'
-					style={{ objectFit: 'cover' }}
-					placeholder="blur"
-					blurDataURL={data.image.asset.metadata.lqip}
+				<CustomImage
+					image={data.image}
+					sizes="(max-width: 768px) 100vw, 90vw"
+					className="h-full w-full object-cover"
 				/>
 			</motion.div>
 			<motion.div

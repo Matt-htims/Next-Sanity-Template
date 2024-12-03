@@ -70,15 +70,18 @@ export default function StandaloneText({ data }: StandaloneTextProps) {
 				>
 					<RevealOnScrollText
 						text={data.simpleText.text}
-						className={`col-span-12 sm:col-span-10 ${width(
-							data.positionOptions?.width,
-						)} ${alignment(
-							data.positionOptions?.alignment,
-						)} ${textStyle(data.simpleText.textOptions?.textStyle ?? 'h2')} ${
-							data.simpleText.textOptions.textCentered
-								? 'text-center'
-								: ''
-						}`}
+						textStyle={
+							data.simpleText.textOptions?.textStyle ?? 'h2'
+						}
+						className={cn(
+							'col-span-12 sm:col-span-10',
+							width(data.positionOptions?.width),
+							alignment(data.positionOptions?.alignment),
+							{
+								'text-center':
+									data.simpleText.textOptions.textCentered,
+							},
+						)}
 					/>
 				</section>
 			);

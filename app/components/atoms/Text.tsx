@@ -4,18 +4,17 @@ import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
 
-import { motion } from 'framer-motion';
-
 const textVariants = cva('font-heading font-bold', {
 	variants: {
 		textStyle: {
-			h1: 'text-[50px] leading-[60px] md:text-h1',
-			h2: 'text-[28px] leading-[40px] md:text-h2',
-			h3: 'text-[18px] leading-[24px] md:text-h3 font-light',
-			h4: 'text-h4 font-normal',
-			h5: 'text-h5 font-medium',
+			h1: 'text-h2 md:text-h1',
+			h2: 'text-h3 md:text-h2',
+			h3: 'text-h4 md:text-h3',
+			h4: 'text-h5 md:text-h4',
+			h5: 'text-h5',
 			h6: 'text-h6 font-medium',
-			body: 'text-body-small md:text-body font-body font-light',
+			body: 'text-body-small sm:text-body font-normal',
+			'body-small': 'text-body-small font-normal',
 		},
 	},
 	defaultVariants: {

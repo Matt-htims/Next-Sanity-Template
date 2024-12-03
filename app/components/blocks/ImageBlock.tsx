@@ -1,7 +1,7 @@
 'use client';
 
 import { ImageType } from '@/types/Image';
-import Image from 'next/image';
+import CustomImage from '../atoms/CustomImage';
 
 // import function to register Swiper custom elements
 import { register } from 'swiper/element/bundle';
@@ -23,15 +23,11 @@ type ImageBlockProps = {
 function CardSwiper({ image }: { image: ImageType }) {
 	if (image.asset?.url) {
 		return (
-			<div className="scale-image relative w-full min-w-0 overflow-hidden rounded-site aspect-[3/2]">
-				<Image
-					src={image.asset.url}
-					alt={image.alt}
-					fill
-					sizes='"(max-width: 768px) 100vw, 90vw"'
-					style={{ objectFit: 'cover' }}
-					placeholder="blur"
-					blurDataURL={image.asset.metadata.lqip}
+			<div className="scale-image relative aspect-[3/2] w-full min-w-0 overflow-hidden rounded-site">
+				<CustomImage
+					image={image}
+					sizes="(max-width: 768px) 100vw, 90vw"
+					className="h-full w-full object-cover"
 				/>
 			</div>
 		);
@@ -81,7 +77,7 @@ export default function ImageBlock({ data }: ImageBlockProps) {
 			</section> */}
 			<section
 				ref={desktopRef}
-				className="contained h-max justify-center overflow-hidden flex"
+				className="contained flex h-max justify-center overflow-hidden"
 			>
 				<motion.div style={{ scale }} className="w-full">
 					<swiper-container

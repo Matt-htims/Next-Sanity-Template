@@ -9,12 +9,9 @@ const buttonVariants = cva(
 	{
 		variants: {
 			variant: {
-				default: 'bg-button-default text-button-default-text',
-				destructive:
-					'bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90',
-				outline: 'border border-black rounded-full',
 				primary: 'bg-button-primary text-button-primary-text',
 				secondary: 'bg-button-secondary text-button-secondary-text',
+				outline: 'border border-black rounded-full',
 				link: 'text-black underline underline-offset-4',
 				nav: 'text-black font-medium text-underline-simple',
 			},
@@ -41,7 +38,7 @@ const buttonVariants = cva(
 			},
 		],
 		defaultVariants: {
-			variant: 'default',
+			variant: 'primary',
 			size: 'default',
 		},
 	},

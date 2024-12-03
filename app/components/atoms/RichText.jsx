@@ -22,7 +22,9 @@ const myPortableTextComponents = {
 			<span style={{ color: value.value }}>{children}</span>
 		),
 		textStyle: ({ children, value }) => (
-			<span className={`text-${value.textStyle}`}>{children}</span>
+			<Text as="span" textStyle={value.textStyle}>
+				{children}
+			</Text>
 		),
 	},
 

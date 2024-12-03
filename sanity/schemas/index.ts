@@ -19,6 +19,8 @@ import textWithOptions from './misc/textWithOptions-schema';
 import buttonBlock from './blocks/buttonBlock-schema';
 import navItem from './misc/navItem-schema';
 import textStack from './blocks/textStack-schema';
+import richText from './misc/richText-schema';
+import testimonialSlider from './blocks/testimonialSlider-schema';
 
 const miscSchemas = [
 	seo,
@@ -28,6 +30,7 @@ const miscSchemas = [
 	button,
 	textWithOptions,
 	navItem,
+	richText,
 ];
 
 const blockSchemas = [
@@ -43,6 +46,7 @@ const blockSchemas = [
 	logoGrid,
 	buttonBlock,
 	textStack,
+	testimonialSlider,
 ];
 
 const documentSchemas = [page, siteInfo];

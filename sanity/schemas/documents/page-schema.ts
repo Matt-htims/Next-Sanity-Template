@@ -57,6 +57,9 @@ const page = {
 					type: 'StandaloneText',
 				},
 				{
+					type: 'TestimonialSlider',
+				},
+				{
 					type: 'ButtonBlock',
 				},
 				{
@@ -92,7 +95,12 @@ const page = {
 						{
 							name: 'storytelling',
 							title: 'Storytelling',
-							of: ['ImageText', 'FadeExplainer', 'LogoGrid'],
+							of: [
+								'ImageText',
+								'FadeExplainer',
+								'LogoGrid',
+								'TestimonialSlider',
+							],
 						},
 						{
 							name: 'media',
