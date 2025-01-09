@@ -86,3 +86,10 @@
 		}
 	}
 }
+
+.wireframe {
+	img {
+		@apply bg-offWhite;
+		content: url('https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png');
+	}
+}

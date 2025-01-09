@@ -1,5 +1,12 @@
 import dynamic from 'next/dynamic';
 
+const WireframeBlock = dynamic(
+	() => import('../components/blocks/WireframeBlock'),
+	{
+		ssr: true,
+	},
+);
+
 const PageIntro = dynamic(() => import('../components/blocks/PageIntro'), {
 	ssr: true,
 });
@@ -62,6 +69,8 @@ const TestimonialSlider = dynamic(
 
 export default function BlockRenderer(block: any, index: number) {
 	switch (block._type) {
+		case 'WireframeBlock':
+			return <WireframeBlock key={index} data={block} />;
 		case 'ImageCarousel':
 			return <ImageCarousel key={index} data={block} />;
 		case 'PageIntro':

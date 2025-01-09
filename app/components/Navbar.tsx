@@ -91,10 +91,12 @@ export default function Navbar({ data }: SiteInfoProps) {
 		<>
 			<header
 				className={cn(
-					'sticky left-0 right-0 top-0 z-[1000] w-full  transition-all duration-500',
+					'sticky left-0 right-0 top-0 w-full transition-all delay-300 duration-500',
 					{
 						'-z-50 opacity-0': !show,
 						'z-[550] bg-background opacity-100': show,
+						'bg-transparent transition-colors delay-0 duration-0':
+							open,
 					},
 				)}
 			>
@@ -102,7 +104,7 @@ export default function Navbar({ data }: SiteInfoProps) {
 					initial="initial"
 					animate="animate"
 					variants={navContainerAnimation}
-					className="contained z-40 flex h-max items-center justify-between py-5 text-text"
+					className="contained flex h-max items-center justify-between py-5 text-text"
 				>
 					<motion.div
 						variants={navIconAnimation}

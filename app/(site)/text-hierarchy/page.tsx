@@ -127,23 +127,17 @@ function Colours() {
 				<div className="flex justify-between">
 					<ColourSquare colourName="background" />
 					<ColourSquare colourName="offColor" />
-					<ColourSquare colourName="text" className="bg-black" />
+					<ColourSquare colourName="text" />
 				</div>
 			</div>
 			<div className="space-y-5 pb-14">
 				<Text as="h2" textStyle="h5">
 					Dark Theme Colours
 				</Text>
-				<div className="flex justify-between">
-					<ColourSquare
-						colourName="background"
-						className="bg-black"
-					/>
-					<ColourSquare
-						colourName="offColor"
-						className="bg-offBlack"
-					/>
-					<ColourSquare colourName="text" className="bg-white" />
+				<div className="flex justify-between dark">
+					<ColourSquare colourName="background" />
+					<ColourSquare colourName="offColor" />
+					<ColourSquare colourName="text" />
 				</div>
 			</div>
 		</div>

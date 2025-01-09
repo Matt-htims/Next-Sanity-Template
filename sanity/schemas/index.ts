@@ -21,6 +21,7 @@ import navItem from './misc/navItem-schema';
 import textStack from './blocks/textStack-schema';
 import richText from './misc/richText-schema';
 import testimonialSlider from './blocks/testimonialSlider-schema';
+import wireFrameBlock from './blocks/wireframeBlock-schema';
 
 const miscSchemas = [
 	seo,
@@ -34,6 +35,7 @@ const miscSchemas = [
 ];
 
 const blockSchemas = [
+	wireFrameBlock,
 	pageIntro,
 	standaloneText,
 	spacer,

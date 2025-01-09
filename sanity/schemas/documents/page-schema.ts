@@ -38,6 +38,7 @@ const page = {
 			title: 'Blocks',
 			type: 'array',
 			of: [
+				{ type: 'WireframeBlock' },
 				{
 					type: 'PageIntro',
 				},
