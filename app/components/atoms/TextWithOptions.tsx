@@ -9,11 +9,6 @@ export default function TextWithOptions({
 	textWithOptions: TextWithOptionsType;
 	className?: string;
 }) {
-	const CustomTag = textWithOptions?.textOptions?.textType
-		? (textWithOptions?.textOptions
-				?.textType as keyof JSX.IntrinsicElements)
-		: ('p' as keyof JSX.IntrinsicElements);
-
 	const textOptions = textWithOptions?.textOptions;
 
 	return (

@@ -70,16 +70,6 @@ const config: Config = {
 				body: ['var(--font-inter)'],
 				heading: ['var(--font-inter)'],
 			},
-			fontSize: {
-				h1: ['64px', '68px'],
-				h2: ['48px', '54px'],
-				h3: ['32px', '38px'],
-				h4: ['28px', '34px'],
-				h5: ['24px', '30px'],
-				h6: ['16px', '22px'],
-				body: ['24px', '34px'],
-				'body-small': ['16px', '22px'],
-			},
 			maxWidth: {
 				site,
 			},
