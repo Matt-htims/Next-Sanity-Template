@@ -1,5 +1,4 @@
 import type { Config } from 'tailwindcss';
-const { createThemes } = require('tw-colors');
 
 // Colours
 const black = '#000000';
@@ -81,19 +80,6 @@ const config: Config = {
 			},
 		},
 	},
-	plugins: [
-		createThemes({
-			light: {
-				background: light,
-				text: dark,
-				offColor: offLight,
-			},
-			dark: {
-				background: dark,
-				text: light,
-				offColor: offDark,
-			},
-		}),
-	],
+	plugins: [],
 };
 export default config;
