@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	.contained {
+		@apply m-auto box-content max-w-site overflow-x-hidden overflow-y-clip px-5 md:px-10 lg:overflow-x-visible;
+	}
+
+	.text-nav {
+		@apply text-lg font-medium;
+	}
+
+	.text-nav-mobile {
+		@apply text-[30px] font-bold text-white transition hover:text-white/80;
+	}
+
+	.text-underline {
+		@apply relative block w-max cursor-pointer leading-5 after:absolute after:block after:h-[2px] after:w-full after:origin-right after:scale-x-0 after:bg-black after:transition after:duration-300 after:content-[''] after:hover:origin-left after:hover:scale-x-100 after:group-hover:origin-left after:group-hover:scale-x-100;
+	}
+
+	.text-underline-simple {
+		@apply underline decoration-transparent decoration-2 underline-offset-[3px] transition duration-300 ease-out hover:decoration-current md:underline-offset-4;
+	}
+}
+
+.wireframe {
+	img {
+		@apply bg-offWhite;
+		content: url('https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png');
+	}
+}
