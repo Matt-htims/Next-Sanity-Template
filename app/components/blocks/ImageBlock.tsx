@@ -23,7 +23,7 @@ type ImageBlockProps = {
 function CardSwiper({ image }: { image: ImageType }) {
 	if (image.asset?.url) {
 		return (
-			<div className="scale-image relative aspect-[3/2] w-full min-w-0 overflow-hidden rounded-site">
+			<div className="scale-image relative aspect-3/2 w-full min-w-0 overflow-hidden rounded-site">
 				<CustomImage
 					image={image}
 					sizes="(max-width: 768px) 100vw, 90vw"

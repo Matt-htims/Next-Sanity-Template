@@ -50,7 +50,7 @@ const navItem = {
 					'default',
 					'primary',
 					'secondary',
-					'outline',
+					'outline-solid',
 					'link',
 				],
 			},

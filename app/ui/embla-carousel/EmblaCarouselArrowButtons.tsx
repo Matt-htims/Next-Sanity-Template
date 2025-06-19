@@ -73,7 +73,7 @@ export const PrevButton: React.FC<PropType> = (props) => {
 					height="48"
 					rx="24"
 					fill="#EDEAE8"
-					className="fill-cream group-hover:fill-offBlack transition-all duration-300"
+					className="fill-cream group-hover:fill-off-black transition-all duration-300"
 				/>
 				<path
 					fillRule="evenodd"
@@ -111,7 +111,7 @@ export const NextButton: React.FC<PropType> = (props) => {
 					height="48"
 					rx="24"
 					fill="#EDEAE8"
-					className="group-hover:fill-offBlack transition-all duration-300"
+					className="group-hover:fill-off-black transition-all duration-300"
 				/>
 				<path
 					fillRule="evenodd"

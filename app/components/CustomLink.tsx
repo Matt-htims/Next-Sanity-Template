@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 
 import { useSetAtom } from 'jotai';
 import { pageTransitionAtom } from '../Atoms';
+import { cn } from '@/lib/utils';
 
 interface RedirectButtonProps {
 	href: string;
@@ -61,7 +62,7 @@ export const CustomLink = ({
 	}, [href, onClick, router, setPageTransition]);
 
 	return (
-		<button className={className} onClick={onClickHandler}>
+		<button className={cn('cursor-pointer', className)} onClick={onClickHandler}>
 			{children}
 		</button>
 	);

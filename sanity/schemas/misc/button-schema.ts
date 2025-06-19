@@ -45,7 +45,7 @@ const button = {
 			type: 'string',
 			initialValue: 'primary',
 			options: {
-				list: ['primary', 'secondary', 'outline', 'link'],
+				list: ['primary', 'secondary', 'outline-solid', 'link'],
 			},
 		},
 		{

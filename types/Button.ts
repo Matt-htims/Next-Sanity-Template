@@ -15,7 +15,7 @@ export type ButtonType = {
 		| 'link'
 		| 'primary'
 		| 'secondary'
-		| 'outline'
+		| 'outline-solid'
 		| 'nav'
 		| null
 		| undefined;
