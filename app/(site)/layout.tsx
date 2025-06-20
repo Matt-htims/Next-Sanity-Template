@@ -34,7 +34,7 @@ export default async function RootLayout({
 	const siteInfo = await getSiteInfo();
 
 	return (
-		<html data-theme="light" lang="en">
+		<html lang="en" data-theme="light">
 			<head>
 				{/* <Script
 					async

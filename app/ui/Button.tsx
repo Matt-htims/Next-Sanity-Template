@@ -9,7 +9,7 @@ const buttonVariants = cva(
 	{
 		variants: {
 			variant: {
-				primary: 'bg-button-primary text-button-primary-text',
+				default: 'bg-button-primary text-button-primary-text',
 				secondary: 'bg-button-secondary text-button-secondary-text',
 				outline: 'border border-black rounded-full',
 				link: 'text-black underline underline-offset-4',
@@ -19,7 +19,6 @@ const buttonVariants = cva(
 				default: 'text-[26px] leading-none px-10 py-5',
 				sm: 'text-[22px] leading-none px-6 py-3',
 				lg: 'text-3xl leading-none px-12 py-6',
-				xs: 'text-lg leading-none px-5 py-3',
 				nav: 'text-2xl lg:text-lg leading-none px-5 py-3',
 			},
 		},
@@ -28,17 +27,17 @@ const buttonVariants = cva(
 			// Removes padding if the style is link
 			{
 				variant: 'link',
-				size: ['default', 'sm', 'lg', 'xs'],
+				size: ['default', 'sm', 'lg'],
 				class: 'p-0',
 			},
 			{
 				variant: 'nav',
-				size: ['default', 'sm', 'lg', 'xs', 'nav'],
+				size: ['default', 'sm', 'lg', 'nav'],
 				class: 'p-0',
 			},
 		],
 		defaultVariants: {
-			variant: 'primary',
+			variant: 'default',
 			size: 'default',
 		},
 	},

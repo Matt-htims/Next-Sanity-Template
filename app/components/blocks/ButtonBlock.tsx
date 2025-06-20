@@ -1,16 +1,12 @@
 'use client';
-import Link from 'next/link';
 import { Button } from '../../ui/Button';
 import { cn } from '@/lib/utils';
 import { ButtonType } from '@/types/Button';
 
-import { CustomLink } from '../CustomLink';
+import { motion } from 'framer-motion';
 
-import { useSetAtom } from 'jotai';
-
-import { motion, cubicBezier } from 'framer-motion';
-import ButtonInnerAnimation from '../atoms/ButtonInnerAnimation';
 import { MouseEventHandler } from 'react';
+import InnerLink from '../atoms/InnerLink';
 
 type ButtonBlockProps = {
 	data: {
@@ -38,103 +34,25 @@ export default function ButtonBlock({
 				className,
 			)}
 		>
-			{data.buttons?.map((button, index) => {
-				if (
-					button.customLink &&
-					button.link &&
-					Array.from(button.link)[0] == '/'
-				) {
-					return (
-						<motion.div
-							onClick={data.onClick}
-							variants={animateChild}
-							key={index}
-							className={innerClassName}
-						>
-							<Button
-								variant={button.buttonType}
-								size={button.buttonSize}
-								asChild
-							>
-								<CustomLink href={button.link}>
-									{button.buttonType == 'nav' ? (
-										<>{button.displayName}</>
-									) : (
-										<>
-											<ButtonInnerAnimation>
-												{button.displayName}
-											</ButtonInnerAnimation>
-										</>
-									)}
-								</CustomLink>
-							</Button>
-						</motion.div>
-					);
-				} else if (button.customLink) {
-					return (
-						<motion.div
-							onClick={data.onClick}
-							variants={animateChild}
-							key={index}
-							className={innerClassName}
-						>
-							<Button
-								variant={button.buttonType}
-								size={button.buttonSize}
-								asChild
-							>
-								<a
-									target="_blank"
-									rel="noindex nofollow"
-									href={button.link}
-								>
-									{button.buttonType == 'nav' ? (
-										<>{button.displayName}</>
-									) : (
-										<>
-											<ButtonInnerAnimation>
-												{button.displayName}
-											</ButtonInnerAnimation>
-										</>
-									)}
-								</a>
-							</Button>
-						</motion.div>
-					);
-				}
-				return (
-					<motion.div
-						onClick={data.onClick}
-						variants={animateChild}
-						key={index}
-						className={innerClassName}
+			{data.buttons?.map((button, index) => (
+				<motion.div
+					onClick={data.onClick}
+					variants={animateChild}
+					key={index}
+					className={innerClassName}
+				>
+					<Button
+						variant={button.buttonType}
+						size={button.buttonSize}
+						asChild
 					>
-						<Button
-							variant={button.buttonType}
-							size={button.buttonSize}
-							asChild
-						>
-							<CustomLink href={'/' + button.page?.slug}>
-								{button.buttonType == 'nav' ? (
-									<>
-										{button.pageTitle
-											? button.pageTitle
-											: button.page?.name}
-									</>
-								) : (
-									<>
-										<ButtonInnerAnimation>
-											{button.pageTitle
-												? button.pageTitle
-												: button.page?.name}
-										</ButtonInnerAnimation>
-									</>
-								)}
-							</CustomLink>
-						</Button>
-					</motion.div>
-				);
-			})}
+						<InnerLink
+							innerLinkData={button.link}
+							navLink={button.buttonType == 'nav'}
+						/>
+					</Button>
+				</motion.div>
+			))}
 		</motion.div>
 	);
 }

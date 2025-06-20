@@ -1,3 +1,5 @@
+import { LinkType } from './Link';
+
 type MenuPageInfo = {
 	_id: string;
 	slug: string;
@@ -6,18 +8,14 @@ type MenuPageInfo = {
 
 export type ButtonType = {
 	_type: string;
-	customLink: boolean;
-	displayName?: string;
-	link?: string;
-	page?: MenuPageInfo;
-	pageTitle?: string;
+	link: LinkType;
 	buttonType?:
-		| 'link'
-		| 'primary'
+		| 'default'
 		| 'secondary'
-		| 'outline-solid'
+		| 'outline'
+		| 'link'
 		| 'nav'
 		| null
 		| undefined;
-	buttonSize?: 'default' | 'sm' | 'lg' | 'xs' | 'nav';
+	buttonSize?: 'default' | 'sm' | 'lg' | 'nav';
 };

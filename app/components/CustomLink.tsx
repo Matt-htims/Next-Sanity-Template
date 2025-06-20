@@ -1,16 +1,14 @@
 'use client';
+
 import * as React from 'react';
 import { useRouter } from 'next/navigation';
-
 import { useSetAtom } from 'jotai';
 import { pageTransitionAtom } from '../Atoms';
 import { cn } from '@/lib/utils';
 
-interface RedirectButtonProps {
+export interface CustomLinkProps
+	extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 	href: string;
-	className?: string;
-	children: React.ReactNode;
-	onClick?: () => void;
 }
 
 function transitionColor(href: string) {
@@ -22,48 +20,54 @@ function transitionColor(href: string) {
 	}
 }
 
-export const CustomLink = ({
-	href,
-	onClick,
-	className,
-	children,
-}: RedirectButtonProps) => {
-	const router = useRouter();
+export const CustomLink = React.forwardRef<HTMLAnchorElement, CustomLinkProps>(
+	({ href, className, onClick, children, ...props }, ref) => {
+		const router = useRouter();
+		const setPageTransition = useSetAtom(pageTransitionAtom);
 
-	const setPageTransition = useSetAtom(pageTransitionAtom);
+		const onClickHandler = React.useCallback(
+			(e: React.MouseEvent<HTMLAnchorElement>) => {
+				// Allow parent onClick to run
+				onClick?.(e);
 
-	const onClickHandler = React.useCallback(() => {
-		// console.log(pathname, href);
+				if (e.defaultPrevented) return;
 
-		// if (pathname == href) {
-		// 	return '';
-		// }
-		setPageTransition((prev) => ({
-			...prev,
-			color: transitionColor(href),
-		}));
-		router.prefetch(href);
-		setPageTransition((prev) => ({
-			...prev,
-			state: true,
-		}));
+				// Prevent default link behavior
+				e.preventDefault();
 
-		// trigger redirect right before exit animation end
-		window.setTimeout(() => {
-			if (onClick) {
-				onClick();
-			}
-			router.push(href);
-			setPageTransition((prev) => ({
-				...prev,
-				state: false,
-			}));
-		}, 700);
-	}, [href, onClick, router, setPageTransition]);
+				setPageTransition((prev) => ({
+					...prev,
+					color: transitionColor(href),
+				}));
+				router.prefetch(href);
+				setPageTransition((prev) => ({
+					...prev,
+					state: true,
+				}));
 
-	return (
-		<button className={cn('cursor-pointer', className)} onClick={onClickHandler}>
-			{children}
-		</button>
-	);
-};
+				window.setTimeout(() => {
+					router.push(href);
+					setPageTransition((prev) => ({
+						...prev,
+						state: false,
+					}));
+				}, 700);
+			},
+			[href, onClick, router, setPageTransition],
+		);
+
+		return (
+			<a
+				href={href}
+				ref={ref}
+				className={cn('cursor-pointer', className)}
+				onClick={onClickHandler}
+				{...props}
+			>
+				{children}
+			</a>
+		);
+	},
+);
+
+CustomLink.displayName = 'CustomLink';

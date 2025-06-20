@@ -13,7 +13,7 @@ import { Text } from './atoms/Text';
 
 export default function Footer({ data }: SiteInfoProps) {
 	return (
-		<footer className="bg-offColor pb-5 pt-12">
+		<footer id="footer" className="bg-offColor pt-12 pb-5">
 			<div className="contained">
 				<div className="mb-12 flex flex-col items-center space-y-5">
 					<Link

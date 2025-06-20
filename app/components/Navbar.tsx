@@ -91,7 +91,7 @@ export default function Navbar({ data }: SiteInfoProps) {
 		<>
 			<header
 				className={cn(
-					'sticky left-0 right-0 top-0 w-full transition-all delay-300 duration-500',
+					'sticky top-0 right-0 left-0 w-full transition-all delay-300 duration-500',
 					{
 						'-z-50 opacity-0': !show,
 						'z-550 bg-background opacity-100': show,
@@ -150,7 +150,7 @@ export default function Navbar({ data }: SiteInfoProps) {
 							)}
 						</CustomLink>
 					</motion.div>
-					<div className="hidden  shrink-0 lg:block">
+					<div className="hidden shrink-0 lg:block">
 						<ButtonBlock
 							className="gap-5 md:gap-10"
 							data={{
@@ -208,7 +208,7 @@ function MobileMenu({
 		<>
 			<div
 				onClick={closeTray}
-				className={`bg-wafer/50 fixed bottom-0 top-0 z-20 h-screen w-full overflow-hidden opacity-0 backdrop-blur-[3px] transition-all duration-400 ${
+				className={`bg-wafer/50 fixed top-0 bottom-0 z-20 h-screen w-full overflow-hidden opacity-0 backdrop-blur-[3px] transition-all duration-400 ${
 					open ? 'opacity-100' : 'z-[-1]'
 				}`}
 			></div>
@@ -219,10 +219,10 @@ function MobileMenu({
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						transition={{ ease: 'easeInOut', duration: 0.5 }}
-						className={`mobile-menu-wrap fixed bottom-0 top-0 z-500 ml-auto flex h-dvh w-full flex-col space-y-3 bg-primary px-5 pb-12 pt-36 lg:hidden`}
+						className={`mobile-menu-wrap fixed top-0 bottom-0 z-500 ml-auto flex h-dvh w-full flex-col space-y-3 bg-primary px-5 pt-36 pb-12 lg:hidden`}
 					>
 						<ButtonBlock
-							className="h-full flex-col items-end gap-8 text-white sm:px-16 "
+							className="h-full flex-col items-end gap-8 text-white sm:px-16"
 							data={{
 								_key: 'sldkfj',
 								_type: 'buttons',
