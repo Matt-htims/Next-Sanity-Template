@@ -21,7 +21,7 @@ import textStack from './blocks/textStack-schema';
 import richText from './misc/richText-schema';
 import testimonialSlider from './blocks/testimonialSlider-schema';
 import wireFrameBlock from './blocks/wireframeBlock-schema';
-import navItem from './misc/navItem-schema';
+import navItem from './misc/NavItem-schema';
 import link from './misc/link-schema';
 
 const miscSchemas = [
