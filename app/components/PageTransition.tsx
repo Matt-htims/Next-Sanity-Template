@@ -15,7 +15,7 @@ export default function PageTransition() {
 			initial="initial"
 			animate={pageTransition.state ? 'animate' : 'exit'}
 			className={cn(
-				'bg-boozyZinfandel-p3 pointer-events-none fixed inset-0 z-[2000] h-full w-full',
+				'bg-boozyZinfandel-p3 pointer-events-none fixed inset-0 z-2000 h-full w-full',
 				pageTransition.color,
 			)}
 		></motion.div>

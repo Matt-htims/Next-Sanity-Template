@@ -1,4 +1,4 @@
-import { InfoOutlineIcon } from '@sanity/icons';
+import { InfoOutlineIcon, LaunchIcon } from '@sanity/icons';
 
 const siteInfo = {
 	name: 'siteInfo',
@@ -40,6 +40,49 @@ const siteInfo = {
 			type: 'array',
 			group: 'header',
 			of: [{ type: 'navItem' }],
+		},
+		{
+			name: 'addBanner',
+			group: 'header',
+			type: 'boolean',
+			initialValue: false,
+		},
+		{
+			name: 'banner',
+			title: 'Banner',
+			group: 'header',
+			type: 'array',
+			hidden: ({ parent }: any) => parent?.addBanner == false,
+			validation: (rule: any) => rule.max(3),
+			of: [
+				{
+					name: 'bannerItem',
+					type: 'object',
+					icon: LaunchIcon,
+					fields: [
+						{
+							name: 'bannerContent',
+							type: 'string',
+						},
+						{
+							name: 'bannerLink',
+							title: 'Banner Link',
+							type: 'string',
+						},
+						{
+							name: 'bannerColour',
+							type: 'string',
+							initialValue: 'value',
+							options: {
+								list: [
+									{ value: 'primary', title: 'Primary' },
+									{ value: 'secondary', title: 'Secondary' },
+								],
+							},
+						},
+					],
+				},
+			],
 		},
 	],
 };

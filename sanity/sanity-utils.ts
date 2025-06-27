@@ -14,14 +14,19 @@ export async function getSiteInfo(): Promise<SiteInfo> {
             facebookLink,
             twitterLink,
             bookingLink,
+            addBanner,
+            banner[],
             siteName,
             navMenu [] {
                     ...,
-                    page-> {
-                        "slug" : slug.current,
-                        name,
-                        id,
-                    },
+                    link {
+                        ...,
+                        page-> {
+                            "slug" : slug.current,
+                            name,
+                            id,
+                        },
+                    }
                 },
             siteLogo{
                 ...,
@@ -142,10 +147,13 @@ export async function getPage(slug: string): Promise<Page> {
                 },
                 buttons [] {
                     ...,
-                    page-> {
-                        "slug" : slug.current,
-                        name,
-                        id,
+                    link {
+                        ...,
+                        page-> {
+                            "slug" : slug.current,
+                            name,
+                            id,
+                        },
                     },
                 },
                 images[] {

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import '../globals.scss';
+import '../globals.css';
 import { getSiteInfo, getSiteInfoMeta } from '@/sanity/sanity-utils';
 import createMetadataObject from '../utils/createMetadataObject';
 
@@ -12,6 +12,7 @@ import Footer from '../components/Footer';
 import SmoothScrolling from '../components/SmoothScrolling';
 import Providers from '../components/Providers';
 import PageTransition from '../components/PageTransition';
+import GoogleAnalytics from '../components/atoms/GoogleAnalytics';
 
 const FallbackSeo = {
 	title: 'No meta sent',
@@ -34,7 +35,8 @@ export default async function RootLayout({
 	const siteInfo = await getSiteInfo();
 
 	return (
-		<html data-theme="light" lang="en">
+		<html lang="en" data-theme="light">
+			{/* <GoogleAnalytics id=''/> */}
 			<head>
 				{/* <Script
 					async

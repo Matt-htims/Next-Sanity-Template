@@ -3,11 +3,16 @@ import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { ReactLenis } from 'lenis/react';
 
+import { useAtom } from 'jotai';
+import { lenisScrollToAtom } from '../Atoms';
+
 function SmoothScrolling({ children }) {
 	const lenisRef = useRef();
-
 	const pathname = usePathname();
 
+	const [lenisScrollTo, setLenisScrollTo] = useAtom(lenisScrollToAtom);
+
+	// Force scroll to top of page on page change
 	useEffect(() => {
 		setTimeout(() => {
 			if (lenisRef?.current) {
@@ -15,6 +20,38 @@ function SmoothScrolling({ children }) {
 				// console.log('scrolled');
 			}
 		}, 100);
+	}, [pathname]);
+
+	// Scroll to id when lenisScrollTo state changes
+	useEffect(() => {
+		if (lenisScrollTo.id) {
+			lenisRef.current?.lenis?.scrollTo(lenisScrollTo.id, {
+				offset: -lenisScrollTo.offset,
+				duration: lenisScrollTo.duration,
+				easing: lenisScrollTo.easing,
+				lerp: 0.2,
+			});
+		}
+	}, [lenisScrollTo]);
+
+	// Scroll to anchor on page change
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			const anchor = window.location.hash;
+			if (anchor) {
+				setTimeout(() => {
+					setLenisScrollTo({
+						id: anchor,
+						offset: 100,
+						duration: 2.5,
+						easing: (x) =>
+							x < 0.5
+								? 4 * x * x * x
+								: 1 - Math.pow(-2 * x + 2, 3) / 2,
+					});
+				}, 500);
+			}
+		}
 	}, [pathname]);
 
 	return (

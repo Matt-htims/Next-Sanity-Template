@@ -1,51 +1,22 @@
-import { LinkIcon } from '@sanity/icons';
+import { LaunchIcon } from '@sanity/icons';
 
 const button = {
 	name: 'button',
 	title: 'Button',
 	type: 'object',
-	icon: LinkIcon,
+	icon: LaunchIcon,
 	fields: [
 		{
-			name: 'customLink',
-			title: 'Custom Link',
-			type: 'boolean',
-			initialValue: false,
-		},
-		{
-			name: 'displayName',
-			title: 'Display Name',
-			type: 'string',
-			hidden: ({ parent }: any) => parent?.customLink == false,
-		},
-		{
 			name: 'link',
-			title: 'Link',
-			type: 'string',
-			hidden: ({ parent }: any) => parent?.customLink == false,
-		},
-		{
-			name: 'page',
-			title: 'Page',
-			type: 'reference',
-			to: [{ type: 'page' }],
-			hidden: ({ parent }: any) => parent?.customLink == true,
-		},
-		{
-			name: 'pageTitle',
-			title: 'Page Title',
-			description:
-				'Overwrite page title - If left blank will use default page name',
-			type: 'string',
-			hidden: ({ parent }: any) => parent?.customLink == true,
+			type: 'link',
 		},
 		{
 			name: 'buttonType',
 			title: 'Button Type',
 			type: 'string',
-			initialValue: 'primary',
+			initialValue: 'default',
 			options: {
-				list: ['primary', 'secondary', 'outline', 'link'],
+				list: ['default', 'secondary', 'outline', 'link'],
 			},
 		},
 		{
@@ -54,26 +25,35 @@ const button = {
 			type: 'string',
 			initialValue: 'default',
 			options: {
-				list: ['default', 'sm', 'xs'],
+				list: ['default', 'sm', 'lg'],
 			},
 		},
 	],
 	preview: {
 		select: {
-			title: 'page.name',
-			displayName: 'displayName',
-			pageTitle: 'pageTitle',
+			linkType: 'link.linkType',
+			title: 'link.page.name',
+			pageTitle: 'link.pageTitle',
+			displayName: 'link.displayName',
 		},
 		prepare(selection: any) {
-			const { title, displayName, pageTitle } = selection;
+			const { linkType, title, pageTitle, displayName } = selection;
 
+			let previewTitle = 'Link';
+
+			if (
+				linkType == 'default' ||
+				linkType == 'anchorLinkDifferentPage'
+			) {
+				previewTitle = pageTitle ?? title ?? 'Link';
+			} else if (
+				linkType == 'customLink' ||
+				linkType == 'anchorLinkCurrentPage'
+			) {
+				previewTitle = displayName ?? 'Link';
+			}
 			return {
-				title:
-					title && pageTitle
-						? pageTitle
-						: title
-							? title
-							: displayName,
+				title: previewTitle,
 			};
 		},
 	},

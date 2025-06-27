@@ -17,15 +17,17 @@ import logoGrid from './blocks/logoGrid-schema';
 import button from './misc/button-schema';
 import textWithOptions from './misc/textWithOptions-schema';
 import buttonBlock from './blocks/buttonBlock-schema';
-import navItem from './misc/navItem-schema';
 import textStack from './blocks/textStack-schema';
 import richText from './misc/richText-schema';
 import testimonialSlider from './blocks/testimonialSlider-schema';
 import wireFrameBlock from './blocks/wireframeBlock-schema';
+import navItem from './misc/navItem-schema';
+import link from './misc/link-schema';
 
 const miscSchemas = [
 	seo,
 	siteSeo,
+	link,
 	addressInfo,
 	siteLogo,
 	button,

@@ -36,7 +36,7 @@ export const AnimateChangeInHeight: React.FC<AnimateChangeInHeightProps> = ({
 			className={classNames(className)}
 			style={{ height }}
 			animate={{ height }}
-			transition={{ duration: 0.6, ease: 'easeInOut' }}
+			transition={{ duration: 0.8, ease: 'easeInOut' }}
 		>
 			<div ref={containerRef}>{children}</div>
 		</motion.div>

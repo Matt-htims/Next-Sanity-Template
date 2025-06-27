@@ -34,7 +34,7 @@ export default function ImageText({ data }: ImageTextProps) {
 		>
 			<motion.div
 				style={{ y }}
-				className={`relative col-span-12 aspect-[3/2] overflow-hidden rounded-site min-[980px]:col-span-6 min-[980px]:aspect-[29/25] xl:col-span-5 ${
+				className={`relative col-span-12 aspect-3/2 overflow-hidden rounded-site min-[980px]:col-span-6 min-[980px]:aspect-29/25 xl:col-span-5 ${
 					data.imageSide == 'left'
 						? 'mb-10 min-[980px]:col-start-1 min-[980px]:mb-0 xl:col-start-2'
 						: 'mb-10 min-[980px]:order-2 min-[980px]:col-start-7 min-[980px]:mb-0 xl:col-start-7'

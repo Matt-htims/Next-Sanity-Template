@@ -7,37 +7,8 @@ const navItem = {
 	icon: LinkIcon,
 	fields: [
 		{
-			name: 'customLink',
-			title: 'Custom Link',
-			type: 'boolean',
-			initialValue: false,
-		},
-		{
-			name: 'displayName',
-			title: 'Display Name',
-			type: 'string',
-			hidden: ({ parent }: any) => parent?.customLink == false,
-		},
-		{
 			name: 'link',
-			title: 'Link',
-			type: 'string',
-			hidden: ({ parent }: any) => parent?.customLink == false,
-		},
-		{
-			name: 'page',
-			title: 'Page',
-			type: 'reference',
-			to: [{ type: 'page' }],
-			hidden: ({ parent }: any) => parent?.customLink == true,
-		},
-		{
-			name: 'pageTitle',
-			title: 'Page Title',
-			description:
-				'Overwrite page title - If left blank will use default page name',
-			type: 'string',
-			hidden: ({ parent }: any) => parent?.customLink == true,
+			type: 'link',
 		},
 		{
 			name: 'buttonType',
@@ -45,14 +16,7 @@ const navItem = {
 			type: 'string',
 			initialValue: 'nav',
 			options: {
-				list: [
-					'nav',
-					'default',
-					'primary',
-					'secondary',
-					'outline',
-					'link',
-				],
+				list: ['nav', 'default', 'secondary', 'outline', 'link'],
 			},
 		},
 		{
@@ -61,26 +25,35 @@ const navItem = {
 			type: 'string',
 			initialValue: 'nav',
 			options: {
-				list: ['nav', 'default', 'sm', 'xs'],
+				list: ['nav', 'default', 'sm', 'lg'],
 			},
 		},
 	],
 	preview: {
 		select: {
-			title: 'page.name',
-			displayName: 'displayName',
-			pageTitle: 'pageTitle',
+			linkType: 'link.linkType',
+			title: 'link.page.name',
+			pageTitle: 'link.pageTitle',
+			displayName: 'link.displayName',
 		},
 		prepare(selection: any) {
-			const { title, displayName, pageTitle } = selection;
+			const { linkType, title, pageTitle, displayName } = selection;
 
+			let previewTitle = 'Link';
+
+			if (
+				linkType == 'default' ||
+				linkType == 'anchorLinkDifferentPage'
+			) {
+				previewTitle = pageTitle ?? title ?? 'Link';
+			} else if (
+				linkType == 'customLink' ||
+				linkType == 'anchorLinkCurrentPage'
+			) {
+				previewTitle = displayName ?? 'Link';
+			}
 			return {
-				title:
-					title && pageTitle
-						? pageTitle
-						: title
-							? title
-							: displayName,
+				title: previewTitle,
 			};
 		},
 	},

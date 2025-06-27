@@ -16,13 +16,13 @@ function Card({ data }: { data: ImageType }) {
 	function imageStyle(carouselSize: string) {
 		switch (carouselSize) {
 			case 'landscape':
-				return 'w-[calc(100vw*0.89132)] md:w-[calc(100vw*0.59419)] xl:w-[820px] aspect-[41/35]';
+				return 'w-[calc(100vw*0.89132)] md:w-[calc(100vw*0.59419)] xl:w-[820px] aspect-41/35';
 			case 'square':
 				return 'w-[calc(100vw*0.76089)] md:w-[calc(100vw*0.507228)] xl:w-[700px] aspect-square';
 			case 'portrait':
-				return 'w-[calc(100vw*0.63045)] md:w-[calc(100vw*0.420278)] xl:w-[580px] aspect-[29/35]';
+				return 'w-[calc(100vw*0.63045)] md:w-[calc(100vw*0.420278)] xl:w-[580px] aspect-29/35';
 			case 'portraitNarrow':
-				return 'w-[calc(100vw*0.50)] md:w-[calc(100vw*0.33333)] xl:w-[460px] aspect-[23/35]';
+				return 'w-[calc(100vw*0.50)] md:w-[calc(100vw*0.33333)] xl:w-[460px] aspect-23/35';
 			default:
 				return '';
 		}

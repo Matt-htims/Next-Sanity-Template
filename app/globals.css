@@ -1,0 +1,98 @@
+@import 'tailwindcss';
+
+:root {
+	/* Colours */
+	--black: #000000;
+	--off-black: #121212;
+	--white: #ffffff;
+	--off-white: #f5f5f5;
+	--primary: #446959;
+	--secondary: #c76647;
+
+	/* Theme colours */
+	--background: var(--white);
+	--text: var(--black);
+	--offColor: var(--off-white);
+}
+
+[data-theme='dark'] {
+	--background: var(--black);
+	--text: var(--white);
+	--offColor: var(--off-black);
+}
+
+@theme {
+	--color-*: initial;
+	--color-transparent: transparent;
+	--color-current: currentColor;
+	--color-black: var(--black);
+	--color-off-black: var(--off-black);
+	--color-white: var(--white);
+	--color-off-white: var(--offWhite);
+	--color-primary: var(--primary);
+	--color-secondary: var(--secondary);
+	--color-text: var(--text);
+	--color-background: var(--background);
+	--color-text: var(--text);
+	--color-offColor: var(--offColor);
+
+	--color-button-primary: var(--primary);
+	--color-button-primary-text: var(--white);
+
+	--color-button-secondary: var(--secondary);
+	--color-button-secondary-text: var(--white);
+
+	--font-body: var(--font-inter);
+	--font-heading: var(--font-inter);
+
+	--container-site: 1420px;
+
+	--radius-site: 10px;
+
+	--breakpoint-xs: 440px;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+	.contained {
+		@apply m-auto box-content max-w-site overflow-x-hidden overflow-y-clip px-5 md:px-10 lg:overflow-x-visible;
+	}
+
+	.text-nav {
+		@apply text-lg font-medium;
+	}
+
+	.text-nav-mobile {
+		@apply text-[30px] font-bold text-white transition hover:text-white/80;
+	}
+
+	.text-underline {
+		@apply relative block w-max cursor-pointer leading-5 after:absolute after:block after:h-[2px] after:w-full after:origin-right after:scale-x-0 after:bg-black after:transition after:duration-300 after:content-[''] group-hover:after:origin-left group-hover:after:scale-x-100 hover:after:origin-left hover:after:scale-x-100;
+	}
+
+	.text-underline-simple {
+		@apply underline decoration-transparent decoration-2 underline-offset-[3px] transition duration-300 ease-out hover:decoration-current md:underline-offset-4;
+	}
+
+	*,
+	::after,
+	::before,
+	::backdrop,
+	::file-selector-button {
+		border-color: var(--color-gray-200, currentcolor);
+	}
+}
+
+.wireframe {
+	img {
+		@apply bg-off-white;
+		content: url('https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png');
+	}
+}

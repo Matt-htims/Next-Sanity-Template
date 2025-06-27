@@ -2,12 +2,7 @@
 import { useRef } from 'react';
 
 // Animation
-import {
-	motion,
-	useScroll,
-	useTransform,
-	useMotionValueEvent,
-} from 'framer-motion';
+import { useScroll, useMotionValueEvent } from 'framer-motion';
 
 type ThemeSwitchProps = {
 	data: {
@@ -27,34 +22,30 @@ export default function ThemeSwitch({ data }: ThemeSwitchProps) {
 	useMotionValueEvent(scrollYProgress, 'change', (latest) => {
 		if (data.theme == 'dark') {
 			if (latest > 0) {
-				if (document.body.classList.contains('dark')) {
+				if (document.documentElement.dataset.theme == 'dark') {
 				} else {
-					document.body.classList.add('dark');
-					document.body.classList.remove('light');
+					document.documentElement.dataset.theme = 'dark';
 				}
 			} else {
-				if (document.body.classList.contains('light')) {
+				if (document.documentElement.dataset.theme == 'light') {
 				} else {
-					document.body.classList.add('light');
-					document.body.classList.remove('dark');
+					document.documentElement.dataset.theme = 'light';
 				}
 			}
 		} else {
 			if (latest > 0) {
-				if (document.body.classList.contains('light')) {
+				if (document.documentElement.dataset.theme == 'light') {
 				} else {
-					document.body.classList.add('light');
-					document.body.classList.remove('dark');
+					document.documentElement.dataset.theme = 'light';
 				}
 			} else {
-				if (document.body.classList.contains('dark')) {
+				if (document.documentElement.dataset.theme == 'dark') {
 				} else {
-					document.body.classList.add('dark');
-					document.body.classList.remove('light');
+					document.documentElement.dataset.theme = 'dark';
 				}
 			}
 		}
 	});
 
-	return <div ref={ref} className="theme-switch w-full "></div>;
+	return <div ref={ref} className="theme-switch w-full"></div>;
 }

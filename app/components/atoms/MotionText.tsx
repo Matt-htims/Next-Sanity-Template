@@ -24,7 +24,7 @@ interface TextProps extends VariantProps<typeof textVariants> {
 }
 
 const Text = React.forwardRef<HTMLElement, TextProps>(
-	({ as: Component = 'h2', className, textStyle, children, style }, ref) => {
+	({ as: Component = 'p', className, textStyle, children, style }, ref) => {
 		return (
 			<Component
 				ref={ref}

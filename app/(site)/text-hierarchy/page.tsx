@@ -109,7 +109,7 @@ function Colours() {
 					<ColourSquare colourName="white" />
 					<ColourSquare
 						colourName="offWhite"
-						className="bg-offWhite"
+						className="bg-off-white"
 					/>
 					<ColourSquare colourName="black" />
 					<ColourSquare colourName="offBlack" />
