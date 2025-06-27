@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useSetAtom } from 'jotai';
 import { pageTransitionAtom } from '../Atoms';
 import { cn } from '@/lib/utils';
@@ -22,6 +22,7 @@ function transitionColor(href: string) {
 
 export const CustomLink = React.forwardRef<HTMLAnchorElement, CustomLinkProps>(
 	({ href, className, onClick, children, ...props }, ref) => {
+		const path = usePathname();
 		const router = useRouter();
 		const setPageTransition = useSetAtom(pageTransitionAtom);
 
@@ -34,26 +35,27 @@ export const CustomLink = React.forwardRef<HTMLAnchorElement, CustomLinkProps>(
 
 				// Prevent default link behavior
 				e.preventDefault();
-
-				setPageTransition((prev) => ({
-					...prev,
-					color: transitionColor(href),
-				}));
-				router.prefetch(href);
-				setPageTransition((prev) => ({
-					...prev,
-					state: true,
-				}));
-
-				window.setTimeout(() => {
-					router.push(href);
+				if (path !== href) {
 					setPageTransition((prev) => ({
 						...prev,
-						state: false,
+						color: transitionColor(href),
 					}));
-				}, 700);
+					router.prefetch(href);
+					setPageTransition((prev) => ({
+						...prev,
+						state: true,
+					}));
+
+					window.setTimeout(() => {
+						router.push(href);
+						setPageTransition((prev) => ({
+							...prev,
+							state: false,
+						}));
+					}, 700);
+				}
 			},
-			[href, onClick, router, setPageTransition],
+			[href, onClick, router, setPageTransition, path],
 		);
 
 		return (

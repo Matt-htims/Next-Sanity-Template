@@ -12,6 +12,7 @@ import Footer from '../components/Footer';
 import SmoothScrolling from '../components/SmoothScrolling';
 import Providers from '../components/Providers';
 import PageTransition from '../components/PageTransition';
+import GoogleAnalytics from '../components/atoms/GoogleAnalytics';
 
 const FallbackSeo = {
 	title: 'No meta sent',
@@ -35,6 +36,7 @@ export default async function RootLayout({
 
 	return (
 		<html lang="en" data-theme="light">
+			{/* <GoogleAnalytics id=''/> */}
 			<head>
 				{/* <Script
 					async

@@ -32,12 +32,20 @@ export type AddressType = {
 	phoneNumber2: string;
 };
 
+export type BannerItemType = {
+	bannerContent?: string;
+	bannerLink?: string;
+	bannerColour?: 'primary' | 'secondary';
+};
+
 export type SiteInfo = {
 	_id: string;
 	_createdAt: Date;
 	siteName: string;
 	siteLogo: SiteLogo;
 	navMenu: Array<ButtonType>;
+	addBanner: boolean;
+	banner?: BannerItemType[];
 };
 
 export type SiteInfoProps = {

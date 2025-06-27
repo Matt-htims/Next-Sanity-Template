@@ -14,6 +14,8 @@ export async function getSiteInfo(): Promise<SiteInfo> {
             facebookLink,
             twitterLink,
             bookingLink,
+            addBanner,
+            banner[],
             siteName,
             navMenu [] {
                     ...,
@@ -152,8 +154,7 @@ export async function getPage(slug: string): Promise<Page> {
                             name,
                             id,
                         },
-                    }
-                    
+                    },
                 },
                 images[] {
                     ...,

@@ -13,9 +13,9 @@ const InnerLink = forwardRef<
 	HTMLAnchorElement,
 	{
 		innerLinkData: LinkType;
-		navLink?: boolean;
+		noAnimation?: boolean;
 	} & React.AnchorHTMLAttributes<HTMLAnchorElement>
->(({ innerLinkData, navLink, className, ...props }, ref) => {
+>(({ innerLinkData, noAnimation, className, ...props }, ref) => {
 	const setLenisScrollTo = useSetAtom(lenisScrollToAtom);
 
 	const sharedProps = {
@@ -27,7 +27,7 @@ const InnerLink = forwardRef<
 	if (innerLinkData?.linkType == 'default') {
 		return (
 			<CustomLink href={'/' + innerLinkData.page?.slug} {...sharedProps}>
-				{navLink ? (
+				{noAnimation ? (
 					<>{innerLinkData.pageTitle ?? innerLinkData.page?.name}</>
 				) : (
 					<ButtonInnerAnimation>
@@ -43,7 +43,7 @@ const InnerLink = forwardRef<
 		if (href.startsWith('/')) {
 			return (
 				<CustomLink href={href} {...sharedProps}>
-					{navLink ? (
+					{noAnimation ? (
 						<>{innerLinkData.displayName}</>
 					) : (
 						<ButtonInnerAnimation>
@@ -60,7 +60,7 @@ const InnerLink = forwardRef<
 				rel="noopener noreferrer nofollow"
 				{...sharedProps}
 			>
-				{navLink ? (
+				{noAnimation ? (
 					<>{innerLinkData.displayName}</>
 				) : (
 					<ButtonInnerAnimation>
@@ -89,7 +89,7 @@ const InnerLink = forwardRef<
 				}}
 				{...sharedProps}
 			>
-				{navLink ? (
+				{noAnimation ? (
 					<>{innerLinkData.displayName}</>
 				) : (
 					<ButtonInnerAnimation>
@@ -105,7 +105,7 @@ const InnerLink = forwardRef<
 			'/' + innerLinkData.page?.slug + '#' + innerLinkData.anchorLink;
 		return (
 			<CustomLink href={href} {...sharedProps}>
-				{navLink ? (
+				{noAnimation ? (
 					<>{innerLinkData.pageTitle ?? innerLinkData.page?.name}</>
 				) : (
 					<ButtonInnerAnimation>

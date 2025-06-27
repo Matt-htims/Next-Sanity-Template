@@ -7,6 +7,7 @@ import { motion } from 'framer-motion';
 
 import { MouseEventHandler } from 'react';
 import InnerLink from '../atoms/InnerLink';
+import { animateButtonChild, animateButtonContainer } from '@/app/animations';
 
 type ButtonBlockProps = {
 	data: {
@@ -26,7 +27,7 @@ export default function ButtonBlock({
 }: ButtonBlockProps) {
 	return (
 		<motion.div
-			variants={animateContainer}
+			variants={animateButtonContainer}
 			initial="initial"
 			whileInView="animate"
 			className={cn(
@@ -37,7 +38,7 @@ export default function ButtonBlock({
 			{data.buttons?.map((button, index) => (
 				<motion.div
 					onClick={data.onClick}
-					variants={animateChild}
+					variants={animateButtonChild}
 					key={index}
 					className={innerClassName}
 				>
@@ -48,7 +49,7 @@ export default function ButtonBlock({
 					>
 						<InnerLink
 							innerLinkData={button.link}
-							navLink={button.buttonType == 'nav'}
+							noAnimation={button.buttonType == 'nav'}
 						/>
 					</Button>
 				</motion.div>
@@ -56,28 +57,3 @@ export default function ButtonBlock({
 		</motion.div>
 	);
 }
-
-const animateContainer = {
-	initial: {
-		opacity: 1,
-	},
-	animate: {
-		opacity: 1,
-		transition: {
-			staggerChildren: 0.1,
-		},
-	},
-};
-
-const animateChild = {
-	initial: {
-		opacity: 0,
-	},
-	animate: {
-		opacity: 1,
-		transition: {
-			ease: 'easeInOut',
-			duration: 1,
-		},
-	},
-};

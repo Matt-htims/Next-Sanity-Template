@@ -36,11 +36,11 @@
 	--color-text: var(--text);
 	--color-offColor: var(--offColor);
 
-	--color-button-primary: #446959;
-	--color-button-primary-text: #ffffff;
+	--color-button-primary: var(--primary);
+	--color-button-primary-text: var(--white);
 
-	--color-button-secondary: #c76647;
-	--color-button-secondary-text: #ffffff;
+	--color-button-secondary: var(--secondary);
+	--color-button-secondary-text: var(--white);
 
 	--font-body: var(--font-inter);
 	--font-heading: var(--font-inter);

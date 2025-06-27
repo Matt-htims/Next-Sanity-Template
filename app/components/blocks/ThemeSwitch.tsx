@@ -2,12 +2,7 @@
 import { useRef } from 'react';
 
 // Animation
-import {
-	motion,
-	useScroll,
-	useTransform,
-	useMotionValueEvent,
-} from 'framer-motion';
+import { useScroll, useMotionValueEvent } from 'framer-motion';
 
 type ThemeSwitchProps = {
 	data: {

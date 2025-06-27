@@ -10,13 +10,14 @@ import instagram from '@/public/icon-instagram.svg';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Text } from './atoms/Text';
+import { CustomLink } from './CustomLink';
 
 export default function Footer({ data }: SiteInfoProps) {
 	return (
 		<footer id="footer" className="bg-offColor pt-12 pb-5">
 			<div className="contained">
 				<div className="mb-12 flex flex-col items-center space-y-5">
-					<Link
+					<CustomLink
 						href="/"
 						aria-label="Back to homepage"
 						className="relative"
@@ -47,7 +48,7 @@ export default function Footer({ data }: SiteInfoProps) {
 						) : (
 							''
 						)}
-					</Link>
+					</CustomLink>
 				</div>
 				<p className="text-center text-base text-text/50">
 					Copyright © {new Date().getFullYear()}{' '}
