@@ -1,3 +1,4 @@
+import { sanityNavItemSizes, sanityNavItemVariants } from '@/app/MasterButton';
 import { LinkIcon } from '@sanity/icons';
 
 const navItem = {
@@ -11,12 +12,12 @@ const navItem = {
 			type: 'link',
 		},
 		{
-			name: 'buttonType',
-			title: 'Button Type',
+			name: 'buttonVariant',
+			title: 'Button Variant',
 			type: 'string',
 			initialValue: 'nav',
 			options: {
-				list: ['nav', 'default', 'secondary', 'outline', 'link'],
+				list: sanityNavItemVariants,
 			},
 		},
 		{
@@ -25,7 +26,7 @@ const navItem = {
 			type: 'string',
 			initialValue: 'nav',
 			options: {
-				list: ['nav', 'default', 'sm', 'lg'],
+				list: sanityNavItemSizes,
 			},
 		},
 	],

@@ -1,3 +1,5 @@
+import { sanityTextOptions } from '@/app/MasterText';
+
 const textWithOptions = {
 	name: 'textWithOptions',
 	title: 'Text With Options',
@@ -35,18 +37,9 @@ const textWithOptions = {
 					name: 'textStyle',
 					title: 'Text Style',
 					type: 'string',
-					initialValue: 'h3',
+					initialValue: 'body',
 					options: {
-						list: [
-							{ value: 'h1', title: 'H1' },
-							{ value: 'h2', title: 'H2' },
-							{ value: 'h3', title: 'H3' },
-							{ value: 'h4', title: 'H4' },
-							{ value: 'h5', title: 'H5' },
-							{ value: 'h6', title: 'H6' },
-							{ value: 'body', title: 'Body' },
-							{ value: 'body-small', title: 'Body Small' },
-						],
+						list: sanityTextOptions,
 					},
 				},
 				{

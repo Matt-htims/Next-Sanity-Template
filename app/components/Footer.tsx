@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SiteInfoProps } from '@/types/SiteInfo';
 
 import twitter from '@/public/icon-x.svg';
@@ -12,7 +12,15 @@ import Image from 'next/image';
 import { Text } from './atoms/Text';
 import { CustomLink } from './CustomLink';
 
+import { useSetAtom } from 'jotai';
+import { pageTransitionAtom } from '../Atoms';
+
 export default function Footer({ data }: SiteInfoProps) {
+	const setPageTransition = useSetAtom(pageTransitionAtom);
+
+	useEffect(() => {
+		setPageTransition((prev) => ({ ...prev, firstPageLoad: true }));
+	}, []);
 	return (
 		<footer id="footer" className="bg-offColor pt-12 pb-5">
 			<div className="contained">

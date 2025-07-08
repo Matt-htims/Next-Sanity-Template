@@ -67,6 +67,13 @@ const TestimonialSlider = dynamic(
 	},
 );
 
+const ImageCarouselLightbox = dynamic(
+	() => import('../components/blocks/ImageCarouselLightbox'),
+	{
+		ssr: true,
+	},
+);
+
 export default function BlockRenderer(block: any, index: number) {
 	switch (block._type) {
 		case 'WireframeBlock':
@@ -95,6 +102,8 @@ export default function BlockRenderer(block: any, index: number) {
 			return <TextStack key={index} data={block} />;
 		case 'TestimonialSlider':
 			return <TestimonialSlider key={index} data={block} />;
+		case 'ImageCarouselLightbox':
+			return <ImageCarouselLightbox key={index} data={block} />;
 		default:
 			return null;
 	}

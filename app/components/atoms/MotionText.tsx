@@ -1,11 +1,11 @@
 import * as React from 'react';
+import { textStyles } from '@/app/MasterText';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
 
 import { motion } from 'framer-motion';
-import { textStyles } from './Text';
 
 const textVariants = cva('font-heading font-bold', {
 	variants: {

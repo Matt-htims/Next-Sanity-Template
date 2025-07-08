@@ -1,3 +1,4 @@
+import { sanityButtonSizes, sanityButtonVariants } from '@/app/MasterButton';
 import { LaunchIcon } from '@sanity/icons';
 
 const button = {
@@ -11,12 +12,12 @@ const button = {
 			type: 'link',
 		},
 		{
-			name: 'buttonType',
-			title: 'Button Type',
+			name: 'buttonVariant',
+			title: 'Button Variant',
 			type: 'string',
 			initialValue: 'default',
 			options: {
-				list: ['default', 'secondary', 'outline', 'link'],
+				list: sanityButtonVariants,
 			},
 		},
 		{
@@ -25,7 +26,7 @@ const button = {
 			type: 'string',
 			initialValue: 'default',
 			options: {
-				list: ['default', 'sm', 'lg'],
+				list: sanityButtonSizes,
 			},
 		},
 	],

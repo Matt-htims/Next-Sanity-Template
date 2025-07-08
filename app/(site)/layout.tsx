@@ -11,7 +11,6 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import SmoothScrolling from '../components/SmoothScrolling';
 import Providers from '../components/Providers';
-import PageTransition from '../components/PageTransition';
 import GoogleAnalytics from '../components/atoms/GoogleAnalytics';
 
 const FallbackSeo = {
@@ -49,7 +48,6 @@ export default async function RootLayout({
 					className={`font-inter relative -z-20 w-full overflow-x-clip bg-background font-body text-text antialiased transition-colors duration-1000 ease-in-out ${inter.variable}`}
 				>
 					<Navbar data={siteInfo} />
-					<PageTransition />
 					<main className="min-h-screen overflow-x-clip">
 						<SmoothScrolling>{children}</SmoothScrolling>
 						{/* {children} */}

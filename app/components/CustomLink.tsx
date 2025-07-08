@@ -2,74 +2,86 @@
 
 import * as React from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
+
 import { useSetAtom } from 'jotai';
 import { pageTransitionAtom } from '../Atoms';
-import { cn } from '@/lib/utils';
 
 export interface CustomLinkProps
 	extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 	href: string;
 }
 
-function transitionColor(href: string) {
-	switch (href) {
-		case '/':
-			return 'bg-white';
-		default:
-			return 'bg-white';
-	}
-}
-
 export const CustomLink = React.forwardRef<HTMLAnchorElement, CustomLinkProps>(
 	({ href, className, onClick, children, ...props }, ref) => {
-		const path = usePathname();
 		const router = useRouter();
+		const path = usePathname();
+
 		const setPageTransition = useSetAtom(pageTransitionAtom);
 
-		const onClickHandler = React.useCallback(
-			(e: React.MouseEvent<HTMLAnchorElement>) => {
-				// Allow parent onClick to run
-				onClick?.(e);
-
-				if (e.defaultPrevented) return;
-
-				// Prevent default link behavior
-				e.preventDefault();
-				if (path !== href) {
-					setPageTransition((prev) => ({
-						...prev,
-						color: transitionColor(href),
-					}));
-					router.prefetch(href);
-					setPageTransition((prev) => ({
-						...prev,
-						state: true,
-					}));
-
-					window.setTimeout(() => {
-						router.push(href);
-						setPageTransition((prev) => ({
-							...prev,
-							state: false,
-						}));
-					}, 700);
-				}
-			},
-			[href, onClick, router, setPageTransition, path],
-		);
-
 		return (
-			<a
+			<Link
 				href={href}
 				ref={ref}
 				className={cn('cursor-pointer', className)}
-				onClick={onClickHandler}
+				onClick={(e) => {
+					e.preventDefault();
+
+					if (path !== href) {
+						setPageTransition((prev) => ({
+							...prev,
+							startPageTransition: true,
+							newHref: href.split('#')[0],
+						}));
+
+						setTimeout(() => {
+							router.push(href);
+						}, 650);
+					}
+				}}
 				{...props}
 			>
 				{children}
-			</a>
+			</Link>
 		);
 	},
 );
 
 CustomLink.displayName = 'CustomLink';
+
+const pageAnimation = () => {
+	document.documentElement.animate(
+		[
+			{
+				opacity: 1,
+			},
+			{
+				opacity: 1,
+			},
+		],
+		{
+			duration: 1000,
+			easing: 'cubic-bezier(0.76, 0, 0.24, 1)',
+			fill: 'forwards',
+			pseudoElement: '::view-transition-old(root)',
+		},
+	);
+
+	document.documentElement.animate(
+		[
+			{
+				opacity: 0,
+			},
+			{
+				opacity: 1,
+			},
+		],
+		{
+			duration: 1000,
+			easing: 'cubic-bezier(0.76, 0, 0.24, 1)',
+			fill: 'forwards',
+			pseudoElement: '::view-transition-new(root)',
+		},
+	);
+};

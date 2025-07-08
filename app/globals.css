@@ -96,3 +96,40 @@
 		content: url('https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png');
 	}
 }
+
+::view-transition-group(root) {
+	z-index: auto !important;
+}
+
+::view-transition-image-pair(root) {
+	isolation: isolate;
+	will-change: transform, opacity, scale;
+	z-index: 1;
+}
+
+::view-transition-new(root) {
+	z-index: 2;
+	animation: none !important;
+}
+
+::view-transition-old(root) {
+	z-index: 1;
+	animation: none !important;
+}
+
+.images-with-effect {
+	.scale-image {
+		transform-origin: center;
+		transform: scale(1) translateX(0);
+		transition: all;
+		transition-duration: 10s;
+		transition-timing-function: linear;
+	}
+	.swiper-slide-active,
+	.swiper-slide-prev,
+	.swiper-wrapper {
+		.scale-image {
+			transform: scale(1.15) translateX(-40px);
+		}
+	}
+}

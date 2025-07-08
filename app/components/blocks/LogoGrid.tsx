@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { ImageType } from '@/types/Image';
 import { motion } from 'framer-motion';
+import { animateChildFadeIn, animateContainer } from '@/app/animations';
 
 type LogoGridProps = {
 	data: {
@@ -16,12 +17,12 @@ export default function LogoGrid({ data }: LogoGridProps) {
 				variants={animateContainer}
 				initial="initial"
 				whileInView="animate"
-				className="lg:gap-24 flex items-center justify-center gap-2 xs:gap-7 sm:gap-12 sm:px-0 md:gap-14"
+				className="flex items-center justify-center gap-2 xs:gap-7 sm:gap-12 sm:px-0 md:gap-14 lg:gap-24"
 			>
 				{data.logos.map((logo, index) => (
 					<motion.div
 						className="flex justify-center sm:w-max"
-						variants={animateLogo}
+						variants={animateChildFadeIn}
 						key={index}
 					>
 						<Image
@@ -39,31 +40,3 @@ export default function LogoGrid({ data }: LogoGridProps) {
 		</section>
 	);
 }
-
-// Animations
-const animateContainer = {
-	initial: {
-		opacity: 1,
-	},
-	animate: {
-		opacity: 1,
-		transition: {
-			when: 'beforeChildren',
-			duration: 0.1,
-			staggerChildren: 0.12,
-		},
-	},
-};
-
-const animateLogo = {
-	initial: {
-		opacity: 0,
-	},
-	animate: {
-		opacity: 1,
-		transition: {
-			ease: 'easeInOut',
-			duration: 0.5,
-		},
-	},
-};

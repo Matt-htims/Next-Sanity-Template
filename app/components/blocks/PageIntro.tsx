@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 
 import { ImageType } from '@/types/Image';
 import { MotionText } from '../atoms/MotionText';
+import { animateChildUp, animateContainer } from '@/app/animations';
 
 type PageIntroProps = {
 	data: {
@@ -30,7 +31,7 @@ export default function PageIntro({ data }: PageIntroProps) {
 			>
 				{data.image?.asset?.url ? (
 					<motion.div
-						variants={animateFadeUp}
+						variants={animateChildUp}
 						className="relative mb-5 h-64 w-52 origin-bottom overflow-hidden rounded-site"
 					>
 						<Image
@@ -55,15 +56,15 @@ export default function PageIntro({ data }: PageIntroProps) {
 					as="h2"
 					textStyle="h1"
 					className="mb-5"
-					variants={animateFadeUp}
+					variants={animateChildUp}
 				>
 					{data.heading}
 				</MotionText>
 				<MotionText
 					as="h3"
 					textStyle="h2"
-					className="text-pretty font-normal"
-					variants={animateFadeUp}
+					className="font-normal text-pretty"
+					variants={animateChildUp}
 				>
 					{data.subheading}
 				</MotionText>
@@ -71,68 +72,3 @@ export default function PageIntro({ data }: PageIntroProps) {
 		</section>
 	);
 }
-
-const animateContainer = {
-	initial: {
-		opacity: 1,
-	},
-	animate: {
-		opacity: 1,
-		transition: {
-			when: 'afterChildren',
-			staggerChildren: 0.2,
-		},
-	},
-};
-
-// const animateRacket = {
-// 	initial: {
-// 		x: -100,
-// 		opacity: 0,
-// 		rotate: -30,
-// 		scale: 0.2,
-// 	},
-// 	animate: {
-// 		x: [-100, 10, 0],
-// 		opacity: [0, 1, 1],
-// 		rotate: [-30, 25, 0],
-// 		scale: [0.2, 1.1, 1],
-// 		transition: {
-// 			duration: 1.2,
-// 			// type: 'spring',
-// 			// bounce: 0.4,
-// 			ease: 'anticipate',
-// 		},
-// 	},
-// };
-
-const animateFadeUp = {
-	initial: {
-		y: 20,
-		opacity: 0,
-	},
-	animate: {
-		y: 0,
-		opacity: 1,
-		transition: {
-			duration: 1.2,
-			ease: 'easeOut',
-		},
-	},
-};
-
-const animateChild = {
-	initial: {
-		y: 10,
-		opacity: 0,
-	},
-	animate: {
-		y: 0,
-		opacity: 1,
-		transition: {
-			duration: 1.2,
-			ease: 'easeInOut',
-			// ease: cubicBezier(0.6, 0.05, -0.01, 0.9),
-		},
-	},
-};
