@@ -26,7 +26,13 @@ const InnerLink = forwardRef<
 
 	if (innerLinkData?.linkType == 'default') {
 		return (
-			<CustomLink href={'/' + innerLinkData.page?.slug} {...sharedProps}>
+			<CustomLink
+				href={
+					(innerLinkData.page?.slug.charAt(0) == '/' ? '' : '/') +
+					innerLinkData.page?.slug
+				}
+				{...sharedProps}
+			>
 				{noAnimation ? (
 					<>{innerLinkData.pageTitle ?? innerLinkData.page?.name}</>
 				) : (
@@ -102,7 +108,10 @@ const InnerLink = forwardRef<
 
 	if (innerLinkData?.linkType == 'anchorLinkDifferentPage') {
 		const href =
-			'/' + innerLinkData.page?.slug + '#' + innerLinkData.anchorLink;
+			(innerLinkData.page?.slug.charAt(0) == '/' ? '' : '/') +
+			innerLinkData.page?.slug +
+			'#' +
+			innerLinkData.anchorLink;
 		return (
 			<CustomLink href={href} {...sharedProps}>
 				{noAnimation ? (

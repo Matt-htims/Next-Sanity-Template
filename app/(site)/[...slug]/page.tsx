@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import BlockRenderer from '../../utils/BlockRenderer';
 import { revalidatePath } from 'next/cache';
 import { createSlug, createSlugArray } from '@/app/utils/slugFunctions';
+import PageWrapper from '@/app/components/PageWrapper';
 
 export const dynamicParams = false;
 
@@ -46,5 +47,13 @@ export default async function Page({ params }: Props) {
 
 	const Blocks = page.content ? page.content : [];
 
-	return Blocks.map((block: any, index: number) => BlockRenderer(block, index));
+	// return Blocks.map((block: any, index: number) => BlockRenderer(block, index));
+
+	return (
+		<PageWrapper>
+			{Blocks.map((block: any, index: number) =>
+				BlockRenderer(block, index),
+			)}
+		</PageWrapper>
+	);
 }

@@ -52,6 +52,9 @@ const page = {
 					type: 'ImageCarousel',
 				},
 				{
+					type: 'ImageCarouselLightbox',
+				},
+				{
 					type: 'ImageText',
 				},
 				{
@@ -109,6 +112,7 @@ const page = {
 							of: [
 								'ImageBlock',
 								'ImageCarousel',
+								'ImageCarouselLightbox',
 								'ImageText',
 								'VideoBlock',
 							],

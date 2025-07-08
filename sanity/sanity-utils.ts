@@ -171,6 +171,21 @@ export async function getPage(slug: string): Promise<Page> {
                         },
                     },
                 },
+                images2[] {
+                    ...,
+                    asset-> {
+                        _id,
+                        _type,
+                        url,
+                        metadata {
+                            lqip,
+                            dimensions {
+                                width,
+                                height,
+                            },
+                        },
+                    },
+                },
                 priceOptions[]->,
                 imageTextPairs[] {
                     ...,

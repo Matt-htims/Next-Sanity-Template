@@ -3,13 +3,12 @@ import { cubicBezier } from 'framer-motion';
 // Container Animations to stagger children
 export const animateContainer = {
 	initial: {
-		opacity: 0.99999,
+		opacity: 1,
 	},
 	animate: {
 		opacity: 1,
 		transition: {
-			when: 'beforeChildren',
-			duration: 0.3,
+			when: 'afterChildren',
 			staggerChildren: 0.08,
 		},
 	},

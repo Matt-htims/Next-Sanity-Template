@@ -1,4 +1,5 @@
-import { TextIcon } from '@sanity/icons';
+import { sanityTextOptions } from '@/app/MasterText';
+import { TextIcon, HomeIcon } from '@sanity/icons';
 
 const richText = {
 	name: 'richText',
@@ -23,22 +24,9 @@ const richText = {
 								name: 'textStyle',
 								title: 'Text Style',
 								type: 'string',
-								initialValue: 'h3',
+								initialValue: 'body',
 								options: {
-									list: [
-										{ value: 'h1', title: 'H1' },
-										{ value: 'h2', title: 'H2' },
-										{ value: 'h3', title: 'H3' },
-										{ value: 'h4', title: 'H4' },
-										{
-											value: 'body',
-											title: 'Body',
-										},
-										{
-											value: 'body-small',
-											title: 'Body Small',
-										},
-									],
+									list: sanityTextOptions,
 								},
 							},
 						],
@@ -61,6 +49,20 @@ const richText = {
 											'tel',
 										],
 									}),
+							},
+						],
+					},
+					{
+						name: 'internalLink',
+						type: 'object',
+						title: 'Internal Link',
+						Icon: HomeIcon,
+						fields: [
+							{
+								name: 'reference',
+								type: 'reference',
+								title: 'Reference',
+								to: [{ type: 'page' }],
 							},
 						],
 					},

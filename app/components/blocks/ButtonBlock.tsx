@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import { MouseEventHandler } from 'react';
 import InnerLink from '../atoms/InnerLink';
 import { animateButtonChild, animateButtonContainer } from '@/app/animations';
+import CornerSmoothing from '../atoms/CornerSmoothing';
 
 type ButtonBlockProps = {
 	data: {
@@ -42,16 +43,21 @@ export default function ButtonBlock({
 					key={index}
 					className={innerClassName}
 				>
-					<Button
-						variant={button.buttonType}
-						size={button.buttonSize}
-						asChild
+					<CornerSmoothing
+						cornerRadius={16}
+						noCornerSmoothing={button.buttonVariant == 'nav'}
 					>
-						<InnerLink
-							innerLinkData={button.link}
-							noAnimation={button.buttonType == 'nav'}
-						/>
-					</Button>
+						<Button
+							variant={button.buttonVariant}
+							size={button.buttonSize}
+							asChild
+						>
+							<InnerLink
+								innerLinkData={button.link}
+								noAnimation={button.buttonVariant == 'nav'}
+							/>
+						</Button>
+					</CornerSmoothing>
 				</motion.div>
 			))}
 		</motion.div>

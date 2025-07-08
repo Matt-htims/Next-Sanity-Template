@@ -23,6 +23,7 @@ import testimonialSlider from './blocks/testimonialSlider-schema';
 import wireFrameBlock from './blocks/wireframeBlock-schema';
 import navItem from './misc/NavItem-schema';
 import link from './misc/link-schema';
+import imageCarouselLightbox from './blocks/imageCarouselLightbox-schema';
 
 const miscSchemas = [
 	seo,
@@ -51,6 +52,7 @@ const blockSchemas = [
 	buttonBlock,
 	textStack,
 	testimonialSlider,
+	imageCarouselLightbox,
 ];
 
 const documentSchemas = [page, siteInfo];
