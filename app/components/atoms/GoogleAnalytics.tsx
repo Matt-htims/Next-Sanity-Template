@@ -4,18 +4,16 @@ const GoogleAnalytics = ({ id }: { id: string }) => {
 	return (
 		<>
 			<Script
-				async
 				src={`https://www.googletagmanager.com/gtag/js?id=${id}`}
+				strategy="afterInteractive"
 			/>
-
-			<Script id="">
+			<Script id="google-analytics" strategy="afterInteractive">
 				{`
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-            
-              gtag('config', ${id});
-          `}
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${id}');
+        `}
 			</Script>
 		</>
 	);
