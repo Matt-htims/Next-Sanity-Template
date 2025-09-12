@@ -74,6 +74,10 @@ const ImageCarouselLightbox = dynamic(
 	},
 );
 
+const VideoBlock = dynamic(() => import('../components/blocks/VideoBlock'), {
+	ssr: true,
+});
+
 export default function BlockRenderer(block: any, index: number) {
 	switch (block._type) {
 		case 'WireframeBlock':
@@ -104,6 +108,8 @@ export default function BlockRenderer(block: any, index: number) {
 			return <TestimonialSlider key={index} data={block} />;
 		case 'ImageCarouselLightbox':
 			return <ImageCarouselLightbox key={index} data={block} />;
+		case 'VideoBlock':
+			return <VideoBlock key={index} data={block} />;
 		default:
 			return null;
 	}

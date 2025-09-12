@@ -8,6 +8,7 @@ import {
 	useMotionValueEvent,
 } from 'framer-motion';
 import { Text } from '../../atoms/Text';
+import { textStyleType } from '@/app/MasterText';
 
 export default function RevealOnScrollText({
 	text,
@@ -16,17 +17,7 @@ export default function RevealOnScrollText({
 }: {
 	text: string;
 	className: any;
-	textStyle:
-		| 'body'
-		| 'h1'
-		| 'h2'
-		| 'h3'
-		| 'h4'
-		| 'h5'
-		| 'h6'
-		| 'body-small'
-		| null
-		| undefined;
+	textStyle: textStyleType;
 }) {
 	const textref = useRef(null);
 
