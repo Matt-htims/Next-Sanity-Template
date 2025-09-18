@@ -12,6 +12,7 @@ import Footer from '../components/Footer';
 import SmoothScrolling from '../components/SmoothScrolling';
 import Providers from '../components/Providers';
 import GoogleAnalytics from '../components/atoms/GoogleAnalytics';
+import PageWrapper from '../components/PageWrapper';
 
 const FallbackSeo = {
 	title: 'No meta sent',
@@ -49,7 +50,9 @@ export default async function RootLayout({
 				>
 					<Navbar data={siteInfo} />
 					<main className="min-h-screen overflow-x-clip">
-						<SmoothScrolling>{children}</SmoothScrolling>
+						<SmoothScrolling>
+							<PageWrapper>{children}</PageWrapper>
+						</SmoothScrolling>
 						{/* {children} */}
 					</main>
 					<Footer data={siteInfo} />

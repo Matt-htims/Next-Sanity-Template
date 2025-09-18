@@ -5,24 +5,41 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 
-import { pageTransitionAtom } from '../Atoms';
+import {
+	firstPageLoadAtom,
+	startPageTransitionAtom,
+	newHrefAtom,
+} from '../Atoms';
 
 const PageWrapper = (props: HTMLAttributes<HTMLDivElement>) => {
 	const path = usePathname();
 	const [showPage, setShowPage] = useState(true);
 
-	const [showTransitionPanel, setShowTransitionPanel] = useState(false);
+	const [showTransitionPanel, setShowTransitionPanel] = useState(true);
 
-	const [pageTransition, setPageTransition] = useAtom(pageTransitionAtom);
+	const firstPageLoad = useAtomValue(firstPageLoadAtom);
+
+	const [startPageTransition, setStartPageTransition] = useAtom(
+		startPageTransitionAtom,
+	);
+
+	const newHref = useAtomValue(newHrefAtom);
 
 	useEffect(() => {
-		if (
-			pageTransition.firstPageLoad &&
-			pageTransition.startPageTransition
-		) {
-			if (path == pageTransition.newHref) {
+		setShowTransitionPanel(false);
+	}, []);
+
+	useEffect(() => {
+		console.log(
+			'Show Transition Panel: ' + showTransitionPanel,
+			'Show Page: ' + showPage,
+			'Start Page Transition: ' + startPageTransition,
+			'New Href: ' + newHref,
+		);
+		if (firstPageLoad && startPageTransition) {
+			if (path == newHref) {
 				setShowPage(false);
 				setShowTransitionPanel(true);
 			} else {
@@ -31,34 +48,31 @@ const PageWrapper = (props: HTMLAttributes<HTMLDivElement>) => {
 
 			setTimeout(
 				() => {
-					setShowPage(true);
-					setShowTransitionPanel(false);
-					setPageTransition((prev) => ({
-						...prev,
-						startPageTransition: false,
-					}));
+					if (path == newHref) {
+						setShowTransitionPanel(false);
+						setStartPageTransition(false);
+						setShowPage(true);
+					}
 				},
-				path == pageTransition.newHref ? 300 : 2000,
+				path == newHref ? 300 : 5000,
 			);
 		}
-	}, [pageTransition, path]);
+	}, [startPageTransition, path, newHref]);
 
 	return (
-		<div className="" onClick={() => console.log(pageTransition)}>
+		<div className="">
 			<AnimatePresence>
-				{showTransitionPanel && pageTransition.firstPageLoad && (
+				{showTransitionPanel && firstPageLoad && (
 					<motion.div
 						initial={
-							path == pageTransition.newHref
-								? { opacity: 1 }
-								: { opacity: 0 }
+							path == newHref ? { opacity: 1 } : { opacity: 0 }
 						}
 						animate={{
 							opacity: 1,
 							transition: { ease: 'easeInOut', duration: 0.6 },
 						}}
 						exit={
-							path == pageTransition.newHref
+							path == newHref
 								? {
 										opacity: 0,
 										transition: {
@@ -68,10 +82,7 @@ const PageWrapper = (props: HTMLAttributes<HTMLDivElement>) => {
 									}
 								: { opacity: 1 }
 						}
-						className={cn('fixed inset-0 z-2000 bg-white', {
-							'bg-primary':
-								pageTransition.newHref == '/style-guide',
-						})}
+						className={cn('fixed inset-0 z-500000 bg-white')}
 					></motion.div>
 				)}
 			</AnimatePresence>

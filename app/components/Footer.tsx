@@ -13,13 +13,13 @@ import { Text } from './atoms/Text';
 import { CustomLink } from './CustomLink';
 
 import { useSetAtom } from 'jotai';
-import { pageTransitionAtom } from '../Atoms';
+import { firstPageLoadAtom } from '../Atoms';
 
 export default function Footer({ data }: SiteInfoProps) {
-	const setPageTransition = useSetAtom(pageTransitionAtom);
+	const setFirstPageLoad = useSetAtom(firstPageLoadAtom);
 
 	useEffect(() => {
-		setPageTransition((prev) => ({ ...prev, firstPageLoad: true }));
+		setFirstPageLoad(true);
 	}, []);
 	return (
 		<footer id="footer" className="bg-offColor pt-12 pb-5">

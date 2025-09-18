@@ -9,12 +9,8 @@ export const lenisScrollToAtom = atom({
 
 export const firstPageLoadAtom = atom(false);
 
-export const pageTransitionAtom = atom({
-	firstPageLoad: false,
-	startPageTransition: false,
-	newHref: '',
-});
-
 export const startPageTransitionAtom = atom(false);
+
+export const newHrefAtom = atom('');
 
 export const mobileMenuOpenAtom = atom(false);

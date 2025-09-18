@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
 import { useSetAtom } from 'jotai';
-import { pageTransitionAtom } from '../Atoms';
+import { startPageTransitionAtom, newHrefAtom } from '../Atoms';
 
 export interface CustomLinkProps
 	extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -18,7 +18,9 @@ export const CustomLink = React.forwardRef<HTMLAnchorElement, CustomLinkProps>(
 		const router = useRouter();
 		const path = usePathname();
 
-		const setPageTransition = useSetAtom(pageTransitionAtom);
+		const setStartPageTransition = useSetAtom(startPageTransitionAtom);
+
+		const setNewHref = useSetAtom(newHrefAtom);
 
 		return (
 			<Link
@@ -29,11 +31,8 @@ export const CustomLink = React.forwardRef<HTMLAnchorElement, CustomLinkProps>(
 					e.preventDefault();
 
 					if (path !== href) {
-						setPageTransition((prev) => ({
-							...prev,
-							startPageTransition: true,
-							newHref: href.split('#')[0],
-						}));
+						setStartPageTransition(true);
+						setNewHref(href.split('#')[0]);
 
 						setTimeout(() => {
 							router.push(href);
