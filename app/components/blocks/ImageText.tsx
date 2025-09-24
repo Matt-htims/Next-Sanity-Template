@@ -30,7 +30,7 @@ export default function ImageText({ data }: ImageTextProps) {
 	return (
 		<section
 			ref={ref}
-			className="contained mb-24 mt-10 grid grid-cols-12 items-center overflow-visible overflow-x-clip min-[980px]:mb-52 min-[980px]:mt-36"
+			className="contained mt-10 mb-24 grid grid-cols-12 items-center overflow-visible overflow-x-clip min-[980px]:mt-36 min-[980px]:mb-52"
 		>
 			<motion.div
 				style={{ y }}

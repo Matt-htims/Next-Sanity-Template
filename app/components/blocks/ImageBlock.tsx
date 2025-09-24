@@ -178,21 +178,16 @@ function IndividualImage({
 		const height = image.asset.metadata.dimensions?.height;
 		return (
 			<div className="scale-image relative h-full w-[calc(100%+40px)]">
-				<Image
-					src={image.asset.url}
-					alt={image.alt ?? 'alt'}
+				<CustomImage
+					image={image}
 					sizes={
 						width && height && width < height
 							? '(max-width: 768px) 110vw, 100vw'
 							: '(max-width: 768px) 150vw, 100vw'
 					}
 					className="h-full w-full object-cover"
-					width={width}
-					height={height}
-					placeholder="blur"
 					priority={index > 0 ? false : true}
 					loading="eager"
-					blurDataURL={image.asset.metadata.lqip}
 				/>
 			</div>
 		);

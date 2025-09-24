@@ -11,14 +11,30 @@ export type textStyleType =
 
 // Text Styles for Text & Motion Text Atom
 export const textStyles = {
-	h1: 'text-[49px] leading-[54px] md:text-[64px] md:leading-[68px]',
-	h2: 'text-[32px] leading-[38px] md:text-[48px] md:leading-[54px]',
-	h3: 'text-[28px] leading-[34px] md:text-[32px] md:leading-[38px]',
-	h4: 'text-[24px] leading-[30px] md:text-[28px] md:leading-[34px]',
+	h1:
+		'text-[49px] leading-[54px]' + // Mobile
+		'md:text-[64px] md:leading-[68px]', // Medium
+	h2:
+		'text-[32px] leading-[38px]' + // Mobile
+		'md:text-[48px] md:leading-[54px]', // Medium
+	h3:
+		'text-[28px] leading-[34px]' + // Mobile
+		'md:text-[32px] md:leading-[38px]', // Medium
+	h4:
+		'text-[24px] leading-[30px]' + // Mobile
+		'md:text-[28px] md:leading-[34px]', // Medium
 	h5: 'text-[24px] leading-[30px]',
+
 	h6: 'text-[18px] leading-[22px]',
-	body: 'text-[16px] leading-[22px] sm:text-[24px] sm:leading-[34px] font-normal',
-	'body-small': 'text-[16px] leading-[22px] font-normal',
+
+	body:
+		'font-normal' + // Base
+		'text-[16px] leading-[22px]' + // Mobile
+		'sm:text-[24px] sm:leading-[34px]', // Small
+
+	'body-small':
+		'font-normal' + // Base
+		'text-[16px] leading-[22px] ',
 };
 
 // Text options for RichText and TextWithOptions styles
