@@ -32,12 +32,6 @@ const PageWrapper = (props: HTMLAttributes<HTMLDivElement>) => {
 	}, []);
 
 	useEffect(() => {
-		console.log(
-			'Show Transition Panel: ' + showTransitionPanel,
-			'Show Page: ' + showPage,
-			'Start Page Transition: ' + startPageTransition,
-			'New Href: ' + newHref,
-		);
 		if (firstPageLoad && startPageTransition) {
 			if (path == newHref) {
 				setShowPage(false);
