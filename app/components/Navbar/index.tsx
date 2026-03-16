@@ -1,6 +1,6 @@
 'use client';
 import { cn } from '@/lib/utils';
-import { MouseEventHandler, useState, useEffect } from 'react';
+import { MouseEventHandler, useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
@@ -39,7 +39,7 @@ export default function Navbar({ data }: SiteInfoProps) {
 	const [show, setShow] = useState(true);
 	const [lastScrollY, setLastScrollY] = useState(0);
 
-	const controlNavbar = () => {
+	const controlNavbar = useCallback(() => {
 		if (path !== '/' && window.scrollY > lastScrollY && lastScrollY > 100) {
 			// if scroll down hide the navbar
 			setShow(false);
@@ -56,7 +56,7 @@ export default function Navbar({ data }: SiteInfoProps) {
 
 		// remember current page location to use in the next move
 		setLastScrollY(window.scrollY);
-	};
+	}, [lastScrollY, path]);
 
 	useEffect(() => {
 		window.addEventListener('scroll', controlNavbar);
@@ -65,7 +65,7 @@ export default function Navbar({ data }: SiteInfoProps) {
 		return () => {
 			window.removeEventListener('scroll', controlNavbar);
 		};
-	}, [lastScrollY]);
+	}, [controlNavbar]);
 
 	useEffect(() => {
 		if (document.documentElement.dataset.theme == 'light') {
@@ -218,7 +218,7 @@ const navIconAnimation = {
 		y: 0,
 		opacity: 1,
 		transition: {
-			type: 'spring',
+			type: 'spring' as const,
 			duration: 1.5,
 			// ease: cubicBezier(0.6, 0.05, -0.01, 0.9),
 		},
@@ -248,7 +248,7 @@ const navItemAnimation = {
 		y: 0,
 		opacity: 1,
 		transition: {
-			type: 'spring',
+			type: 'spring' as const,
 			duration: 1.5,
 			// ease: cubicBezier(0.6, 0.05, -0.01, 0.9),
 		},

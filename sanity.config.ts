@@ -11,13 +11,10 @@ import { media } from 'sanity-plugin-media';
 import schemas from './sanity/schemas';
 // import { dashboardTool } from '@sanity/dashboard';
 // import { netlifyWidget } from 'sanity-plugin-dashboard-widget-netlify';
-import {
-	VercelDeployConfig,
-	vercelDeployTool,
-} from 'sanity-plugin-vercel-deploy';
 // import { visionTool } from '@sanity/vision';
 
 import { simplerColorInput } from 'sanity-plugin-simpler-color-input';
+import { vercelDeployTool } from './sanity/plugins/vercelDeployTool';
 
 import { ControlsIcon, DocumentsIcon } from '@sanity/icons';
 
@@ -63,7 +60,6 @@ const config = defineConfig({
 		media(),
 		vercelDeployTool(),
 		simplerColorInput({
-			defaultEnableAlpha: true,
 			defaultColorList: [
 				{ label: 'Lush', value: '#446959' },
 				{ label: 'Earth', value: '#E0D0B6' },
@@ -71,9 +67,11 @@ const config = defineConfig({
 				{ label: 'Clay', value: '#C76647' },
 				{ label: 'Wood', value: '#7C6252' },
 			],
+			defaultColorFormat: 'hexa',
 		}),
 		// visionTool(),
 	],
+	tools: (prev) => prev.filter((tool) => tool.name !== 'releases'),
 	schema: {
 		types: schemas,
 		templates: (templates) =>

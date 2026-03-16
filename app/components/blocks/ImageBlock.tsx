@@ -13,6 +13,7 @@ register();
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useRef } from 'react';
 import { animateChildUp } from '@/app/animations';
+import { easeInOutCurve, linearCurve } from '@/app/animations/easings';
 import { useWindowSize } from '@uidotdev/usehooks';
 import CornerSmoothing from '../atoms/CornerSmoothing';
 
@@ -122,7 +123,7 @@ const animateImageGrow = {
 		scale: 1.2,
 		transition: {
 			duration: 4,
-			ease: 'linear',
+			ease: linearCurve,
 		},
 	},
 };
@@ -134,7 +135,7 @@ function ImagesWithEffect({ images }: { images: ImageType[] }) {
 			animate={{ scale: 1, x: 0 }}
 			transition={{
 				// ease: cubicBezier(0.33, 1, 0.68, 1),
-				ease: 'easeInOut',
+				ease: easeInOutCurve,
 				duration: 5,
 				delay: 0.6,
 			}}

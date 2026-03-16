@@ -37,12 +37,23 @@ export const useDotButton = (
 	useEffect(() => {
 		if (!emblaApi) return;
 
-		onInit(emblaApi);
-		onSelect(emblaApi);
+		const frameId = window.requestAnimationFrame(() => {
+			onInit(emblaApi);
+			onSelect(emblaApi);
+		});
+
 		emblaApi
 			.on('reInit', onInit)
 			.on('reInit', onSelect)
 			.on('select', onSelect);
+
+		return () => {
+			window.cancelAnimationFrame(frameId);
+			emblaApi
+				.off('reInit', onInit)
+				.off('reInit', onSelect)
+				.off('select', onSelect);
+		};
 	}, [emblaApi, onInit, onSelect]);
 
 	return {

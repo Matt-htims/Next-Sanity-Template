@@ -4,6 +4,7 @@ import { useEffect, useState, HTMLAttributes } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
+import { easeInOutCurve } from '@/app/animations/easings';
 
 import { useAtom, useAtomValue } from 'jotai';
 
@@ -16,8 +17,7 @@ import {
 const PageWrapper = (props: HTMLAttributes<HTMLDivElement>) => {
 	const path = usePathname();
 	const [showPage, setShowPage] = useState(true);
-
-	const [showTransitionPanel, setShowTransitionPanel] = useState(true);
+	const [showTransitionPanel, setShowTransitionPanel] = useState(false);
 
 	const firstPageLoad = useAtomValue(firstPageLoadAtom);
 
@@ -28,30 +28,37 @@ const PageWrapper = (props: HTMLAttributes<HTMLDivElement>) => {
 	const newHref = useAtomValue(newHrefAtom);
 
 	useEffect(() => {
-		setShowTransitionPanel(false);
-	}, []);
+		if (!(firstPageLoad && startPageTransition)) return;
 
-	useEffect(() => {
-		if (firstPageLoad && startPageTransition) {
+		const startTimer = window.setTimeout(() => {
+			setShowTransitionPanel(true);
 			if (path == newHref) {
 				setShowPage(false);
-				setShowTransitionPanel(true);
-			} else {
-				setShowTransitionPanel(true);
 			}
+		}, 0);
 
-			setTimeout(
-				() => {
-					if (path == newHref) {
-						setShowTransitionPanel(false);
-						setStartPageTransition(false);
-						setShowPage(true);
-					}
-				},
-				path == newHref ? 300 : 5000,
-			);
-		}
-	}, [startPageTransition, path, newHref]);
+		const completeTimer = window.setTimeout(
+			() => {
+				if (path == newHref) {
+					setShowTransitionPanel(false);
+					setStartPageTransition(false);
+					setShowPage(true);
+				}
+			},
+			path == newHref ? 300 : 5000,
+		);
+
+		return () => {
+			window.clearTimeout(startTimer);
+			window.clearTimeout(completeTimer);
+		};
+	}, [
+		firstPageLoad,
+		startPageTransition,
+		path,
+		newHref,
+		setStartPageTransition,
+	]);
 
 	return (
 		<div className="">
@@ -63,14 +70,14 @@ const PageWrapper = (props: HTMLAttributes<HTMLDivElement>) => {
 						}
 						animate={{
 							opacity: 1,
-							transition: { ease: 'easeInOut', duration: 0.6 },
+							transition: { ease: easeInOutCurve, duration: 0.6 },
 						}}
 						exit={
 							path == newHref
 								? {
 										opacity: 0,
 										transition: {
-											ease: 'easeInOut',
+											ease: easeInOutCurve,
 											duration: 0.6,
 										},
 									}

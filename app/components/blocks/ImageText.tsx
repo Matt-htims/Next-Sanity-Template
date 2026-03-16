@@ -4,6 +4,7 @@ import RichText from '../atoms/RichText';
 import { useRef } from 'react';
 
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { easeInOutCurve } from '@/app/animations/easings';
 
 import { ImageType } from '@/types/Image';
 
@@ -74,7 +75,7 @@ const textAnimation = {
 		y: 0,
 		transition: {
 			duration: 0.8,
-			ease: 'easeInOut',
+			ease: easeInOutCurve,
 		},
 	},
 };

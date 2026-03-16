@@ -8,7 +8,7 @@ import { createSlug, createSlugArray } from '@/app/utils/slugFunctions';
 export const dynamicParams = false;
 
 type Props = {
-	params: { slug: string[] };
+	params: Promise<{ slug: string[] }>;
 };
 
 export async function generateStaticParams() {
@@ -26,7 +26,8 @@ export async function generateStaticParams() {
 export async function generateMetadata({
 	params,
 }: Props): Promise<Metadata | null> {
-	const meta = await getPageSeo(createSlug(params.slug));
+	const { slug } = await params;
+	const meta = await getPageSeo(createSlug(slug));
 
 	if (!meta || !meta.seo || !meta.seo.seoTitle || !meta.seo.seoDescription)
 		return null;
@@ -38,7 +39,8 @@ export async function generateMetadata({
 }
 
 export default async function Page({ params }: Props) {
-	const page = await getPage(createSlug(params.slug));
+	const { slug } = await params;
+	const page = await getPage(createSlug(slug));
 
 	if (!page) {
 		return notFound();

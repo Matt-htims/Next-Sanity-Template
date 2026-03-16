@@ -7,6 +7,7 @@ import {
 	useMotionValueEvent,
 	useTransform,
 } from 'framer-motion';
+import { easeInOutCurve, linearCurve } from '@/app/animations/easings';
 import { Text } from '../atoms/Text';
 
 import { ImageType } from '@/types/Image';
@@ -201,14 +202,14 @@ const animateImage = {
 		opacity: 1,
 		transition: {
 			duration: 0.2,
-			ease: 'linear',
+			ease: linearCurve,
 		},
 	},
 	animate: {
 		opacity: 0.7,
 		transition: {
 			duration: 0.2,
-			ease: 'linear',
+			ease: linearCurve,
 		},
 	},
 };
@@ -218,14 +219,14 @@ const removeImage = {
 		opacity: 1,
 		transition: {
 			duration: 0.3,
-			ease: 'linear',
+			ease: linearCurve,
 		},
 	},
 	animate: {
 		opacity: 0,
 		transition: {
 			duration: 0.3,
-			ease: 'easeInOut',
+			ease: easeInOutCurve,
 		},
 	},
 };

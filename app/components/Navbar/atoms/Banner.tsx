@@ -2,7 +2,8 @@
 
 import { BannerItemType, SiteInfo } from '@/types/SiteInfo';
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { circOutCurve, easeInOutCurve } from '@/app/animations/easings';
 import Marquee from 'react-fast-marquee';
 import { AnimateChangeInHeight } from '../../atoms/AnimateChangeInHeight';
 import { Text } from '../../atoms/Text';
@@ -26,17 +27,8 @@ export default function Banner({
 }) {
 	const [closeBanner, setCloseBanner] = useState(false);
 
-	const [showBanner, setShowBanner] = useState(true);
-
 	const mobileMenuOpen = useAtomValue(mobileMenuOpenAtom);
-
-	useEffect(() => {
-		if (mobileMenuOpen && lastScrollY < 80) {
-			setShowBanner(false);
-		} else {
-			setShowBanner(true);
-		}
-	}, [mobileMenuOpen, lastScrollY]);
+	const showBanner = !(mobileMenuOpen && lastScrollY < 80);
 
 	return (
 		<AnimateChangeInHeight>
@@ -196,7 +188,7 @@ const bannerAnimation = {
 	initial: {
 		y: -62,
 		transition: {
-			ease: 'easeInOut',
+			ease: easeInOutCurve,
 			duration: 0.8,
 			delay: 0.5,
 			// ease: cubicBezier(0.6, 0.05, -0.01, 0.9),
@@ -205,7 +197,7 @@ const bannerAnimation = {
 	animate: {
 		y: 0,
 		transition: {
-			ease: 'circOut',
+			ease: circOutCurve,
 			duration: 0.8,
 			delay: 0.3,
 			// ease: cubicBezier(0.6, 0.05, -0.01, 0.9),
@@ -214,7 +206,7 @@ const bannerAnimation = {
 	exit: {
 		opacity: 0,
 		transition: {
-			ease: 'easeInOut',
+			ease: easeInOutCurve,
 			duration: 0.8,
 		},
 	},

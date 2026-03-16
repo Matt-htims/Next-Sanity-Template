@@ -1,5 +1,6 @@
 'use client';
 import { cn } from '@/lib/utils';
+import { circOutCurve } from '@/app/animations/easings';
 
 // Animation
 import { motion, cubicBezier } from 'framer-motion';
@@ -83,7 +84,7 @@ export default function TextStack({ data }: TextStackProps) {
 							}
 							whileInView={{
 								y: 0,
-								transition: { ease: 'circOut', duration: 0.5 },
+								transition: { ease: circOutCurve, duration: 0.5 },
 							}}
 							viewport={{ once: false }}
 							className={cn(

@@ -37,8 +37,16 @@ export const usePrevNextButtons = (
 	useEffect(() => {
 		if (!emblaApi) return;
 
-		onSelect(emblaApi);
+		const frameId = window.requestAnimationFrame(() => {
+			onSelect(emblaApi);
+		});
+
 		emblaApi.on('reInit', onSelect).on('select', onSelect);
+
+		return () => {
+			window.cancelAnimationFrame(frameId);
+			emblaApi.off('reInit', onSelect).off('select', onSelect);
+		};
 	}, [emblaApi, onSelect]);
 
 	return {
@@ -73,7 +81,7 @@ export const PrevButton: React.FC<PropType> = (props) => {
 					height="48"
 					rx="24"
 					fill="#EDEAE8"
-					className="fill-cream group-hover:fill-off-black transition-all duration-300"
+					className="fill-cream transition-all duration-300 group-hover:fill-off-black"
 				/>
 				<path
 					fillRule="evenodd"
@@ -111,7 +119,7 @@ export const NextButton: React.FC<PropType> = (props) => {
 					height="48"
 					rx="24"
 					fill="#EDEAE8"
-					className="group-hover:fill-off-black transition-all duration-300"
+					className="transition-all duration-300 group-hover:fill-off-black"
 				/>
 				<path
 					fillRule="evenodd"

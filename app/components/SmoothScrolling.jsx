@@ -52,7 +52,7 @@ function SmoothScrolling({ children }) {
 				}, 500);
 			}
 		}
-	}, [pathname]);
+	}, [pathname, setLenisScrollTo]);
 
 	return (
 		<ReactLenis

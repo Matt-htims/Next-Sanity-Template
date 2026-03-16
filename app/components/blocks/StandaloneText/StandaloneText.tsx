@@ -1,6 +1,7 @@
 'use client';
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { easeOutCurve } from '@/app/animations/easings';
 import { cn } from '@/lib/utils';
 import { breakText } from '@/app/utils/breakText';
 import RichText from '../../atoms/RichText';
@@ -143,7 +144,7 @@ const textAnimation = {
 		y: 0,
 		transition: {
 			duration: 1,
-			ease: 'easeOut',
+			ease: easeOutCurve,
 		},
 	},
 };

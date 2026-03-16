@@ -7,6 +7,7 @@ import {
 	useTransform,
 	useMotionValueEvent,
 } from 'framer-motion';
+import { easeInOutCurve } from '@/app/animations/easings';
 import { Text } from '../../atoms/Text';
 import { textStyleType } from '@/app/MasterText';
 
@@ -78,7 +79,7 @@ const animateSimpleText = {
 		opacity: 1,
 		transition: {
 			duration: 0.5,
-			ease: 'easeInOut',
+			ease: easeInOutCurve,
 		},
 	},
 };

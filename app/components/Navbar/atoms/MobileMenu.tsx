@@ -1,6 +1,7 @@
 import { ButtonType } from '@/types/Button';
 import { AnimatePresence, cubicBezier, motion } from 'framer-motion';
 import { MouseEventHandler, useState, useEffect } from 'react';
+import { easeInOutCurve } from '@/app/animations/easings';
 import ButtonBlock from '../../blocks/ButtonBlock';
 
 export default function MobileMenu({
@@ -62,7 +63,7 @@ const mobileMenuContainer = {
 	exit: {
 		opacity: 0,
 		transition: {
-			ease: 'easeInOut',
+			ease: easeInOutCurve,
 			delay: 0.5, //0.5
 			duration: 0.4, //0.8
 		},

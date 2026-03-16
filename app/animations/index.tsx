@@ -1,4 +1,5 @@
 import { cubicBezier } from 'framer-motion';
+import { easeInOutCurve, easeOutCurve } from './easings';
 
 // Container Animations to stagger children
 export const animateContainer = {
@@ -41,7 +42,7 @@ export const animateChildUp = {
 			ease: cubicBezier(0.33, 1, 0.68, 1),
 			duration: 1.2,
 			opacity: {
-				ease: 'easeOut',
+				ease: easeOutCurve,
 				duration: 1,
 			},
 		},
@@ -50,7 +51,7 @@ export const animateChildUp = {
 		y: 40,
 		opacity: 0,
 		transition: {
-			ease: 'easeInOut',
+			ease: easeInOutCurve,
 			duration: 0.6,
 		},
 	},
@@ -63,14 +64,14 @@ export const animateChildFadeIn = {
 	animate: {
 		opacity: 1,
 		transition: {
-			ease: 'easeInOut',
+			ease: easeInOutCurve,
 			duration: 1,
 		},
 	},
 	exit: {
 		opacity: 1,
 		transition: {
-			ease: 'easeInOut',
+			ease: easeInOutCurve,
 			duration: 1,
 			delay: 1,
 		},
@@ -97,7 +98,7 @@ export const animateButtonChild = {
 	animate: {
 		opacity: 1,
 		transition: {
-			ease: 'easeInOut',
+			ease: easeInOutCurve,
 			duration: 1,
 		},
 	},

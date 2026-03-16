@@ -20,7 +20,7 @@ export default function Footer({ data }: SiteInfoProps) {
 
 	useEffect(() => {
 		setFirstPageLoad(true);
-	}, []);
+	}, [setFirstPageLoad]);
 	return (
 		<footer id="footer" className="bg-offColor pt-12 pb-5">
 			<div className="contained">

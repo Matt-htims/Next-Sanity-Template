@@ -16,6 +16,15 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Environment Variables
+
+An example environment file is available at [example.env](example.env).
+
+Copy those values into your local `.env` file and set:
+
+- `NEXT_PUBLIC_SANITY_STUDIO_DEPLOY_HOOK_URL` for the Sanity Studio deploy button.
+- `NEXT_PUBLIC_SANITY_STUDIO_DEPLOY_LABEL` to customize the deploy button text (optional).
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.

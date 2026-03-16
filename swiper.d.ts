@@ -2,7 +2,7 @@ import React from 'react';
 
 import type { SwiperSlideProps, SwiperProps } from 'swiper/react';
 
-declare global {
+declare module 'react' {
 	namespace JSX {
 		interface IntrinsicElements {
 			'swiper-container': React.DetailedHTMLProps<

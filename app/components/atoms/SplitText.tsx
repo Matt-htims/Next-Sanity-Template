@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { circOutCurve, easeInOutCurve } from '@/app/animations/easings';
 
 export default function SplitText({
 	text,
@@ -72,14 +73,14 @@ const typeIn = {
 	initial: {
 		opacity: 0.2,
 		transition: {
-			ease: 'easeInOut',
+			ease: easeInOutCurve,
 			duration: 0.1,
 		},
 	},
 	animate: {
 		opacity: 1,
 		transition: {
-			ease: 'easeInOut',
+			ease: easeInOutCurve,
 			duration: 0.6,
 		},
 	},
@@ -94,10 +95,10 @@ const fadeIn = {
 		opacity: 1,
 		x: 0,
 		transition: {
-			ease: 'circOut',
+			ease: circOutCurve,
 			duration: 0.6,
 			opacity: {
-				ease: 'easeInOut',
+				ease: easeInOutCurve,
 				duration: 0.4,
 			},
 		},
