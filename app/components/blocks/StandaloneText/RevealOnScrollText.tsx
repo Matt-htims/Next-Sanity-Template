@@ -7,9 +7,9 @@ import {
 	useTransform,
 	useMotionValueEvent,
 } from 'framer-motion';
-import { easeInOutCurve } from '@/app/animations/easings';
+import { easeInOutCurve } from '@/lib/animations/easings';
 import { Text } from '../../atoms/Text';
-import { textStyleType } from '@/app/MasterText';
+import { textStyleType } from '@/app/theme/text';
 
 export default function RevealOnScrollText({
 	text,

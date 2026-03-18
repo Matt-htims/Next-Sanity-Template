@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
-import { easeInOutCurve } from '@/app/animations/easings';
+import { easeInOutCurve } from '@/lib/animations/easings';
 
 interface AnimateChangeInHeightProps {
 	children: React.ReactNode;

@@ -6,7 +6,8 @@ import { motion } from 'framer-motion';
 
 import { ImageType } from '@/types/Image';
 import { MotionText } from '../atoms/MotionText';
-import { animateChildUp, animateContainer } from '@/app/animations';
+import { animateChildUp, animateContainer } from '@/lib/animations';
+import { Container } from '../atoms/Container';
 
 type PageIntroProps = {
 	data: {
@@ -21,7 +22,10 @@ type PageIntroProps = {
 
 export default function PageIntro({ data }: PageIntroProps) {
 	return (
-		<section className="contained my-28 flex justify-center overflow-visible">
+		<Container
+			as="section"
+			className="my-28 flex justify-center overflow-visible"
+		>
 			<motion.div
 				variants={animateContainer}
 				initial="initial"
@@ -69,6 +73,6 @@ export default function PageIntro({ data }: PageIntroProps) {
 					{data.subheading}
 				</MotionText>
 			</motion.div>
-		</section>
+		</Container>
 	);
 }

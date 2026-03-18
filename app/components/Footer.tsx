@@ -11,6 +11,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { Text } from './atoms/Text';
 import { CustomLink } from './CustomLink';
+import { Container } from './atoms/Container';
 
 import { useSetAtom } from 'jotai';
 import { firstPageLoadAtom } from '../Atoms';
@@ -22,8 +23,8 @@ export default function Footer({ data }: SiteInfoProps) {
 		setFirstPageLoad(true);
 	}, [setFirstPageLoad]);
 	return (
-		<footer id="footer" className="bg-offColor pt-12 pb-5">
-			<div className="contained">
+		<footer id="footer" className="bg-bg-muted pt-12 pb-5">
+			<Container>
 				<div className="mb-12 flex flex-col items-center space-y-5">
 					<CustomLink
 						href="/"
@@ -58,11 +59,11 @@ export default function Footer({ data }: SiteInfoProps) {
 						)}
 					</CustomLink>
 				</div>
-				<p className="text-center text-base text-text/50">
+				<p className="text-center text-base text-text-primary/50">
 					Copyright © {new Date().getFullYear()}{' '}
 					{data.siteName ? data.siteName : ''}
 				</p>
-			</div>
+			</Container>
 		</footer>
 	);
 }

@@ -16,7 +16,7 @@ import schemas from './sanity/schemas';
 import { simplerColorInput } from 'sanity-plugin-simpler-color-input';
 import { vercelDeployTool } from './sanity/plugins/vercelDeployTool';
 
-import { ControlsIcon, DocumentsIcon } from '@sanity/icons';
+import { ControlsIcon, DocumentsIcon, ClipboardIcon } from '@sanity/icons';
 
 // Define the actions that should be available for singleton documents
 const singletonActions = new Set(['publish', 'discardChanges', 'restore']);
@@ -55,6 +55,10 @@ const config = defineConfig({
 						S.documentTypeListItem('page')
 							.title('Pages')
 							.icon(DocumentsIcon),
+						S.divider(),
+						S.documentTypeListItem('form')
+							.title('Forms')
+							.icon(ClipboardIcon),
 					]),
 		}),
 		media(),

@@ -1,18 +1,18 @@
 'use client';
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { easeOutCurve } from '@/app/animations/easings';
+import { easeOutCurve } from '@/lib/animations/easings';
 import { cn } from '@/lib/utils';
-import { breakText } from '@/app/utils/breakText';
+import { breakText } from '@/lib/breakText';
 import RichText from '../../atoms/RichText';
 import { Text } from '../../atoms/Text';
 
 // Components
 import RevealOnScrollText from './RevealOnScrollText';
 
-// Standalone Text Helpers
-import { textStyle, alignment, width } from './standaloneTextHelpers';
 import { TextWithOptions } from '@/types/TextWithOptions';
+import { getLayoutWidthClassName } from '@/lib/layoutWidth';
+import { Container } from '../../atoms/Container';
 
 type StandaloneTextProps = {
 	data: {
@@ -20,12 +20,14 @@ type StandaloneTextProps = {
 		_type: string;
 		title: string;
 		useSimpleText: boolean;
+		centered?: boolean;
 		simpleText: TextWithOptions;
 		richText: Array<any>;
 		textAnimation: string;
-		positionOptions: {
-			alignment: string;
-			width: string;
+		maxWidth?: string;
+		positionOptions?: {
+			alignment?: string;
+			width?: string;
 			maxWidth?: number;
 		};
 	};
@@ -34,101 +36,73 @@ type StandaloneTextProps = {
 export default function StandaloneText({ data }: StandaloneTextProps) {
 	const ref = useRef(null);
 	const isInView = useInView(ref, { amount: 0.4, once: true });
+	const widthClassName = getLayoutWidthClassName(data.maxWidth);
+	const isCentered = !!data.centered;
 
 	if (data.useSimpleText) {
 		if (data.textAnimation == 'fadeIn') {
 			return (
-				<motion.section
-					ref={ref}
-					variants={textAnimation}
-					initial="initial"
-					animate={isInView ? 'animate' : 'initial'}
-					className="contained mb-3.5 grid grid-cols-12 gap-5 sm:mb-8"
-				>
-					<Text
-						as={data.simpleText.textOptions.textType}
-						textStyle={data.simpleText.textOptions.textStyle}
-						style={{ maxWidth: data.positionOptions.maxWidth }}
-						className={cn(
-							'col-span-12 sm:col-span-10',
-							width(data.positionOptions.width),
-							alignment(data.positionOptions.alignment),
-							{
-								'text-center':
-									data.simpleText.textOptions.textCentered,
-							},
-						)}
+				<Container as="section" ref={ref} className="mb-3.5 sm:mb-8">
+					<motion.div
+						variants={textAnimation}
+						initial="initial"
+						animate={isInView ? 'animate' : 'initial'}
 					>
-						{breakText(data.simpleText.text)}
-					</Text>
-				</motion.section>
+						<Text
+							as={data.simpleText.textOptions.textType}
+							textStyle={data.simpleText.textOptions.textStyle}
+							className={cn(widthClassName, {
+								'text-center': isCentered,
+							})}
+						>
+							{breakText(data.simpleText.text)}
+						</Text>
+					</motion.div>
+				</Container>
 			);
 		} else if (data.textAnimation == 'scrollReveal') {
 			return (
-				<section
-					style={{ maxWidth: data.positionOptions.maxWidth }}
-					className="contained mb-3.5 grid grid-cols-12 gap-5 sm:mb-8"
-				>
+				<Container as="section" className="mb-3.5 sm:mb-8">
 					<RevealOnScrollText
 						text={data.simpleText.text}
 						textStyle={
 							data.simpleText.textOptions?.textStyle ?? 'h2'
 						}
-						className={cn(
-							'col-span-12 sm:col-span-10',
-							width(data.positionOptions?.width),
-							alignment(data.positionOptions?.alignment),
-							{
-								'text-center':
-									data.simpleText.textOptions.textCentered,
-							},
-						)}
+						className={cn(widthClassName, {
+							'text-center': isCentered,
+						})}
 					/>
-				</section>
+				</Container>
 			);
 		} else {
 			return (
-				<section className="contained mb-3.5 grid grid-cols-12 gap-5 sm:mb-8">
+				<Container as="section" className="mb-3.5 sm:mb-8">
 					<Text
 						as={data.simpleText.textOptions.textType}
 						textStyle={data.simpleText.textOptions.textStyle}
-						style={{ maxWidth: data.positionOptions.maxWidth }}
-						className={cn(
-							'col-span-12 sm:col-span-10',
-							width(data.positionOptions.width),
-							alignment(data.positionOptions.alignment),
-							{
-								'text-center':
-									data.simpleText.textOptions.textCentered,
-							},
-						)}
+						className={cn(widthClassName, {
+							'text-center': isCentered,
+						})}
 					>
 						{breakText(data.simpleText.text)}
 					</Text>
-				</section>
+				</Container>
 			);
 		}
 	} else {
 		return (
-			<motion.section
-				ref={ref}
-				className="contained mb-3.5 grid grid-cols-12 gap-5 sm:mb-7"
-				variants={textAnimation}
-				initial="initial"
-				animate={isInView ? 'animate' : 'initial'}
-			>
+			<Container as="section" ref={ref} className="mb-3.5 sm:mb-7">
 				<motion.div
 					variants={textAnimation}
 					initial="initial"
 					animate={isInView ? 'animate' : 'initial'}
-					className={`col-span-12 sm:col-span-10 ${width(
-						data.positionOptions?.width,
-					)} ${alignment(data.positionOptions?.alignment)}`}
-					style={{ maxWidth: data.positionOptions.maxWidth }}
+					className={cn(widthClassName, {
+						'text-center': isCentered,
+					})}
 				>
 					<RichText data={data.richText} />
 				</motion.div>
-			</motion.section>
+			</Container>
 		);
 	}
 }

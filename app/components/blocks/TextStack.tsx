@@ -1,10 +1,10 @@
 'use client';
 import { cn } from '@/lib/utils';
-import { circOutCurve } from '@/app/animations/easings';
+import { circOutCurve } from '@/lib/animations/easings';
 
 // Animation
 import { motion, cubicBezier } from 'framer-motion';
-import { animateContainer, animateChildUp } from '@/app/animations';
+import { animateContainer, animateChildUp } from '@/lib/animations';
 
 // Atoms / Blocks
 import ButtonBlock from './ButtonBlock';
@@ -15,19 +15,22 @@ import RichText from '../atoms/RichText';
 import { ImageType } from '@/types/Image';
 import CustomImage from '../atoms/CustomImage';
 import CornerSmoothing from '../atoms/CornerSmoothing';
+import type { FormDocumentType } from '@/types/Form';
+import FormspreeForm from './forms/FormspreeForm';
+import { getLayoutWidthClassName } from '@/lib/layoutWidth';
+import { Container } from '../atoms/Container';
 
 export type TextStackType = {
 	_key?: string;
 	_type?: string;
-	id: string;
+	id?: string;
 	centered: boolean;
 	maxWidth: string;
 	pretitle: Array<any>;
 	headingRich: Array<any>;
 	bodyRich: Array<any>;
 	buttons: ButtonType[];
-	addImage: boolean;
-	image?: ImageType;
+	form?: FormDocumentType;
 };
 
 type TextStackProps = {
@@ -35,25 +38,14 @@ type TextStackProps = {
 };
 
 export default function TextStack({ data }: TextStackProps) {
+	const widthClassName = getLayoutWidthClassName(data.maxWidth);
+
 	return (
-		<section id={data.id} className={cn('relative scroll-m-32')}>
-			{data.addImage && data.image && (
-				<motion.div
-					variants={animateChildUp}
-					initial="initial"
-					whileInView="animate"
-					viewport={{ once: true }}
-					className="lg:contained relative z-0"
-				>
-					<CornerSmoothing className="h-full w-full">
-						<CustomImage
-							image={data.image}
-							className="aspect-square w-full object-cover lg:aspect-[26/15] lg:rounded-site"
-						/>
-					</CornerSmoothing>
-				</motion.div>
-			)}
-			<div className="contained">
+		<section
+			id={data.id || undefined}
+			className={cn('relative scroll-m-32')}
+		>
+			<Container>
 				<motion.div
 					variants={animateContainer}
 					initial="initial"
@@ -64,66 +56,28 @@ export default function TextStack({ data }: TextStackProps) {
 					// 		data.centered,
 					// })}
 				>
-					<CornerSmoothing
-						noCornerSmoothing={data.maxWidth !== 'boxed'}
+					<div
 						className={cn(
 							'relative z-10 flex w-full justify-center',
 							{
 								'relative z-10 flex w-full justify-center text-center':
 									data.centered,
-								'mx-auto md:w-10/12 lg:w-full xl:w-max':
-									data.maxWidth == 'boxed',
 							},
 						)}
 					>
 						<motion.div
-							initial={
-								data.addImage && data.image
-									? { y: 100 }
-									: { y: 0 }
-							}
+							initial={{ y: 0 }}
 							whileInView={{
 								y: 0,
-								transition: { ease: circOutCurve, duration: 0.5 },
+								transition: {
+									ease: circOutCurve,
+									duration: 0.5,
+								},
 							}}
 							viewport={{ once: false }}
-							className={cn(
-								'mx-auto max-w-[940px]',
-								{
-									'max-w-[676px] md:w-9/12 lg:w-10/12':
-										data.maxWidth === 'six',
-								},
-								{
-									'max-w-[912px] md:w-10/12':
-										data.maxWidth === 'seven',
-								},
-								{
-									'max-w-[1036px] md:w-10/12':
-										data.maxWidth === 'eight',
-								},
-								{
-									'max-w-[1200px] rounded-site bg-white px-7 py-16 md:px-14 md:py-28 lg:px-36 lg:py-28':
-										data.maxWidth === 'boxed',
-								},
-								// {
-								// 	'ml-[calc(100%/12*1)]': !data.centered,
-								// },
-								{
-									'mx-auto flex max-w-full flex-col gap-5 md:w-10/12 xl:max-w-max xl:flex-row':
-										data.maxWidth == 'sideBySide',
-								},
-								{
-									'-mt-[82px] rounded-[28px] bg-white px-3 pt-10 md:-mt-18 md:rounded-[36px] md:px-14 md:pt-14 lg:-mt-28 lg:box-content lg:px-33 lg:pt-28':
-										data.addImage && data.image,
-								},
-							)}
+							className={widthClassName}
 						>
-							<div
-								className={cn({
-									'md:max-w-[640px] xl:w-1/2 xl:max-w-max':
-										data.maxWidth == 'sideBySide',
-								})}
-							>
+							<div>
 								{data.pretitle && (
 									<motion.div
 										variants={animateChildUp}
@@ -141,12 +95,7 @@ export default function TextStack({ data }: TextStackProps) {
 									</motion.div>
 								)}
 							</div>
-							<div
-								className={cn({
-									'ml-auto md:max-w-[640px] xl:mt-[360px] xl:w-1/2 xl:max-w-max':
-										data.maxWidth == 'sideBySide',
-								})}
-							>
+							<div>
 								{data.bodyRich && (
 									<motion.div
 										variants={animateChildUp}
@@ -155,16 +104,14 @@ export default function TextStack({ data }: TextStackProps) {
 										<RichText data={data.bodyRich} />
 									</motion.div>
 								)}
-								{/* <TextWithOptions
-					textWithOptions={data.heading}
-					className=""
-				/>
-				<TextWithOptions
-					textWithOptions={data.body}
-					className={cn('mt-7 max-w-2xl', {
-						'mx-auto': data.centered,
-					})}
-				/> */}
+								{data.form && (
+									<motion.div
+										variants={animateChildUp}
+										className="mt-7"
+									>
+										<FormspreeForm form={data.form} />
+									</motion.div>
+								)}
 								{data.buttons && (
 									<ButtonBlock
 										data={{ buttons: data.buttons }}
@@ -176,9 +123,9 @@ export default function TextStack({ data }: TextStackProps) {
 								)}
 							</div>
 						</motion.div>
-					</CornerSmoothing>
+					</div>
 				</motion.div>
-			</div>
+			</Container>
 		</section>
 	);
 }

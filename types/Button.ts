@@ -1,4 +1,4 @@
-import { buttonSizeType, buttonVariantType } from '@/app/MasterButton';
+import { buttonSizeType, buttonVariantType } from '@/app/theme/button';
 import { LinkType } from './Link';
 
 export type ButtonType = {

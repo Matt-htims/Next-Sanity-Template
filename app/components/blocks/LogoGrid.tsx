@@ -2,7 +2,8 @@
 import Image from 'next/image';
 import { ImageType } from '@/types/Image';
 import { motion } from 'framer-motion';
-import { animateChildFadeIn, animateContainer } from '@/app/animations';
+import { animateChildFadeIn, animateContainer } from '@/lib/animations';
+import { Container } from '../atoms/Container';
 
 type LogoGridProps = {
 	data: {
@@ -12,7 +13,7 @@ type LogoGridProps = {
 
 export default function LogoGrid({ data }: LogoGridProps) {
 	return (
-		<section className="contained opacity-20">
+		<Container as="section" className="opacity-20">
 			<motion.div
 				variants={animateContainer}
 				initial="initial"
@@ -37,6 +38,6 @@ export default function LogoGrid({ data }: LogoGridProps) {
 					</motion.div>
 				))}
 			</motion.div>
-		</section>
+		</Container>
 	);
 }

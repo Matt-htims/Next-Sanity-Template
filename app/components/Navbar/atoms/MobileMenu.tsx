@@ -1,7 +1,7 @@
 import { ButtonType } from '@/types/Button';
 import { AnimatePresence, cubicBezier, motion } from 'framer-motion';
 import { MouseEventHandler, useState, useEffect } from 'react';
-import { easeInOutCurve } from '@/app/animations/easings';
+import { easeInOutCurve } from '@/lib/animations/easings';
 import ButtonBlock from '../../blocks/ButtonBlock';
 
 export default function MobileMenu({
@@ -31,10 +31,10 @@ export default function MobileMenu({
 						initial="initial"
 						animate="animate"
 						exit="exit"
-						className={`mobile-menu-wrap fixed top-0 bottom-0 z-500 ml-auto flex h-dvh w-full flex-col space-y-3 bg-primary px-5 pt-36 pb-12 lg:hidden`}
+						className={`mobile-menu-wrap fixed top-0 bottom-0 z-500 ml-auto flex h-dvh w-full flex-col space-y-3 bg-black px-5 pt-12 pb-12 lg:hidden`}
 					>
 						<ButtonBlock
-							className="h-full flex-col items-end gap-8 text-white sm:px-16"
+							className="h-full flex-col items-center gap-8 text-white sm:px-16 md:gap-8"
 							data={{
 								_key: 'sldkfj',
 								_type: 'buttons',

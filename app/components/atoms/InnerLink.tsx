@@ -8,6 +8,7 @@ import { lenisScrollToAtom } from '@/app/Atoms';
 import { CustomLink } from '../CustomLink';
 import { LinkType } from '@/types/Link';
 import ButtonInnerAnimation from './ButtonInnerAnimation';
+import { easeInOutCubic } from '@/lib/animations/scrollEasing';
 
 const InnerLink = forwardRef<
 	HTMLAnchorElement,
@@ -17,6 +18,14 @@ const InnerLink = forwardRef<
 	} & React.AnchorHTMLAttributes<HTMLAnchorElement>
 >(({ innerLinkData, noAnimation, className, ...props }, ref) => {
 	const setLenisScrollTo = useSetAtom(lenisScrollToAtom);
+	const childContent = props.children;
+
+	const getLabel = (fallback?: React.ReactNode) => {
+		if (childContent !== undefined && childContent !== null) {
+			return childContent;
+		}
+		return fallback ?? null;
+	};
 
 	const sharedProps = {
 		className,
@@ -34,10 +43,16 @@ const InnerLink = forwardRef<
 				{...sharedProps}
 			>
 				{noAnimation ? (
-					<>{innerLinkData.pageTitle ?? innerLinkData.page?.name}</>
+					<>
+						{getLabel(
+							innerLinkData.pageTitle ?? innerLinkData.page?.name,
+						)}
+					</>
 				) : (
 					<ButtonInnerAnimation>
-						{innerLinkData.pageTitle ?? innerLinkData.page?.name}
+						{getLabel(
+							innerLinkData.pageTitle ?? innerLinkData.page?.name,
+						)}
 					</ButtonInnerAnimation>
 				)}
 			</CustomLink>
@@ -50,10 +65,10 @@ const InnerLink = forwardRef<
 			return (
 				<CustomLink href={href} {...sharedProps}>
 					{noAnimation ? (
-						<>{innerLinkData.displayName}</>
+						<>{getLabel(innerLinkData.displayName)}</>
 					) : (
 						<ButtonInnerAnimation>
-							{innerLinkData.displayName}
+							{getLabel(innerLinkData.displayName)}
 						</ButtonInnerAnimation>
 					)}
 				</CustomLink>
@@ -67,10 +82,10 @@ const InnerLink = forwardRef<
 				{...sharedProps}
 			>
 				{noAnimation ? (
-					<>{innerLinkData.displayName}</>
+					<>{getLabel(innerLinkData.displayName)}</>
 				) : (
 					<ButtonInnerAnimation>
-						{innerLinkData.displayName}
+						{getLabel(innerLinkData.displayName)}
 					</ButtonInnerAnimation>
 				)}
 			</a>
@@ -87,19 +102,16 @@ const InnerLink = forwardRef<
 						id: '#' + innerLinkData.anchorLink,
 						offset: 100,
 						duration: 2.5,
-						easing: (x: any) =>
-							x < 0.5
-								? 4 * x * x * x
-								: 1 - Math.pow(-2 * x + 2, 3) / 2,
+						easing: easeInOutCubic,
 					});
 				}}
 				{...sharedProps}
 			>
 				{noAnimation ? (
-					<>{innerLinkData.displayName}</>
+					<>{getLabel(innerLinkData.displayName)}</>
 				) : (
 					<ButtonInnerAnimation>
-						{innerLinkData.displayName}
+						{getLabel(innerLinkData.displayName)}
 					</ButtonInnerAnimation>
 				)}
 			</Link>
@@ -115,17 +127,23 @@ const InnerLink = forwardRef<
 		return (
 			<CustomLink href={href} {...sharedProps}>
 				{noAnimation ? (
-					<>{innerLinkData.pageTitle ?? innerLinkData.page?.name}</>
+					<>
+						{getLabel(
+							innerLinkData.pageTitle ?? innerLinkData.page?.name,
+						)}
+					</>
 				) : (
 					<ButtonInnerAnimation>
-						{innerLinkData.pageTitle ?? innerLinkData.page?.name}
+						{getLabel(
+							innerLinkData.pageTitle ?? innerLinkData.page?.name,
+						)}
 					</ButtonInnerAnimation>
 				)}
 			</CustomLink>
 		);
 	}
 
-	return '';
+	return null;
 });
 
 InnerLink.displayName = 'InnerLink';

@@ -1,45 +1,125 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next + Sanity Starter
 
-## Getting Started
+A theme-first starter for building Next.js + Sanity websites from design handoff.
 
-First, run the development server:
+## Who This Is For
+
+1. Teams starting a brand-new project from this template.
+2. Developers migrating from the previous internal template.
+
+If you used the old template, start with the migration guide:
+
+- [docs/migrating-from-old-template.md](docs/migrating-from-old-template.md)
+
+## Clone To Running In 5 Minutes
+
+1. Clone and install dependencies.
+
+```bash
+git clone <your-repo-url>
+cd next-sanity-starter
+npm install
+```
+
+2. Start the app.
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open:
 
-## Environment Variables
+- Site: [http://localhost:3000](http://localhost:3000)
+- Studio: [http://localhost:3000/admin](http://localhost:3000/admin)
 
-An example environment file is available at [example.env](example.env).
+## New Project Setup Flow (Recommended)
 
-Copy those values into your local `.env` file and set:
+Follow this order when creating a new client project from the template.
 
-- `NEXT_PUBLIC_SANITY_STUDIO_DEPLOY_HOOK_URL` for the Sanity Studio deploy button.
-- `NEXT_PUBLIC_SANITY_STUDIO_DEPLOY_LABEL` to customize the deploy button text (optional).
+1. Configure Sanity project settings in [sanityConfig.js](sanityConfig.js).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `sanityProjectId`
+- `sanityDataset`
+- `sanityTitle`
+- `sanityApiVersion`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. Import starter content into the connected Sanity project.
 
-## Learn More
+Run this after the project ID and dataset are set in [sanityConfig.js](sanityConfig.js):
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npx sanity dataset import seedData.tar.gz production
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Add environment values from [example.env](example.env) into `.env`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- `NEXT_PUBLIC_SANITY_STUDIO_DEPLOY_HOOK_URL` (optional but recommended)
+- `NEXT_PUBLIC_SANITY_STUDIO_DEPLOY_LABEL` (optional)
 
-## Deploy on Vercel
+4. Paste design tokens into [app/theme/theme.css](app/theme/theme.css).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Primitive tokens (`--black`, `--accent`, etc.)
+- Semantic tokens (`--semantic-bg-canvas`, `--semantic-text-primary`, etc.)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+5. Configure fonts.
+
+- [app/theme/fonts.ts](app/theme/fonts.ts)
+- [app/theme/theme.css](app/theme/theme.css) (`--font-body-family`, `--font-heading-family`)
+
+6. Configure typography variants in [app/theme/text.ts](app/theme/text.ts).
+
+- Update `textStyles` values.
+
+7. Configure buttons and layout presets.
+
+- [app/theme/button.ts](app/theme/button.ts)
+- [app/theme/layoutConfig.ts](app/theme/layoutConfig.ts)
+
+8. Verify theme output.
+
+- Open [http://localhost:3000/text-hierarchy](http://localhost:3000/text-hierarchy)
+- Confirm text styles and color tokens render as expected.
+
+9. Run quality checks.
+
+```bash
+npm run lint
+npm run build
+```
+
+## Theme Source Of Truth
+
+Keep design decisions in theme files first, then consume in components.
+
+1. Colors: [app/theme/theme.css](app/theme/theme.css)
+2. Typography: [app/theme/text.ts](app/theme/text.ts)
+3. Buttons: [app/theme/button.ts](app/theme/button.ts)
+4. Layout widths: [app/theme/layoutConfig.ts](app/theme/layoutConfig.ts)
+
+Notes:
+
+- Text hierarchy previews derive from [app/theme/text.ts](app/theme/text.ts).
+- Color token previews derive from variables defined in [app/theme/theme.css](app/theme/theme.css) via [app/theme/colours.ts](app/theme/colours.ts).
+
+## Sanity CLI Notes
+
+Prefer local execution to avoid global version conflicts:
+
+```bash
+npx sanity versions
+```
+
+If you intentionally use a global CLI, keep it updated:
+
+```bash
+npm install -g @sanity/cli@latest
+```
+
+## Useful Commands
+
+```bash
+npm run dev
+npm run lint
+npm run build
+npx sanity versions
+```

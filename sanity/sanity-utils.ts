@@ -9,27 +9,34 @@ export async function getSiteInfo(): Promise<SiteInfo> {
 		groq`*[_type == "siteInfo" && _id == 'siteInfo'][0]{
             _id,
             _createdAt,
-            address,
-            instaLink,
-            facebookLink,
-            twitterLink,
-            bookingLink,
-            addBanner,
-            banner[],
             siteName,
+            addBanner,
+            banner[] {
+                bannerContent,
+                bannerLink,
+                bannerColour,
+            },
             navMenu [] {
-                    ...,
+                    _type,
+                    buttonVariant,
+                    buttonSize,
                     link {
-                        ...,
+                        linkType,
+                        displayName,
+                        externalLink,
+                        pageTitle,
+                        anchorLink,
                         page-> {
+                            _id,
                             "slug" : slug.current,
                             name,
-                            id,
                         },
-                    }
+                    },
                 },
             siteLogo{
-                ...,
+                _type,
+                textAsLogo,
+                textLogo,
                 imageLogo{
                     _type,
                     alt,
@@ -97,23 +104,49 @@ export async function getPage(slug: string): Promise<Page> {
             "slug": slug.current,
             content[] {
                 ...,
-                projects[]-> {
+                pretitle[] {
                     ...,
-                    image{
+                    markDefs[] {
                         ...,
-                        asset-> {
-                            _id,
-                            _type,
-                            url,
-                            metadata {
-                                lqip,
-                                dimensions {
-                                    width,
-                                    height,
-                                }
-                            },
-                        },
-                    },
+                        page-> {
+                            "slug": slug.current,
+                            name,
+                            id,
+                        }
+                    }
+                },
+                headingRich[] {
+                    ...,
+                    markDefs[] {
+                        ...,
+                        page-> {
+                            "slug": slug.current,
+                            name,
+                            id,
+                        }
+                    }
+                },
+                bodyRich[] {
+                    ...,
+                    markDefs[] {
+                        ...,
+                        page-> {
+                            "slug": slug.current,
+                            name,
+                            id,
+                        }
+                    }
+                },
+                richText[] {
+                    ...,
+                    markDefs[] {
+                        ...,
+                        page-> {
+                            "slug": slug.current,
+                            name,
+                            id,
+                        }
+                    }
                 },
                 image{
                     ...,
@@ -156,6 +189,18 @@ export async function getPage(slug: string): Promise<Page> {
                         },
                     },
                 },
+                form-> {
+                    _id,
+                    title,
+                    formspreeFormId,
+                    submitLabel,
+                    successMessage,
+                    errorMessage,
+                    fields[] {
+                        ...,
+                        options[]
+                    }
+                },
                 images[] {
                     ...,
                     asset-> {
@@ -171,22 +216,6 @@ export async function getPage(slug: string): Promise<Page> {
                         },
                     },
                 },
-                images2[] {
-                    ...,
-                    asset-> {
-                        _id,
-                        _type,
-                        url,
-                        metadata {
-                            lqip,
-                            dimensions {
-                                width,
-                                height,
-                            },
-                        },
-                    },
-                },
-                priceOptions[]->,
                 imageTextPairs[] {
                     ...,
                     image {

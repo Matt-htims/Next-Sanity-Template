@@ -1,0 +1,136 @@
+/*
+	New Brand Handoff Template
+	1) Replace the core palette variables below with Figma values.
+	2) Map semantic color tokens to your project UI needs.
+	3) Update font families to match your chosen font setup.
+*/
+
+:root {
+	/* Layout defaults */
+	--site-container: 1420px;
+	/*
+	  Surface radius tokens
+	  Use for cards, media, sections, and other container surfaces.
+	*/
+	--site-radius: 20px;
+	--site-radius-mobile: 12px;
+	--site-radius-mobile-breakpoint: 640px;
+	/*
+	  Controls radius tokens
+	  Use for form fields and button corner smoothing so controls can be tuned independently.
+	*/
+	--site-controls-radius: 12px;
+	--site-controls-radius-mobile: 10px;
+
+	/* Typography defaults */
+	--font-body-family: Inter;
+	--font-heading-family: Inter;
+
+	/* Primitive color tokens (edit these first from handoff values) */
+	--black: #04090b;
+	--off-black: #161b1d;
+	--black-muted: #4e5862;
+	--white: #ffffff;
+	--off-white: #f3f1eb;
+	--grey: #d9d6cf;
+	--accent: #fdd133;
+	--accent-alt: #7faff3;
+	--state-success: #2f9e8f;
+	--state-error: #b33a3a;
+	--state-warning: #b7791f;
+
+	/* Semantic color tokens (light theme default) */
+	--semantic-bg-canvas: var(--white);
+	--semantic-bg-surface: var(--off-white);
+	--semantic-bg-muted: var(--grey);
+	--semantic-text-primary: var(--black);
+	--semantic-text-secondary: var(--black-muted);
+	--semantic-text-inverse: var(--white);
+	--semantic-border-subtle: var(--grey);
+	--semantic-border-strong: var(--black-muted);
+	--semantic-accent: var(--accent);
+	--semantic-accent-alt: var(--accent-alt);
+	--semantic-accent-contrast: var(--black);
+	--semantic-button-primary: var(--accent);
+	--semantic-button-primary-text: var(--black);
+	--semantic-button-secondary: var(--accent-alt);
+	--semantic-button-secondary-text: var(--black);
+	--semantic-focus-ring: var(--accent-alt);
+
+	--semantic-feedback-success-bg: var(--off-white);
+	--semantic-feedback-success-text: var(--state-success);
+	--semantic-feedback-success-border: var(--state-success);
+
+	--semantic-feedback-error-bg: var(--off-white);
+	--semantic-feedback-error-text: var(--state-error);
+	--semantic-feedback-error-border: var(--state-error);
+
+	--semantic-feedback-warning-bg: var(--off-white);
+	--semantic-feedback-warning-text: var(--state-warning);
+	--semantic-feedback-warning-border: var(--state-warning);
+}
+
+@supports (color: color(display-p3 0 0 0 / 1)) {
+	:root {
+		/* Primitive color tokens (Display-P3 override) */
+		--black: color(display-p3 0.015686 0.035294 0.043137 / 1);
+		--off-black: color(display-p3 0.086275 0.105882 0.113725 / 1);
+		--white: color(display-p3 1 1 1 / 1);
+		--off-white: color(display-p3 0.952941 0.945098 0.921569 / 1);
+		--grey: color(display-p3 0.85098 0.839216 0.811765 / 1);
+		--accent: color(display-p3 0.992157 0.819608 0.2 / 1);
+		--accent-alt: color(display-p3 0.498039 0.686275 0.952941 / 1);
+	}
+}
+
+[data-theme='dark'] {
+	/* Dark theme semantic overrides */
+	--semantic-bg-canvas: var(--black);
+	--semantic-bg-surface: var(--off-black);
+	--semantic-bg-muted: var(--off-black);
+	--semantic-text-primary: var(--white);
+	--semantic-text-secondary: var(--grey);
+	--semantic-text-inverse: var(--black);
+	--semantic-border-subtle: var(--black-muted);
+	--semantic-border-strong: var(--grey);
+	--semantic-accent: var(--accent);
+	--semantic-accent-alt: var(--accent-alt);
+	--semantic-accent-contrast: var(--black);
+	--semantic-button-primary: var(--accent);
+	--semantic-button-primary-text: var(--black);
+	--semantic-button-secondary: var(--accent-alt);
+	--semantic-button-secondary-text: var(--black);
+	--semantic-focus-ring: var(--accent-alt);
+
+	--semantic-feedback-success-bg: var(--off-black);
+	--semantic-feedback-success-text: var(--state-success);
+	--semantic-feedback-success-border: var(--state-success);
+
+	--semantic-feedback-error-bg: var(--off-black);
+	--semantic-feedback-error-text: var(--state-error);
+	--semantic-feedback-error-border: var(--state-error);
+
+	--semantic-feedback-warning-bg: var(--off-black);
+	--semantic-feedback-warning-text: var(--state-warning);
+	--semantic-feedback-warning-border: var(--state-warning);
+}
+
+/*
+  Optional local-font setup example (mode: local)
+  1) Add font files to public/fonts
+  2) Uncomment and set your font family names
+*/
+/*
+@font-face {
+	font-family: 'MyLocalFont';
+	src: url('/fonts/MyLocalFont-Regular.woff2') format('woff2');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+:root {
+	--font-body-family: 'MyLocalFont';
+	--font-heading-family: 'MyLocalFont';
+}
+*/

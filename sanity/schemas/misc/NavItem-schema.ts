@@ -1,4 +1,4 @@
-import { sanityNavItemSizes, sanityNavItemVariants } from '@/app/MasterButton';
+import { sanityNavItemSizes, sanityNavItemVariants } from '@/app/theme/button';
 import { LinkIcon } from '@sanity/icons';
 
 const navItem = {

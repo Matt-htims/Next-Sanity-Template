@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { circOutCurve, easeInOutCurve } from '@/app/animations/easings';
+import { circOutCurve, easeInOutCurve } from '@/lib/animations/easings';
 
 export default function SplitText({
 	text,

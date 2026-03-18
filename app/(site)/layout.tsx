@@ -1,17 +1,15 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import '../globals.css';
 import { getSiteInfo, getSiteInfoMeta } from '@/sanity/sanity-utils';
-import createMetadataObject from '../utils/createMetadataObject';
-
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
+import createMetadataObject from '@/lib/createMetadataObject';
+import { siteFontClassName, siteFontHeadLinks } from '@/app/theme/fonts';
 
 // Components
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import SmoothScrolling from '../components/SmoothScrolling';
 import Providers from '../components/Providers';
-import GoogleAnalytics from '../components/atoms/GoogleAnalytics';
+import GoogleAnalytics from '../components/GoogleAnalytics';
 import PageWrapper from '../components/PageWrapper';
 
 const FallbackSeo = {
@@ -38,15 +36,13 @@ export default async function RootLayout({
 		<html lang="en" data-theme="light">
 			{/* <GoogleAnalytics id=''/> */}
 			<head>
-				{/* <Script
-					async
-					src="https://eu.umami.is/script.js"
-					data-website-id="8d538029-7728-4485-81f1-4972e7bf67f2"
-				/> */}
+				{siteFontHeadLinks.map((href) => (
+					<link key={href} rel="stylesheet" href={href} />
+				))}
 			</head>
 			<Providers>
 				<body
-					className={`font-inter relative -z-20 w-full overflow-x-clip bg-background font-body text-text antialiased transition-colors duration-1000 ease-in-out ${inter.variable}`}
+					className={`relative -z-20 w-full overflow-x-clip bg-bg-canvas font-body text-text-primary antialiased transition-colors duration-1000 ease-in-out ${siteFontClassName}`}
 				>
 					<Navbar data={siteInfo} />
 					<main className="min-h-screen overflow-x-clip">

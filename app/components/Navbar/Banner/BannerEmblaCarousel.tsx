@@ -35,7 +35,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 								key={index}
 								onClick={() => onDotButtonClick(index)}
 								className={cn(
-									'embla__dot text- h-1 w-1 rounded-full bg-white opacity-20 transition duration-300',
+									'embla__dot text- h-1 w-1 rounded-full bg-black opacity-20 transition duration-300',
 									{
 										'opacity-100': index === selectedIndex,
 									},

@@ -3,7 +3,7 @@
 import { BannerItemType, SiteInfo } from '@/types/SiteInfo';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState } from 'react';
-import { circOutCurve, easeInOutCurve } from '@/app/animations/easings';
+import { circOutCurve, easeInOutCurve } from '@/lib/animations/easings';
 import Marquee from 'react-fast-marquee';
 import { AnimateChangeInHeight } from '../../atoms/AnimateChangeInHeight';
 import { Text } from '../../atoms/Text';
@@ -20,15 +20,15 @@ const OPTIONS: EmblaOptionsType = { axis: 'y', loop: true, watchDrag: false };
 
 export default function Banner({
 	data,
-	lastScrollY,
+	isNearTop,
 }: {
 	data: SiteInfo;
-	lastScrollY: number;
+	isNearTop: boolean;
 }) {
 	const [closeBanner, setCloseBanner] = useState(false);
 
 	const mobileMenuOpen = useAtomValue(mobileMenuOpenAtom);
-	const showBanner = !(mobileMenuOpen && lastScrollY < 80);
+	const showBanner = !(mobileMenuOpen && isNearTop);
 
 	return (
 		<AnimateChangeInHeight>
@@ -42,7 +42,7 @@ export default function Banner({
 							initial="initial"
 							animate="animate"
 							exit="exit"
-							className="relative z-50 text-white"
+							className="relative z-50 text-black"
 						>
 							<EmblaCarousel options={OPTIONS}>
 								{data.banner.map((bannerItem, index) => {
@@ -56,12 +56,12 @@ export default function Banner({
 												key={index}
 												href={bannerItem.bannerLink}
 												className={cn(
-													'bg-ice relative z-[210] flex h-10 min-h-0 flex-[0_0_100%] items-center justify-center px-0 text-center md:h-[62px]',
+													'bg-ice relative z-210 flex h-10 min-h-0 flex-[0_0_100%] items-center justify-center px-0 text-center md:h-15.5',
 													{
-														'bg-primary':
+														'bg-accent':
 															bannerItem.bannerColour ==
 															'primary',
-														'bg-secondary':
+														'bg-accent-alt':
 															bannerItem.bannerColour ==
 															'secondary',
 													},
@@ -81,12 +81,12 @@ export default function Banner({
 												key={index}
 												href={bannerItem.bannerLink}
 												className={cn(
-													'bg-ice relative z-[210] flex h-10 min-h-0 flex-[0_0_100%] items-center justify-center px-0 text-center md:h-[62px]',
+													'bg-ice relative z-210 flex h-10 min-h-0 flex-[0_0_100%] items-center justify-center px-0 text-center md:h-15.5',
 													{
-														'bg-primary':
+														'bg-accent':
 															bannerItem.bannerColour ==
 															'primary',
-														'bg-secondary':
+														'bg-accent-alt':
 															bannerItem.bannerColour ==
 															'secondary',
 													},
@@ -159,11 +159,10 @@ function BannerInner({
 			{length && length > 1 && (
 				<div
 					className={cn(
-						'absolute top-0 bottom-0 left-0 z-[8] w-14 bg-gradient-to-r from-primary from-40% to-primary/0',
+						'absolute top-0 bottom-0 left-0 z-8 w-14 bg-linear-to-r from-accent from-40% to-accent/0',
 						{
-							'from-primary':
-								bannerItem.bannerColour == 'primary',
-							'from-secondary':
+							'from-accent': bannerItem.bannerColour == 'primary',
+							'from-accent-alt':
 								bannerItem.bannerColour == 'secondary',
 							'w-8': length && length < 2,
 						},
@@ -172,10 +171,10 @@ function BannerInner({
 			)}
 			<div
 				className={cn(
-					'absolute top-0 right-0 bottom-0 z-[8] w-14 bg-gradient-to-l from-primary from-40% to-primary/0',
+					'absolute top-0 right-0 bottom-0 z-8 w-14 bg-linear-to-l from-accent from-40% to-accent/0',
 					{
-						'from-primary': bannerItem.bannerColour == 'primary',
-						'from-secondary':
+						'from-accent': bannerItem.bannerColour == 'primary',
+						'from-accent-alt':
 							bannerItem.bannerColour == 'secondary',
 					},
 				)}

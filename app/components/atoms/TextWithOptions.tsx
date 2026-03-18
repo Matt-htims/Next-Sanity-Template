@@ -15,10 +15,7 @@ export default function TextWithOptions({
 		<Text
 			as={textOptions.textType}
 			textStyle={textOptions.textStyle}
-			className={cn(
-				textOptions.textCentered ? 'text-center' : '',
-				className,
-			)}
+			className={cn(className)}
 		>
 			{textWithOptions?.text}
 		</Text>

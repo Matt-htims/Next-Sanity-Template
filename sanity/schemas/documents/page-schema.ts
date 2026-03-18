@@ -52,9 +52,6 @@ const page = {
 					type: 'ImageCarousel',
 				},
 				{
-					type: 'ImageCarouselLightbox',
-				},
-				{
 					type: 'ImageText',
 				},
 				{
@@ -71,9 +68,6 @@ const page = {
 				},
 				{
 					type: 'LogoGrid',
-				},
-				{
-					type: 'FadeExplainer',
 				},
 				{
 					type: 'Spacer',
@@ -99,12 +93,7 @@ const page = {
 						{
 							name: 'storytelling',
 							title: 'Storytelling',
-							of: [
-								'ImageText',
-								'FadeExplainer',
-								'LogoGrid',
-								'TestimonialSlider',
-							],
+							of: ['ImageText', 'LogoGrid', 'TestimonialSlider'],
 						},
 						{
 							name: 'media',
@@ -112,7 +101,6 @@ const page = {
 							of: [
 								'ImageBlock',
 								'ImageCarousel',
-								'ImageCarouselLightbox',
 								'ImageText',
 								'VideoBlock',
 							],

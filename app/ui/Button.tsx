@@ -3,7 +3,7 @@ import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
-import { buttonVariants as buttonVariantsImport } from '../MasterButton';
+import { buttonVariants as buttonVariantsImport } from '../theme/button';
 
 const buttonVariants = cva(
 	'inline-flex group items-center cursor-pointer font-bold justify-center whitespace-nowrap transition-all focus-visible:outline-hidden focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50',
@@ -31,7 +31,8 @@ const buttonVariants = cva(
 );
 
 export interface ButtonProps
-	extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+	extends
+		React.ButtonHTMLAttributes<HTMLButtonElement>,
 		VariantProps<typeof buttonVariants> {
 	asChild?: boolean;
 }

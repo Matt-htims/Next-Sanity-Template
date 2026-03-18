@@ -2,20 +2,18 @@
 
 import { ImageType } from '@/types/Image';
 import CustomImage from '../atoms/CustomImage';
-import Image from 'next/image';
 
 // import function to register Swiper custom elements
 import { register } from 'swiper/element/bundle';
-// register Swiper custom elements
-register();
 
 // Animation
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { useRef } from 'react';
-import { animateChildUp } from '@/app/animations';
-import { easeInOutCurve, linearCurve } from '@/app/animations/easings';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import { animateChildUp } from '@/lib/animations';
+import { easeInOutCurve } from '@/lib/animations/easings';
 import { useWindowSize } from '@uidotdev/usehooks';
 import CornerSmoothing from '../atoms/CornerSmoothing';
+import { Container } from '../atoms/Container';
 
 type ImageBlockProps = {
 	data: {
@@ -25,23 +23,13 @@ type ImageBlockProps = {
 	};
 };
 
-function CardSwiper({ image }: { image: ImageType }) {
-	if (image.asset?.url) {
-		return (
-			<div className="scale-image relative aspect-[3/2] w-full min-w-0 overflow-hidden">
-				<CustomImage
-					image={image}
-					sizes="(max-width: 768px) 100vw, 92vw"
-					className="h-full w-full object-cover"
-				/>
-			</div>
-		);
-	} else return '';
-}
-
 export default function ImageBlock({ data }: ImageBlockProps) {
 	let desktopRef = useRef(null);
 	// let mobileRef = useRef(null);
+
+	useEffect(() => {
+		register();
+	}, []);
 
 	const { width } = useWindowSize();
 
@@ -60,12 +48,6 @@ export default function ImageBlock({ data }: ImageBlockProps) {
 		[0, 1],
 		['80%', width && width < 1024 ? '100%' : '100%'],
 	);
-	// let borderRadiusMobile = useTransform(
-	// 	scrollYDesktop,
-	// 	[0.8, 1],
-	// 	['8px', '0px'],
-	// );
-
 	return (
 		<>
 			{/* <section
@@ -90,45 +72,47 @@ export default function ImageBlock({ data }: ImageBlockProps) {
 					</swiper-container>
 				</motion.div>
 			</section> */}
-			<motion.section
-				variants={animateChildUp}
-				initial="initial"
-				whileInView="animate"
-				viewport={{ once: true }}
-				ref={desktopRef}
-				className="contained flex h-max justify-center overflow-hidden"
-			>
+			<Container as="section" ref={desktopRef}>
 				<motion.div
+					variants={animateChildUp}
+					initial="initial"
+					whileInView="animate"
+					viewport={{ once: true }}
 					style={{
 						scale,
 						// borderRadius:
 						// 	width && width < 1024 ? borderRadiusMobile : '8px',
 					}}
-					className="aspect-[4/3] w-full overflow-hidden"
+					className="flex h-max justify-center overflow-hidden"
 				>
-					<CornerSmoothing className="h-full w-full">
-						<ImagesWithEffect images={data.images} />
-					</CornerSmoothing>
+					<div className="aspect-5/3 w-full overflow-hidden">
+						<CornerSmoothing className="h-full w-full">
+							<ImagesWithEffect images={data.images} />
+						</CornerSmoothing>
+					</div>
 				</motion.div>
-			</motion.section>
+			</Container>
 		</>
 	);
 }
-
-const animateImageGrow = {
-	initial: {
-		scale: 1,
-	},
-	animate: {
-		scale: 1.2,
-		transition: {
-			duration: 4,
-			ease: linearCurve,
-		},
-	},
-};
-
 function ImagesWithEffect({ images }: { images: ImageType[] }) {
+	const swiperRef = useRef<any>(null);
+
+	useEffect(() => {
+		const swiperEl = swiperRef.current;
+		if (!swiperEl) return;
+
+		Object.assign(swiperEl, {
+			slidesPerView: 1,
+			autoplay: { delay: 5000 },
+			loop: true,
+			effect: 'fade',
+			speed: 1500,
+		});
+
+		swiperEl.initialize?.();
+	}, []);
+
 	return (
 		<motion.div
 			initial={images.length > 1 ? { scale: 1.1, x: 10 } : {}}
@@ -143,11 +127,8 @@ function ImagesWithEffect({ images }: { images: ImageType[] }) {
 		>
 			<div className="h-full w-full">
 				<swiper-container
-					slides-per-view="1"
-					autoplay-delay="5000"
-					loop
-					effect="fade"
-					speed={1500}
+					ref={swiperRef}
+					init={false}
 					style={{ height: '100%' }}
 				>
 					{images?.map((image, index) => (

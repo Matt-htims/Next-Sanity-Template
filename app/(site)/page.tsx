@@ -1,5 +1,5 @@
 import { getPage } from '@/sanity/sanity-utils';
-import BlockRenderer from '../utils/BlockRenderer';
+import BlockRenderer from '@/lib/BlockRenderer';
 
 export default async function Home() {
 	const page = await getPage('/');

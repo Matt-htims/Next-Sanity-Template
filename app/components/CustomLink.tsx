@@ -8,8 +8,7 @@ import Link from 'next/link';
 import { useSetAtom } from 'jotai';
 import { startPageTransitionAtom, newHrefAtom } from '../Atoms';
 
-export interface CustomLinkProps
-	extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface CustomLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 	href: string;
 }
 
@@ -28,14 +27,41 @@ export const CustomLink = React.forwardRef<HTMLAnchorElement, CustomLinkProps>(
 				ref={ref}
 				className={cn('cursor-pointer', className)}
 				onClick={(e) => {
+					onClick?.(e);
+
+					// Let the browser/Next handle modified-click behavior (new tab, etc.).
+					if (
+						e.defaultPrevented ||
+						e.metaKey ||
+						e.ctrlKey ||
+						e.shiftKey ||
+						e.altKey ||
+						e.button !== 0
+					) {
+						return;
+					}
+
+					const isHashOnlyLink = href.startsWith('#');
+					const resolvedUrl = new URL(href, window.location.origin);
+					const targetPath = resolvedUrl.pathname;
+					const isSamePathHashNavigation =
+						!!resolvedUrl.hash && targetPath === path;
+
+					// Hash navigation on the current route should not trigger page transitions.
+					if (isHashOnlyLink || isSamePathHashNavigation) {
+						return;
+					}
+
 					e.preventDefault();
 
-					if (path !== href) {
+					if (path !== targetPath) {
 						setStartPageTransition(true);
-						setNewHref(href.split('#')[0]);
+						setNewHref(targetPath);
 
 						setTimeout(() => {
-							router.push(href);
+							router.push(href, {
+								scroll: !resolvedUrl.hash,
+							});
 						}, 650);
 					}
 				}}

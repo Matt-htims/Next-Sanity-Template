@@ -1,5 +1,5 @@
 import { textVariants } from '@/app/components/atoms/Text';
-import { textStyleType } from '@/app/MasterText';
+import { textStyleType } from '@/app/theme/text';
 
 export type TextWithOptions = {
 	_type: string;
@@ -7,6 +7,5 @@ export type TextWithOptions = {
 	textOptions: {
 		textType: string;
 		textStyle?: textStyleType;
-		textCentered: boolean;
 	};
 };

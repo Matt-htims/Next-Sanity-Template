@@ -5,6 +5,7 @@ import { ReactLenis } from 'lenis/react';
 
 import { useAtom } from 'jotai';
 import { lenisScrollToAtom } from '../Atoms';
+import { easeInOutCubic } from '@/lib/animations/scrollEasing';
 
 function SmoothScrolling({ children }) {
 	const lenisRef = useRef();
@@ -14,45 +15,71 @@ function SmoothScrolling({ children }) {
 
 	// Force scroll to top of page on page change
 	useEffect(() => {
-		setTimeout(() => {
-			if (lenisRef?.current) {
-				lenisRef.current.lenis.scrollTo(0, { immediate: true });
-				// console.log('scrolled');
-			}
-		}, 100);
+		if (window.location.hash) return;
+
+		const frame = requestAnimationFrame(() => {
+			lenisRef.current?.lenis?.scrollTo(0, { immediate: true });
+		});
+
+		return () => cancelAnimationFrame(frame);
 	}, [pathname]);
 
 	// Scroll to id when lenisScrollTo state changes
 	useEffect(() => {
-		if (lenisScrollTo.id) {
-			lenisRef.current?.lenis?.scrollTo(lenisScrollTo.id, {
-				offset: -lenisScrollTo.offset,
-				duration: lenisScrollTo.duration,
-				easing: lenisScrollTo.easing,
-				lerp: 0.2,
-			});
-		}
-	}, [lenisScrollTo]);
+		if (!lenisScrollTo.id) return;
+
+		lenisRef.current?.lenis?.scrollTo(lenisScrollTo.id, {
+			offset: -lenisScrollTo.offset,
+			duration: lenisScrollTo.duration,
+			easing: lenisScrollTo.easing,
+			lerp: 0.2,
+		});
+
+		// Consume one-shot scroll intent so it doesn't accidentally replay.
+		setLenisScrollTo((prev) => ({ ...prev, id: '' }));
+	}, [lenisScrollTo, setLenisScrollTo]);
 
 	// Scroll to anchor on page change
 	useEffect(() => {
-		if (typeof window !== 'undefined') {
-			const anchor = window.location.hash;
-			if (anchor) {
-				setTimeout(() => {
-					setLenisScrollTo({
-						id: anchor,
-						offset: 100,
-						duration: 2.5,
-						easing: (x) =>
-							x < 0.5
-								? 4 * x * x * x
-								: 1 - Math.pow(-2 * x + 2, 3) / 2,
+		const anchor = window.location.hash;
+		if (!anchor) return;
+
+		const prefersReducedMotion = window.matchMedia(
+			'(prefers-reduced-motion: reduce)',
+		).matches;
+
+		let attempts = 0;
+		const maxAttempts = 20;
+		let cancelled = false;
+
+		const tryAnchorScroll = () => {
+			if (cancelled) return;
+
+			attempts += 1;
+			const target = document.querySelector(anchor);
+
+			if (target || attempts >= maxAttempts) {
+				if (target) {
+					lenisRef.current?.lenis?.scrollTo(anchor, {
+						offset: -100,
+						duration: prefersReducedMotion ? 0 : 2.5,
+						immediate: prefersReducedMotion,
+						easing: easeInOutCubic,
+						lerp: 0.2,
 					});
-				}, 500);
+				}
+				return;
 			}
-		}
-	}, [pathname, setLenisScrollTo]);
+
+			setTimeout(tryAnchorScroll, 120);
+		};
+
+		tryAnchorScroll();
+
+		return () => {
+			cancelled = true;
+		};
+	}, [pathname]);
 
 	return (
 		<ReactLenis

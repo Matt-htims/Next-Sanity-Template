@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { getPage, getPageSeo, getPages } from '@/sanity/sanity-utils';
 import { notFound } from 'next/navigation';
-import BlockRenderer from '../../utils/BlockRenderer';
+import BlockRenderer from '@/lib/BlockRenderer';
 import { revalidatePath } from 'next/cache';
-import { createSlug, createSlugArray } from '@/app/utils/slugFunctions';
+import { createSlug, createSlugArray } from '@/lib/slugFunctions';
 
 export const dynamicParams = false;
 

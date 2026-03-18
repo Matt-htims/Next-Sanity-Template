@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { textStyles } from '@/app/MasterText';
+import { textStyles } from '@/app/theme/text';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 

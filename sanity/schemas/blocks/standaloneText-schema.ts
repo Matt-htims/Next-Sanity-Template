@@ -1,5 +1,6 @@
-import { BlockContentIcon, TextIcon } from '@sanity/icons';
-import truncateText from '@/app/utils/truncateText';
+import { BlockContentIcon } from '@sanity/icons';
+import truncateText from '@/lib/truncateText';
+import { sanityTextStackWidthOptions } from '@/app/theme/layoutConfig';
 
 const standaloneText = {
 	name: 'StandaloneText',
@@ -19,6 +20,12 @@ const standaloneText = {
 			title: 'Use Simple Text Input',
 			type: 'boolean',
 			initialValue: true,
+		},
+		{
+			name: 'centered',
+			title: 'Centered',
+			type: 'boolean',
+			initialValue: false,
 		},
 		{
 			name: 'simpleText',
@@ -47,57 +54,13 @@ const standaloneText = {
 			type: 'richText',
 		},
 		{
-			name: 'positionOptions',
-			title: 'Position Options',
-			type: 'object',
+			name: 'maxWidth',
+			title: 'Width',
+			type: 'string',
+			initialValue: 'default',
 			options: {
-				collapsible: true,
-				collapsed: true,
-				columns: 2,
-				modal: { type: 'popover' },
+				list: sanityTextStackWidthOptions,
 			},
-			fields: [
-				{
-					name: 'alignment',
-					title: 'Alignment',
-					description: 'The column the block starts at.',
-					type: 'string',
-					initialValue: '2',
-					options: {
-						list: [
-							{ value: '1', title: 'Column 1' },
-							{ value: '2', title: 'Column 2' },
-							{ value: '3', title: 'Column 3' },
-							{ value: '4', title: 'Column 4' },
-							{ value: '6', title: 'Column 6' },
-						],
-					},
-				},
-				{
-					name: 'width',
-					title: 'Width',
-					description: 'In columns',
-					type: 'string',
-					initialValue: 'w-5/12',
-					options: {
-						list: [
-							{ value: 'w-5/12', title: '5/12' },
-							{ value: 'w-6/12', title: '6/12' },
-							{ value: 'w-7/12', title: '7/12' },
-							{ value: 'w-8/12', title: '8/12' },
-							{ value: 'w-9/12', title: '9/12' },
-							{ value: 'w-10/12', title: '10/12' },
-							{ value: 'w-12/12', title: '12/12' },
-						],
-					},
-				},
-				{
-					name: 'maxWidth',
-					title: 'Max Width',
-					description: 'In px. Optional',
-					type: 'number',
-				},
-			],
 		},
 	],
 	preview: {

@@ -1,70 +1,70 @@
-import { sanityTextOptions } from '@/app/MasterText';
-import { TextIcon, HomeIcon } from '@sanity/icons';
+import { TextIcon } from '@sanity/icons';
+import { sanityTextOptions } from '@/app/theme/text';
+import { richTextColorOptions } from '@/app/theme/richTextColor';
+import RichTextColorInput from '@/sanity/components/RichTextColorInput';
+import RichTextAppearanceAnnotation from '@/sanity/components/RichTextAppearanceAnnotation';
 
 const richText = {
 	name: 'richText',
 	title: 'Rich Text',
 	description:
-		'Able to customise text color and display style. Change Text Style if the Type and Style differ, e.g. a H2 that should look like a H1.',
+		'Flexible rich text for design-led sections. For semantic editorial content, use blogRichText.',
 	type: 'array',
 	hidden: ({ parent }: any) => parent?.useSimpleText == true,
 	of: [
 		{
 			type: 'block',
+			styles: [
+				{ title: 'Paragraph', value: 'normal' },
+				{ title: 'H1', value: 'h1' },
+				{ title: 'H2', value: 'h2' },
+				{ title: 'H3', value: 'h3' },
+				{ title: 'H4', value: 'h4' },
+				{ title: 'H5', value: 'h5' },
+				{ title: 'H6', value: 'h6' },
+			],
 			marks: {
 				annotations: [
-					{ type: 'textColor' },
 					{
-						name: 'textStyle',
-						title: 'Text Style',
+						name: 'textAppearance',
+						title: 'Text Appearance',
 						type: 'object',
 						icon: TextIcon,
+						description:
+							'Optional visual override for selected text: style and/or color.',
+						components: {
+							annotation: RichTextAppearanceAnnotation,
+						},
 						fields: [
 							{
 								name: 'textStyle',
 								title: 'Text Style',
 								type: 'string',
-								initialValue: 'body',
 								options: {
 									list: sanityTextOptions,
 								},
 							},
-						],
-					},
-					{
-						name: 'link',
-						type: 'object',
-						title: 'link',
-						fields: [
 							{
-								name: 'href',
-								type: 'url',
-								title: 'URL',
-								validation: (Rule: any) =>
-									Rule.uri({
-										scheme: [
-											'http',
-											'https',
-											'mailto',
-											'tel',
-										],
-									}),
+								name: 'colorToken',
+								title: 'Text Color',
+								type: 'string',
+								components: {
+									input: RichTextColorInput,
+								},
+								options: {
+									list: richTextColorOptions,
+								},
+							},
+							{
+								name: 'color',
+								title: 'Legacy Text Color (Deprecated)',
+								type: 'textColor',
+								hidden: true,
 							},
 						],
 					},
 					{
-						name: 'internalLink',
-						type: 'object',
-						title: 'Internal Link',
-						Icon: HomeIcon,
-						fields: [
-							{
-								name: 'reference',
-								type: 'reference',
-								title: 'Reference',
-								to: [{ type: 'page' }],
-							},
-						],
+						type: 'richTextLink',
 					},
 				],
 			},

@@ -7,7 +7,7 @@ import { motion } from 'framer-motion';
 
 import { MouseEventHandler } from 'react';
 import InnerLink from '../atoms/InnerLink';
-import { animateButtonChild, animateButtonContainer } from '@/app/animations';
+import { animateButtonChild, animateButtonContainer } from '@/lib/animations';
 import CornerSmoothing from '../atoms/CornerSmoothing';
 
 type ButtonBlockProps = {
@@ -44,7 +44,7 @@ export default function ButtonBlock({
 					className={innerClassName}
 				>
 					<CornerSmoothing
-						cornerRadius={16}
+						themeRadiusFamily="controls"
 						noCornerSmoothing={button.buttonVariant == 'nav'}
 					>
 						<Button

@@ -1,10 +1,9 @@
 'use client';
-import { animateChildUp } from '@/app/animations';
-import { cn } from '@/lib/utils';
-import { useWindowSize } from '@uidotdev/usehooks';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { animateChildUp } from '@/lib/animations';
+import { motion } from 'framer-motion';
 import { useRef } from 'react';
 import CornerSmoothing from '../atoms/CornerSmoothing';
+import { Container } from '../atoms/Container';
 
 type VideoBlockProps = {
 	data: {
@@ -16,43 +15,16 @@ type VideoBlockProps = {
 };
 
 export default function VideoBlock({ data }: VideoBlockProps) {
-	const { width } = useWindowSize();
 	let desktopRef = useRef(null);
-	// let mobileRef = useRef(null);
 
-	let { scrollYProgress: scrollYDesktop } = useScroll({
-		target: desktopRef,
-		offset: ['start end', 'end 0.7'],
-	});
-
-	// let { scrollYProgress: scrollYMobile } = useScroll({
-	// 	target: mobileRef,
-	// 	offset: ['start end', 'end end'],
-	// });
-
-	let scale = useTransform(scrollYDesktop, [0, 1], ['80%', '100%']);
-	let borderRadiusMobile = useTransform(
-		scrollYDesktop,
-		[0.8, 1],
-		['8px', '0px'],
-	);
-	// let scaleMobile = useTransform(scrollYMobile, [0, 1], ['70%', '105%']);
 	return (
-		<motion.section
-			variants={animateChildUp}
-			initial="initial"
-			whileInView="animate"
-			viewport={{ once: true }}
-			ref={desktopRef}
-			className={cn('contained', {})}
-		>
+		<Container as="section" ref={desktopRef}>
 			<motion.div
-				// style={{
-				// 	scale,
-				// 	// borderRadius:
-				// 	// 	width && width < 1024 ? borderRadiusMobile : '8px',
-				// }}
-				className={cn('aspect-[35/23] w-full overflow-hidden')}
+				variants={animateChildUp}
+				initial="initial"
+				whileInView="animate"
+				viewport={{ once: true }}
+				className="aspect-35/23 w-full overflow-hidden"
 			>
 				<CornerSmoothing className="h-full w-full">
 					<video
@@ -66,6 +38,6 @@ export default function VideoBlock({ data }: VideoBlockProps) {
 					></video>
 				</CornerSmoothing>
 			</motion.div>
-		</motion.section>
+		</Container>
 	);
 }

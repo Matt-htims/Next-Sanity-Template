@@ -1,4 +1,4 @@
-import { sanityTextOptions } from '@/app/MasterText';
+import { sanityTextOptions } from '@/app/theme/text';
 
 const textWithOptions = {
 	name: 'textWithOptions',
@@ -41,13 +41,6 @@ const textWithOptions = {
 					options: {
 						list: sanityTextOptions,
 					},
-				},
-				{
-					name: 'textCentered',
-					title: 'Text Centered',
-					type: 'boolean',
-					initialValue: false,
-					hidden: true,
 				},
 			],
 		},

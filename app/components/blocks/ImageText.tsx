@@ -4,9 +4,10 @@ import RichText from '../atoms/RichText';
 import { useRef } from 'react';
 
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
-import { easeInOutCurve } from '@/app/animations/easings';
+import { easeInOutCurve } from '@/lib/animations/easings';
 
 import { ImageType } from '@/types/Image';
+import { Container } from '../atoms/Container';
 
 type ImageTextProps = {
 	data: {
@@ -29,9 +30,10 @@ export default function ImageText({ data }: ImageTextProps) {
 	});
 	let y = useTransform(scrollYProgress, [0, 1], ['-6%', '6%']);
 	return (
-		<section
+		<Container
+			as="section"
 			ref={ref}
-			className="contained mt-10 mb-24 grid grid-cols-12 items-center overflow-visible overflow-x-clip min-[980px]:mt-36 min-[980px]:mb-52"
+			className="mt-10 mb-24 grid grid-cols-12 items-center overflow-visible overflow-x-clip min-[980px]:mt-36 min-[980px]:mb-52"
 		>
 			<motion.div
 				style={{ y }}
@@ -60,7 +62,7 @@ export default function ImageText({ data }: ImageTextProps) {
 			>
 				<RichText data={data.richText} />
 			</motion.div>
-		</section>
+		</Container>
 	);
 }
 

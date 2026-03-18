@@ -1,54 +1,59 @@
 @import 'tailwindcss';
-
-:root {
-	/* Colours */
-	--black: #000000;
-	--off-black: #121212;
-	--white: #ffffff;
-	--off-white: #f5f5f5;
-	--primary: #446959;
-	--secondary: #c76647;
-
-	/* Theme colours */
-	--background: var(--white);
-	--text: var(--black);
-	--offColor: var(--off-white);
-}
-
-[data-theme='dark'] {
-	--background: var(--black);
-	--text: var(--white);
-	--offColor: var(--off-black);
-}
+@import './theme/theme.css';
 
 @theme {
+	/* Base styles */
 	--color-*: initial;
 	--color-transparent: transparent;
 	--color-current: currentColor;
+
+	/* Primitive utilities */
 	--color-black: var(--black);
 	--color-off-black: var(--off-black);
+	--color-black-muted: var(--black-muted);
 	--color-white: var(--white);
-	--color-off-white: var(--offWhite);
-	--color-primary: var(--primary);
-	--color-secondary: var(--secondary);
-	--color-text: var(--text);
-	--color-background: var(--background);
-	--color-text: var(--text);
-	--color-offColor: var(--offColor);
+	--color-off-white: var(--off-white);
+	--color-grey: var(--grey);
+	--color-accent: var(--accent);
+	--color-accent-alt: var(--accent-alt);
 
-	--color-button-primary: var(--primary);
-	--color-button-primary-text: var(--white);
+	/* Semantic utilities */
+	--color-bg-canvas: var(--semantic-bg-canvas);
+	--color-bg-surface: var(--semantic-bg-surface);
+	--color-bg-muted: var(--semantic-bg-muted);
+	--color-text-primary: var(--semantic-text-primary);
+	--color-text-secondary: var(--semantic-text-secondary);
+	--color-text-inverse: var(--semantic-text-inverse);
+	--color-border-subtle: var(--semantic-border-subtle);
+	--color-border-strong: var(--semantic-border-strong);
+	--color-focus-ring: var(--semantic-focus-ring);
 
-	--color-button-secondary: var(--secondary);
-	--color-button-secondary-text: var(--white);
+	/* Button colors */
+	--color-button-primary: var(--semantic-button-primary);
+	--color-button-primary-text: var(--semantic-button-primary-text);
+	--color-button-secondary: var(--semantic-button-secondary);
+	--color-button-secondary-text: var(--semantic-button-secondary-text);
 
-	--font-body: var(--font-inter);
-	--font-heading: var(--font-inter);
+	/* Feedback utilities */
+	--color-feedback-success-bg: var(--semantic-feedback-success-bg);
+	--color-feedback-success-text: var(--semantic-feedback-success-text);
+	--color-feedback-success-border: var(--semantic-feedback-success-border);
+	--color-feedback-error-bg: var(--semantic-feedback-error-bg);
+	--color-feedback-error-text: var(--semantic-feedback-error-text);
+	--color-feedback-error-border: var(--semantic-feedback-error-border);
+	--color-feedback-warning-bg: var(--semantic-feedback-warning-bg);
+	--color-feedback-warning-text: var(--semantic-feedback-warning-text);
+	--color-feedback-warning-border: var(--semantic-feedback-warning-border);
 
-	--container-site: 1420px;
+	/* Typography */
+	--font-body: var(--font-body-family), sans-serif;
+	--font-heading:
+		var(--font-heading-family, var(--font-body-family)), sans-serif;
 
-	--radius-site: 10px;
-
+	/* Layout */
+	--container-site: var(--site-container);
+	--radius-site: var(--site-radius);
+	--radius-controls: var(--site-controls-radius);
 	--breakpoint-xs: 440px;
 }
 
@@ -61,16 +66,12 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
-	.contained {
-		@apply m-auto box-content max-w-site overflow-x-hidden overflow-y-clip px-5 md:px-10 lg:overflow-x-visible;
-	}
-
 	.text-nav {
 		@apply text-lg font-medium;
 	}
 
 	.text-nav-mobile {
-		@apply text-[30px] font-bold text-white transition hover:text-white/80;
+		@apply text-[30px] font-bold text-black transition hover:text-black/80;
 	}
 
 	.text-underline {

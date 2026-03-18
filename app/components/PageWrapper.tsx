@@ -4,7 +4,7 @@ import { useEffect, useState, HTMLAttributes } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { easeInOutCurve } from '@/app/animations/easings';
+import { easeInOutCurve } from '@/lib/animations/easings';
 
 import { useAtom, useAtomValue } from 'jotai';
 
@@ -83,7 +83,7 @@ const PageWrapper = (props: HTMLAttributes<HTMLDivElement>) => {
 									}
 								: { opacity: 1 }
 						}
-						className={cn('fixed inset-0 z-500000 bg-white')}
+						className={cn('fixed inset-0 z-500000 bg-bg-canvas')}
 					></motion.div>
 				)}
 			</AnimatePresence>

@@ -1,97 +1,109 @@
 import { Text } from '@/app/components/atoms/Text';
+import { Container } from '@/app/components/atoms/Container';
 import { cn } from '@/lib/utils';
+import { textStyles, type textStyleType } from '@/app/theme/text';
+import {
+	primitiveColourTokens,
+	semanticColourTokens,
+} from '@/app/theme/colours';
+import type { ElementType } from 'react';
+
+function formatTextStyleName(style: textStyleType) {
+	return style
+		.replace('-', ' ')
+		.replace(/\b\w/g, (letter) => letter.toUpperCase());
+}
+
+function getPreviewElement(style: textStyleType): ElementType {
+	if (style === 'h1') {
+		return 'h1';
+	}
+	if (style === 'h2') {
+		return 'h2';
+	}
+	if (style === 'h3') {
+		return 'h3';
+	}
+	if (style === 'h4') {
+		return 'h4';
+	}
+	if (style === 'h5') {
+		return 'h5';
+	}
+	if (style === 'h6') {
+		return 'h6';
+	}
+
+	return 'p';
+}
+
+function getPreviewSample(style: textStyleType): string {
+	if (style === 'nav') {
+		return 'Navigation Label';
+	}
+
+	if (style === 'body-small') {
+		return 'Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.';
+	}
+
+	if (style === 'body') {
+		return 'Etiam porta sem malesuada magna mollis euismod. Maecenas sed diam eget risus varius blandit sit amet non magna.';
+	}
+
+	return 'Nullam Sem Consectetur';
+}
 
 export default function Page() {
+	const styleKeys = Object.keys(textStyles) as textStyleType[];
+
 	return (
-		<div className="contained my-28 max-w-5xl space-y-3">
+		<Container className="my-28 max-w-5xl space-y-12">
 			<Colours />
-			<Text as="h1" textStyle="h1">
-				Nullam Sem Consectetur
-			</Text>
-			<Text as="p" textStyle="body">
-				Etiam porta sem malesuada magna mollis euismod. Maecenas sed
-				diam eget risus varius blandit sit amet non magna. Maecenas sed
-				diam eget risus varius blandit sit amet non magna. Vestibulum id
-				ligula porta felis euismod semper.
-			</Text>
-			<Text as="p" textStyle="body">
-				Nullam quis risus eget urna mollis ornare vel eu leo. Donec
-				ullamcorper nulla non metus auctor fringilla. Nulla vitae elit
-				libero, a pharetra augue. Donec id elit non mi porta gravida at
-				eget metus. Integer posuere erat a ante venenatis dapibus
-				posuere velit aliquet. Integer posuere erat a ante venenatis
-				dapibus posuere velit aliquet.
-			</Text>
-			<Text as="h2" textStyle="h2" className="pt-6">
-				Vulputate Bibendum Egestas
-			</Text>
-			<Text as="p" textStyle="body-small">
-				Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
-				eget lacinia odio sem nec elit. Vivamus sagittis lacus vel augue
-				laoreet rutrum faucibus dolor auctor. Integer posuere erat a
-				ante venenatis dapibus posuere velit aliquet. Morbi leo risus,
-				porta ac consectetur ac, vestibulum at eros. Maecenas sed diam
-				eget risus varius blandit sit amet non magna. Donec id elit non
-				mi porta gravida at eget metus. Integer posuere erat a ante
-				venenatis dapibus posuere velit aliquet.
-			</Text>
-			<Text as="h3" textStyle="h3" className="pt-6">
-				Quam Ridiculus Egestas Ligula Cursus
-			</Text>
-			<Text as="p" textStyle="body">
-				Etiam porta sem malesuada magna mollis euismod. Maecenas sed
-				diam eget risus varius blandit sit amet non magna. Maecenas sed
-				diam eget risus varius blandit sit amet non magna. Vestibulum id
-				ligula porta felis euismod semper.
-			</Text>
-			<Text as="p" textStyle="body">
-				Nullam quis risus eget urna mollis ornare vel eu leo. Donec
-				ullamcorper nulla non metus auctor fringilla. Nulla vitae elit
-				libero, a pharetra augue. Donec id elit non mi porta gravida at
-				eget metus. Integer posuere erat a ante venenatis dapibus
-				posuere velit aliquet. Integer posuere erat a ante venenatis
-				dapibus posuere velit aliquet.
-			</Text>
-			<Text as="h4" textStyle="h4" className="pt-6">
-				Aenean lacinia bibendum nulla sed consectetur.
-			</Text>
-			<Text as="p" textStyle="body-small">
-				Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
-				eget lacinia odio sem nec elit. Vivamus sagittis lacus vel augue
-				laoreet rutrum faucibus dolor auctor. Integer posuere erat a
-				ante venenatis dapibus posuere velit aliquet. Morbi leo risus,
-				porta ac consectetur ac, vestibulum at eros. Maecenas sed diam
-				eget risus varius blandit sit amet non magna. Donec id elit non
-				mi porta gravida at eget metus. Integer posuere erat a ante
-				venenatis dapibus posuere velit aliquet.
-			</Text>
-			<Text as="h5" textStyle="h5" className="pt-6">
-				Nullam Sem Consectetur
-			</Text>
-			<Text as="p" textStyle="body">
-				Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
-				eget lacinia odio sem nec elit. Vivamus sagittis lacus vel augue
-				laoreet rutrum faucibus dolor auctor. Integer posuere erat a
-				ante venenatis dapibus posuere velit aliquet. Morbi leo risus,
-				porta ac consectetur ac, vestibulum at eros. Maecenas sed diam
-				eget risus varius blandit sit amet non magna. Donec id elit non
-				mi porta gravida at eget metus. Integer posuere erat a ante
-				venenatis dapibus posuere velit aliquet.
-			</Text>
-			<Text as="h6" textStyle="h6" className="pt-6">
-				Nullam Sem Consectetur
-			</Text>
-			<Text as="p" textStyle="body-small">
-				Duis mollis, est non commodo luctus, nisi erat porttitor ligula,
-				eget lacinia odio sem nec elit. Vivamus sagittis lacus vel augue
-				laoreet rutrum faucibus dolor auctor. Integer posuere erat a
-				ante venenatis dapibus posuere velit aliquet. Morbi leo risus,
-				porta ac consectetur ac, vestibulum at eros. Maecenas sed diam
-				eget risus varius blandit sit amet non magna. Donec id elit non
-				mi porta gravida at eget metus. Integer posuere erat a ante
-				venenatis dapibus posuere velit aliquet.
-			</Text>
-		</div>
+
+			<div className="space-y-6">
+				<Text as="h1" textStyle="h1">
+					Text Style Preview
+				</Text>
+				<Text
+					as="p"
+					textStyle="body-small"
+					className="text-text-secondary"
+				>
+					This list is generated from textStyles in theme/text.ts.
+					Adding or removing styles there automatically updates this
+					page.
+				</Text>
+				<div className="space-y-6">
+					{styleKeys.map((style) => {
+						const PreviewElement = getPreviewElement(style);
+						const previewSample = getPreviewSample(style);
+
+						return (
+							<div
+								key={style}
+								className="space-y-3 border-t border-border-subtle pt-6"
+							>
+								<div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+									<Text as="p" textStyle="h6">
+										{formatTextStyleName(style)}
+									</Text>
+									<Text
+										as="p"
+										textStyle="body-small"
+										className="text-text-secondary"
+									>
+										{textStyles[style]}
+									</Text>
+								</div>
+								<Text as={PreviewElement} textStyle={style}>
+									{previewSample}
+								</Text>
+							</div>
+						);
+					})}
+				</div>
+			</div>
+		</Container>
 	);
 }
 
@@ -103,41 +115,49 @@ function Colours() {
 			</Text>
 			<div className="space-y-5 pb-14">
 				<Text as="h2" textStyle="h5">
-					All Colours
+					Primitive Tokens
 				</Text>
-				<div className="flex justify-between">
-					<ColourSquare colourName="white" />
-					<ColourSquare
-						colourName="offWhite"
-						className="bg-off-white"
-					/>
-					<ColourSquare colourName="black" />
-					<ColourSquare colourName="offBlack" />
-					<ColourSquare colourName="primary" />
-					<ColourSquare
-						colourName="secondary"
-						className="bg-secondary"
-					/>
+				<div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-6">
+					{primitiveColourTokens.map((token) => (
+						<ColourSquare
+							key={token}
+							colourName={token}
+							tokenType="primitive"
+						/>
+					))}
 				</div>
 			</div>
 			<div className="space-y-5 pb-14">
 				<Text as="h2" textStyle="h5">
-					Light Theme Colours
+					Light Theme Semantic Tokens
 				</Text>
-				<div className="flex justify-between">
-					<ColourSquare colourName="background" />
-					<ColourSquare colourName="offColor" />
-					<ColourSquare colourName="text" />
+				<div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-6">
+					{semanticColourTokens.map((token) => (
+						<ColourSquare
+							key={token}
+							colourName={token}
+							tokenType="semantic"
+						/>
+					))}
 				</div>
 			</div>
 			<div className="space-y-5 pb-14">
 				<Text as="h2" textStyle="h5">
-					Dark Theme Colours
+					Dark Theme Semantic Tokens
 				</Text>
-				<div className="flex justify-between dark">
-					<ColourSquare colourName="background" />
-					<ColourSquare colourName="offColor" />
-					<ColourSquare colourName="text" />
+				<div
+					data-theme="dark"
+					className="rounded-site bg-bg-canvas p-4"
+				>
+					<div className="grid grid-cols-2 gap-4 sm:grid-cols-4 lg:grid-cols-6">
+						{semanticColourTokens.map((token) => (
+							<ColourSquare
+								key={token}
+								colourName={token}
+								tokenType="semantic"
+							/>
+						))}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -146,20 +166,32 @@ function Colours() {
 
 function ColourSquare({
 	colourName,
-	className,
+	tokenType,
 }: {
 	colourName: string;
-	className?: string;
+	tokenType: 'primitive' | 'semantic';
 }) {
+	const cssVariableName =
+		tokenType === 'primitive'
+			? `--${colourName}`
+			: `--semantic-${colourName}`;
+
 	return (
-		<div>
+		<div className="space-y-2">
 			<div
 				className={cn(
-					'h-32 w-32 border border-black',
-					'bg-' + colourName,
-					className,
+					'flex h-32 w-full min-w-32 items-end border border-border-subtle p-2',
 				)}
-			></div>
+				style={{ backgroundColor: `var(${cssVariableName})` }}
+			>
+				<Text
+					as="p"
+					textStyle="body-small"
+					className="rounded bg-bg-canvas px-1.5 py-0.5 font-mono text-xs text-text-primary"
+				>
+					{cssVariableName}
+				</Text>
+			</div>
 			<Text as="p" textStyle="h6" className="pt-2">
 				{colourName}
 			</Text>

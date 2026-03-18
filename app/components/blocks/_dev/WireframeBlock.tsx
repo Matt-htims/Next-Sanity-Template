@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { Text } from '../atoms/Text';
+import { Text } from '../../atoms/Text';
 
 type WireframeBlockProps = {
 	data: {
@@ -29,7 +29,7 @@ export default function WireframeBlock({ data }: WireframeBlockProps) {
 	return (
 		<section
 			className={cn(
-				'flex items-center justify-center border border-b border-t border-text text-center',
+				'border-text flex items-center justify-center border border-t border-b text-center',
 				blockSize(data.blockSize),
 			)}
 		>

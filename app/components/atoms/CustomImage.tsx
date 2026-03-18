@@ -23,14 +23,8 @@ export default function CustomImage({
 			alt={image.alt ?? 'Image'}
 			placeholder="blur"
 			blurDataURL={image.asset.metadata.lqip}
-			className={cn(
-				'scale-90 opacity-0 transition-all duration-700',
-				className,
-			)}
+			className={cn(className)}
 			sizes={sizes}
-			onLoad={(image) =>
-				image.currentTarget.classList.remove('opacity-0', 'scale-90')
-			}
 			priority={priority}
 			loading={loading}
 		/>
