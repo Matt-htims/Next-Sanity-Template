@@ -1,8 +1,19 @@
 import { getPage } from '@/sanity/sanity-utils';
 import BlockRenderer from '@/lib/BlockRenderer';
 
-export default async function Home() {
-	const page = await getPage('/');
+type Props = {
+	searchParams: Promise<{ preview?: string }>;
+};
+
+export default async function Home({ searchParams }: Props) {
+	const { preview } = await searchParams;
+
+	const isPreview =
+		!!preview &&
+		!!process.env.SANITY_PREVIEW_TOKEN &&
+		preview === process.env.SANITY_PREVIEW_TOKEN;
+
+	const page = await getPage('/', { preview: isPreview });
 	const Blocks = page?.content ? page.content : [];
 
 	return (

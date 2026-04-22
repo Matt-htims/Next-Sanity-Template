@@ -2,18 +2,16 @@ import type { Metadata } from 'next';
 import { getPage, getPageSeo, getPages } from '@/sanity/sanity-utils';
 import { notFound } from 'next/navigation';
 import BlockRenderer from '@/lib/BlockRenderer';
-import { revalidatePath } from 'next/cache';
 import { createSlug, createSlugArray } from '@/lib/slugFunctions';
 
 export const dynamicParams = false;
 
 type Props = {
 	params: Promise<{ slug: string[] }>;
+	searchParams: Promise<{ preview?: string }>;
 };
 
 export async function generateStaticParams() {
-	revalidatePath('/', 'layout');
-
 	const pages = await getPages();
 
 	const pagesNoHome = pages.filter((page) => page.slug != '/');
@@ -38,9 +36,16 @@ export async function generateMetadata({
 	};
 }
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params, searchParams }: Props) {
 	const { slug } = await params;
-	const page = await getPage(createSlug(slug));
+	const { preview } = await searchParams;
+
+	const isPreview =
+		!!preview &&
+		!!process.env.SANITY_PREVIEW_TOKEN &&
+		preview === process.env.SANITY_PREVIEW_TOKEN;
+
+	const page = await getPage(createSlug(slug), { preview: isPreview });
 
 	if (!page) {
 		return notFound();

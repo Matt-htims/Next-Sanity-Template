@@ -1,8 +1,8 @@
 import { ButtonType } from '@/types/Button';
 import { AnimatePresence, cubicBezier, motion } from 'framer-motion';
 import { MouseEventHandler, useState, useEffect } from 'react';
-import { easeInOutCurve } from '@/lib/animations/easings';
 import ButtonBlock from '../../blocks/ButtonBlock';
+import { customEasing } from '@/lib/animations';
 
 export default function MobileMenu({
 	closeTray,
@@ -54,7 +54,7 @@ const mobileMenuContainer = {
 	animate: {
 		opacity: 1,
 		transition: {
-			ease: cubicBezier(0.33, 1, 0.68, 1),
+			ease: customEasing,
 			duration: 0.4, //0.8
 			// when: 'beforeChildren',
 			staggerChildren: 0.08,
@@ -63,7 +63,7 @@ const mobileMenuContainer = {
 	exit: {
 		opacity: 0,
 		transition: {
-			ease: easeInOutCurve,
+			ease: 'easeInOut' as const,
 			delay: 0.5, //0.5
 			duration: 0.4, //0.8
 		},

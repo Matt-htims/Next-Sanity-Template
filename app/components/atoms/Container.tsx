@@ -21,7 +21,7 @@ export const containerVariants = cva('mx-auto w-full', {
 	defaultVariants: {
 		width: 'site',
 		gutter: 'default',
-		box: 'content',
+		box: 'border',
 	},
 });
 

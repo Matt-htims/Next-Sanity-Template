@@ -10,7 +10,6 @@ import { register } from 'swiper/element/bundle';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { animateChildUp } from '@/lib/animations';
-import { easeInOutCurve } from '@/lib/animations/easings';
 import { useWindowSize } from '@uidotdev/usehooks';
 import CornerSmoothing from '../atoms/CornerSmoothing';
 import { Container } from '../atoms/Container';
@@ -119,7 +118,7 @@ function ImagesWithEffect({ images }: { images: ImageType[] }) {
 			animate={{ scale: 1, x: 0 }}
 			transition={{
 				// ease: cubicBezier(0.33, 1, 0.68, 1),
-				ease: easeInOutCurve,
+				ease: 'easeInOut' as const,
 				duration: 5,
 				delay: 0.6,
 			}}

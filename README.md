@@ -53,8 +53,27 @@ npx sanity dataset import seedData.tar.gz production
 
 3. Add environment values from [example.env](example.env) into `.env`.
 
-- `NEXT_PUBLIC_SANITY_STUDIO_DEPLOY_HOOK_URL` (optional but recommended)
-- `NEXT_PUBLIC_SANITY_STUDIO_DEPLOY_LABEL` (optional)
+**Required for revalidation:**
+
+- `SANITY_REVALIDATE_SECRET` — generate with `openssl rand -hex 32`
+
+**Required for draft preview:**
+
+- `SANITY_PREVIEW_TOKEN` — generate with `openssl rand -hex 32`
+- `NEXT_PUBLIC_PREVIEW_TOKEN` — must match `SANITY_PREVIEW_TOKEN` exactly
+- `NEXT_PUBLIC_BASE_URL` — your frontend URL, no trailing slash (e.g. `https://yoursite.com`)
+- `SANITY_API_READ_TOKEN` — a Sanity API token with viewer role; create at [sanity.io/manage](https://sanity.io/manage) → project → API → Tokens
+
+**Set up the Sanity webhook:**
+
+In [sanity.io/manage](https://sanity.io/manage), go to your project → API → Webhooks and create a new webhook:
+
+- URL: `https://yoursite.com/api/sanity/revalidate`
+- HTTP method: `POST`
+- Trigger on: Create, Update, Delete
+- Projection: `{ _type, _id, "slug": slug.current, "operation": delta::operation() }`
+- Secret: the value of `SANITY_REVALIDATE_SECRET`
+- HTTP Headers: `Authorization: Bearer <SANITY_REVALIDATE_SECRET>`
 
 4. Paste design tokens into [app/theme/theme.css](app/theme/theme.css).
 

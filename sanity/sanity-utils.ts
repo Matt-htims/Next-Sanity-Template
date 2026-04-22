@@ -95,8 +95,11 @@ export async function getPages(): Promise<Page[]> {
 	);
 }
 
-export async function getPage(slug: string): Promise<Page> {
-	return createClient(clientConfig).fetch(
+export async function getPage(slug: string, options?: { preview?: boolean }): Promise<Page> {
+	const client = options?.preview
+		? createClient({ ...clientConfig, token: process.env.SANITY_API_READ_TOKEN })
+		: createClient(clientConfig);
+	return client.fetch(
 		groq`*[_type == "page" && slug.current == $slug][0]{
             _id,
             _createdAt,
@@ -237,6 +240,7 @@ export async function getPage(slug: string): Promise<Page> {
             },
         }`,
 		{ slug },
+		options?.preview ? { perspective: 'previewDrafts' as const } : undefined,
 	);
 }
 

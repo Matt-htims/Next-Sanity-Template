@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
-import { easeInOutCurve } from '@/lib/animations/easings';
 
 interface AnimateChangeInHeightProps {
 	children: React.ReactNode;
@@ -37,7 +36,7 @@ export const AnimateChangeInHeight: React.FC<AnimateChangeInHeightProps> = ({
 			className={classNames(className)}
 			style={{ height }}
 			animate={{ height }}
-			transition={{ duration: 0.8, ease: easeInOutCurve }}
+			transition={{ duration: 0.8, ease: 'easeInOut' }}
 		>
 			<div ref={containerRef}>{children}</div>
 		</motion.div>

@@ -3,7 +3,6 @@
 import { BannerItemType, SiteInfo } from '@/types/SiteInfo';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useState } from 'react';
-import { circOutCurve, easeInOutCurve } from '@/lib/animations/easings';
 import Marquee from 'react-fast-marquee';
 import { AnimateChangeInHeight } from '../../atoms/AnimateChangeInHeight';
 import { Text } from '../../atoms/Text';
@@ -15,6 +14,7 @@ import { cn } from '@/lib/utils';
 import { useAtomValue } from 'jotai';
 import { mobileMenuOpenAtom } from '@/app/Atoms';
 import { CustomLink } from '../../CustomLink';
+import { customEasing } from '@/lib/animations';
 
 const OPTIONS: EmblaOptionsType = { axis: 'y', loop: true, watchDrag: false };
 
@@ -187,7 +187,7 @@ const bannerAnimation = {
 	initial: {
 		y: -62,
 		transition: {
-			ease: easeInOutCurve,
+			ease: customEasing,
 			duration: 0.8,
 			delay: 0.5,
 			// ease: cubicBezier(0.6, 0.05, -0.01, 0.9),
@@ -196,7 +196,7 @@ const bannerAnimation = {
 	animate: {
 		y: 0,
 		transition: {
-			ease: circOutCurve,
+			ease: customEasing,
 			duration: 0.8,
 			delay: 0.3,
 			// ease: cubicBezier(0.6, 0.05, -0.01, 0.9),
@@ -205,7 +205,7 @@ const bannerAnimation = {
 	exit: {
 		opacity: 0,
 		transition: {
-			ease: easeInOutCurve,
+			ease: 'easeInOut' as const,
 			duration: 0.8,
 		},
 	},

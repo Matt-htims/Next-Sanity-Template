@@ -4,7 +4,6 @@ import { useEffect, useState, HTMLAttributes } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import { easeInOutCurve } from '@/lib/animations/easings';
 
 import { useAtom, useAtomValue } from 'jotai';
 
@@ -70,14 +69,14 @@ const PageWrapper = (props: HTMLAttributes<HTMLDivElement>) => {
 						}
 						animate={{
 							opacity: 1,
-							transition: { ease: easeInOutCurve, duration: 0.6 },
+							transition: { ease: 'easeInOut', duration: 0.6 },
 						}}
 						exit={
 							path == newHref
 								? {
 										opacity: 0,
 										transition: {
-											ease: easeInOutCurve,
+											ease: 'easeInOut',
 											duration: 0.6,
 										},
 									}

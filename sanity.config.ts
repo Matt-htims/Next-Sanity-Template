@@ -14,7 +14,8 @@ import schemas from './sanity/schemas';
 // import { visionTool } from '@sanity/vision';
 
 import { simplerColorInput } from 'sanity-plugin-simpler-color-input';
-import { vercelDeployTool } from './sanity/plugins/vercelDeployTool';
+import { PreviewAction } from './sanity/actions/PreviewAction';
+import PreviewPane from './sanity/components/PreviewPane';
 
 import { ControlsIcon, DocumentsIcon, ClipboardIcon } from '@sanity/icons';
 
@@ -33,6 +34,15 @@ const config = defineConfig({
 	basePath: '/admin',
 	plugins: [
 		structureTool({
+			defaultDocumentNode: (S, { schemaType }) => {
+				if (schemaType === 'page') {
+					return S.document().views([
+						S.view.form(),
+						S.view.component(PreviewPane).title('Preview'),
+					]);
+				}
+				return S.document().views([S.view.form()]);
+			},
 			structure: (S) =>
 				S.list()
 					.title('Content')
@@ -62,7 +72,6 @@ const config = defineConfig({
 					]),
 		}),
 		media(),
-		vercelDeployTool(),
 		simplerColorInput({
 			defaultColorList: [
 				{ label: 'Lush', value: '#446959' },
@@ -91,7 +100,7 @@ const config = defineConfig({
 				? input.filter(
 						({ action }) => action && singletonActions.has(action),
 					)
-				: input,
+				: [...input, PreviewAction],
 	},
 });
 
