@@ -42,10 +42,21 @@ Follow this order when creating a new client project from the template.
 
 2. Import starter content into the connected Sanity project.
 
-Run this after the project ID and dataset are set in [sanityConfig.js](sanityConfig.js):
+Run this after the project ID and dataset are set in [sanityConfig.js](sanityConfig.js).
+
+Recent versions of the Sanity CLI require an API token with write access to import datasets. Add the following to your `.env`:
+
+```
+SANITY_IMPORT_TOKEN=<token-with-editor-or-deploy-role>
+```
+
+Then source your `.env` into the shell and run the import:
 
 ```bash
-npx sanity dataset import seedData.tar.gz production
+set -a
+source .env
+set +a
+npx sanity datasets import -d production seedData.tar.gz
 ```
 
 3. Add environment values from [example.env](example.env) into `.env`.
@@ -79,7 +90,7 @@ In [sanity.io/manage](https://sanity.io/manage), go to your project → API → 
 
 5. Configure fonts.
 
-- [app/theme/fonts.ts](app/theme/fonts.ts)
+- [app/theme/_internal/fonts.ts](app/theme/_internal/fonts.ts)
 - [app/theme/theme.css](app/theme/theme.css) (`--font-body-family`, `--font-heading-family`)
 
 6. Configure typography variants in [app/theme/text.ts](app/theme/text.ts).
@@ -115,7 +126,7 @@ Keep design decisions in theme files first, then consume in components.
 Notes:
 
 - Text hierarchy previews derive from [app/theme/text.ts](app/theme/text.ts).
-- Color token previews derive from variables defined in [app/theme/theme.css](app/theme/theme.css) via [app/theme/colours.ts](app/theme/colours.ts).
+- Color token previews derive from variables defined in [app/theme/theme.css](app/theme/theme.css) via [app/theme/_internal/colours.ts](app/theme/_internal/colours.ts).
 
 ## Sanity CLI Notes
 
