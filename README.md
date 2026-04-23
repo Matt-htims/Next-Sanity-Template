@@ -2,7 +2,7 @@
 
 A theme-first starter for building Next.js + Sanity websites from design handoff.
 
-## If you use the old template
+## If you used the old template
 
 Start with the migration guide:
 
