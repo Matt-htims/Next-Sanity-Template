@@ -39,6 +39,6 @@ const Text = React.forwardRef<HTMLElement, TextProps>(
 
 Text.displayName = 'Text';
 
-const MotionText = motion(Text);
+const MotionText = motion.create(Text);
 
 export { MotionText };

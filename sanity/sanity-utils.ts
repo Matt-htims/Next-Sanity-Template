@@ -240,7 +240,7 @@ export async function getPage(slug: string, options?: { preview?: boolean }): Pr
             },
         }`,
 		{ slug },
-		options?.preview ? { perspective: 'previewDrafts' as const } : undefined,
+		options?.preview ? { perspective: 'drafts' as const } : undefined,
 	);
 }
 
