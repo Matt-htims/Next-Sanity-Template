@@ -16,15 +16,15 @@ function Card({ data }: { data: ImageType }) {
 	function imageStyle(carouselSize: string) {
 		switch (carouselSize) {
 			case 'landscape':
-				return 'w-[calc(100vw*0.89132)] md:w-[calc(100vw*0.59419)] xl:w-[820px] aspect-41/35';
+				return 'aspect-41/35';
 			case 'square':
-				return 'w-[calc(100vw*0.76089)] md:w-[calc(100vw*0.507228)] xl:w-[700px] aspect-square';
+				return 'aspect-square';
 			case 'portrait':
-				return 'w-[calc(100vw*0.63045)] md:w-[calc(100vw*0.420278)] xl:w-[580px] aspect-29/35';
+				return ' aspect-29/35';
 			case 'portraitNarrow':
-				return 'w-[calc(100vw*0.50)] md:w-[calc(100vw*0.33333)] xl:w-[460px] aspect-23/35';
+				return 'aspect-23/35';
 			default:
-				return '';
+				return 'aspect-square';
 		}
 	}
 
@@ -39,12 +39,12 @@ function Card({ data }: { data: ImageType }) {
 			case 'portraitNarrow':
 				return '(max-width: 768px) 60vw, 30vw';
 			default:
-				return '';
+				return '(max-width: 768px) 80vw, 50vw';
 		}
 	}
 	return (
 		<div
-			className={`relative mr-1 max-h-[700px] overflow-hidden rounded-site md:mr-5 ${imageStyle(
+			className={`relative mr-3 h-[300px] md:h-[700px] overflow-hidden rounded-site md:mr-5 ${imageStyle(
 				data.carouselSize ?? '',
 			)}`}
 		>
@@ -59,7 +59,7 @@ function Card({ data }: { data: ImageType }) {
 
 export default function ImageCarousel({ data }: ImageCarouselProps) {
 	return (
-		<section className="pointer-events- max-h-[700px]">
+		<section className="">
 			<Marquee speed={70}>
 				<div className="flex">
 					{data.images?.map((image, index) => (
