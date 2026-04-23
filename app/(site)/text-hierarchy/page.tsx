@@ -5,7 +5,7 @@ import { textStyles, type textStyleType } from '@/app/theme/text';
 import {
 	primitiveColourTokens,
 	semanticColourTokens,
-} from '@/app/theme/colours';
+} from '@/app/theme/_internal/colours';
 import type { ElementType } from 'react';
 
 function formatTextStyleName(style: textStyleType) {

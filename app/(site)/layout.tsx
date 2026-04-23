@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import '../globals.css';
 import { getSiteInfo, getSiteInfoMeta } from '@/sanity/sanity-utils';
 import createMetadataObject from '@/lib/createMetadataObject';
-import { siteFontClassName, siteFontHeadLinks } from '@/app/theme/fonts';
+import { siteFontClassName, siteFontHeadLinks } from '@/app/theme/_internal/fonts';
 
 // Components
 import Navbar from '../components/Navbar';
