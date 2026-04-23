@@ -2,12 +2,9 @@
 
 A theme-first starter for building Next.js + Sanity websites from design handoff.
 
-## Who This Is For
+## If you use the old template
 
-1. Teams starting a brand-new project from this template.
-2. Developers migrating from the previous internal template.
-
-If you used the old template, start with the migration guide:
+Start with the migration guide:
 
 - [docs/migrating-from-old-template.md](docs/migrating-from-old-template.md)
 
