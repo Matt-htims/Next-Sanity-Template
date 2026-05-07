@@ -1,19 +1,78 @@
 'use client';
-import Image from 'next/image';
+import {
+	motion,
+	useScroll,
+	useTransform,
+} from 'framer-motion';
 import { useRef } from 'react';
-
-import { motion } from 'framer-motion';
+import { useAtomValue } from 'jotai';
+import { navHeightAtom } from '@/app/Atoms';
+import { useNavDark } from '@/lib/useNavDark';
 
 import { ImageType } from '@/types/Image';
 import { MotionText } from '../atoms/MotionText';
-import { animateChildUp, animateContainer } from '@/lib/animations';
-import { Container } from '../atoms/Container';
+import { Text } from '../atoms/Text';
+import { cn } from '@/lib/utils';
+import { breakText } from '@/lib/breakText';
+import CustomImage from '../atoms/CustomImage';
+
+const animateContainer = {
+	initial: {},
+	animate: {
+		transition: {
+			staggerChildren: 0.25,
+		},
+	},
+};
+
+export const animatePreheading = {
+	initial: {
+		opacity: 0,
+	},
+	animate: {
+		opacity: 1,
+		transition: {
+			ease: 'easeInOut' as const,
+			duration: 0.8,
+		},
+	},
+};
+
+const animateHeading = {
+	initial: {
+		opacity: 0,
+	},
+	animate: {
+		opacity: 1,
+		transition: {
+			ease: 'easeInOut' as const,
+			duration: 1.6,
+			delay: 0.4,
+		},
+	},
+};
+
+const animateSubheading = {
+	initial: {
+		opacity: 0,
+	},
+	animate: {
+		opacity: 1,
+		transition: {
+			ease: 'easeInOut' as const,
+			duration: 1.6,
+			delay: 0.6,
+		},
+	},
+};
 
 type PageIntroProps = {
 	data: {
 		_key: string;
 		_type: string;
 		title: string;
+		style?: 'standard' | 'simple';
+		preheading: string;
 		heading: string;
 		subheading: string;
 		image: ImageType;
@@ -21,58 +80,104 @@ type PageIntroProps = {
 };
 
 export default function PageIntro({ data }: PageIntroProps) {
+	const isSimple = data.style === 'simple';
+	const sectionRef = useRef<HTMLElement>(null);
+	const containerRef = useRef(null);
+	const bannerHeight = useAtomValue(navHeightAtom);
+
+	useNavDark(sectionRef, !isSimple && !!data.image?.asset?.url);
+
+	const { scrollYProgress } = useScroll({
+		target: containerRef,
+		offset: ['start start', 'end start'],
+	});
+
+	const SCALE_VALUE = 1;
+
+	const y = useTransform(scrollYProgress, [0, 1], [0, 80]);
+
 	return (
-		<Container
-			as="section"
-			className="my-28 flex justify-center overflow-visible"
-		>
-			<motion.div
-				variants={animateContainer}
-				initial="initial"
-				whileInView="animate"
-				viewport={{ once: true, amount: 0.6 }}
-				className="flex max-w-[400px] flex-col items-center text-center sm:max-w-[750px] lg:max-w-[940px]"
-			>
-				{data.image?.asset?.url ? (
-					<motion.div
-						variants={animateChildUp}
-						className="relative mb-5 h-64 w-52 origin-bottom overflow-hidden rounded-site"
-					>
-						<Image
-							src={data.image.asset.url}
-							width={
-								data.image.asset.metadata.dimensions?.width ??
-								145
-							}
-							height={
-								data.image.asset.metadata.dimensions?.height ??
-								200
-							}
-							alt={data.image.alt}
-							sizes='"(max-width: 768px) 25vw, 20vw"'
-							className="mb-5 w-full md:mb-10"
-						/>
-					</motion.div>
-				) : (
-					''
+		<section ref={sectionRef}>
+			<div
+				ref={containerRef}
+				style={{ marginTop: `-${bannerHeight}px` }}
+				className={cn(
+					'relative flex w-screen flex-col items-center overflow-hidden',
+					isSimple
+						? 'pt-26'
+						: 'h-screen pt-28 pb-20',
 				)}
-				<MotionText
-					as="h2"
-					textStyle="h1"
-					className="mb-5"
-					variants={animateChildUp}
+			>
+				{!isSimple && data.image?.asset?.url ? (
+					<motion.div
+						initial={{ scale: 1.2, opacity: 0 }}
+						animate={{ scale: SCALE_VALUE, opacity: 1 }}
+						transition={{
+							duration: 2,
+							ease: 'easeInOut',
+						}}
+						className="absolute inset-0 bg-black"
+					>
+						<motion.div
+							style={{ y }}
+							className="h-full w-full opacity-64"
+						>
+							<CustomImage
+								image={data.image}
+								sizes="(max-width: 768px) 150vw, 100vw"
+								className="h-full w-full object-cover object-center"
+							/>
+						</motion.div>
+					</motion.div>
+				) : null}
+
+				<motion.div
+					variants={animateContainer}
+					initial="initial"
+					whileInView="animate"
+					viewport={{ once: true, amount: 0.6 }}
+					className={cn(
+						'contained relative flex h-full justify-center flex-col items-center gap-3 text-center md:gap-5',
+						!isSimple && 'text-text-inverse',
+					)}
 				>
-					{data.heading}
-				</MotionText>
-				<MotionText
-					as="h3"
-					textStyle="h2"
-					className="font-normal text-pretty"
-					variants={animateChildUp}
-				>
-					{data.subheading}
-				</MotionText>
-			</motion.div>
-		</Container>
+					{data.preheading && (
+						<motion.div
+							variants={animatePreheading}
+							className="flex items-center justify-center gap-3"
+						>
+
+							<Text
+								as="p"
+								textStyle="nav"
+								className="text-[20px] leading-6 text-pretty"
+							>
+								{data.preheading}
+							</Text>
+						</motion.div>
+					)}
+
+					<MotionText
+						as="h2"
+						textStyle="h1"
+						className="mx-auto max-w-193 text-pretty"
+						variants={animateHeading}
+					>
+						{breakText(data.heading)}
+					</MotionText>
+
+					{data.subheading && (
+						<MotionText
+							as="p"
+							textStyle="body"
+							className="mx-auto mt-4 max-w-193 text-pretty"
+							variants={animateSubheading}
+						>
+							{data.subheading}
+						</MotionText>
+					)}
+				</motion.div>
+			</div>
+		</section>
 	);
 }

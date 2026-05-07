@@ -16,8 +16,8 @@ import { motion } from 'framer-motion';
 import Banner from './Banner';
 
 // Global State
-import { useAtom } from 'jotai';
-import { mobileMenuOpenAtom } from '@/app/Atoms';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { mobileMenuOpenAtom, navHeightAtom, navDarkAtom } from '@/app/Atoms';
 import MobileMenu from './atoms/MobileMenu';
 import { Text } from '../atoms/Text';
 import { Container } from '../atoms/Container';
@@ -26,6 +26,28 @@ export default function Navbar({ data }: SiteInfoProps) {
 	const path = usePathname();
 
 	const [mobileMenuOpen, setMobileMenuOpen] = useAtom(mobileMenuOpenAtom);
+	const navDark = useAtomValue(navDarkAtom);
+	const setNavHeight = useSetAtom(navHeightAtom);
+	const bannerRef = useRef<HTMLDivElement>(null);
+	const headerRef = useRef<HTMLElement>(null);
+	const mobileMenuOpenRef = useRef(false);
+
+	useEffect(() => {
+		mobileMenuOpenRef.current = mobileMenuOpen;
+	}, [mobileMenuOpen]);
+
+	useEffect(() => {
+		const update = () => {
+			if (mobileMenuOpenRef.current) return;
+			const bannerH = bannerRef.current?.offsetHeight ?? 0;
+			const headerH = headerRef.current?.offsetHeight ?? 0;
+			setNavHeight(bannerH + headerH);
+		};
+		const observer = new ResizeObserver(update);
+		if (bannerRef.current) observer.observe(bannerRef.current);
+		if (headerRef.current) observer.observe(headerRef.current);
+		return () => observer.disconnect();
+	}, [setNavHeight]);
 
 	function handleTray() {
 		setMobileMenuOpen(!mobileMenuOpen);
@@ -34,7 +56,7 @@ export default function Navbar({ data }: SiteInfoProps) {
 		setMobileMenuOpen(false);
 	}
 
-	const hamburgerLine = `h-[3px] w-[24px] bg-text-primary transition ease transform duration-500 delay-300`;
+	const hamburgerLine = `h-[3px] w-[24px] transition-colors duration-500`;
 
 	// Hide navbar on scroll - show on scroll up
 	const [show, setShow] = useState(true);
@@ -82,13 +104,16 @@ export default function Navbar({ data }: SiteInfoProps) {
 
 	return (
 		<>
-			<Banner data={data} isNearTop={isNearTop} />
+			<div ref={bannerRef}>
+				<Banner data={data} isNearTop={isNearTop} />
+			</div>
 			<header
+				ref={headerRef}
 				className={cn(
 					'sticky top-0 right-0 left-0 w-full transition-all duration-500',
 					{
 						'-z-50 opacity-0': !show,
-						'z-200 bg-bg-canvas opacity-100': show,
+						'z-200 opacity-100': show,
 					},
 				)}
 			>
@@ -108,7 +133,7 @@ export default function Navbar({ data }: SiteInfoProps) {
 							initial="initial"
 							animate="animate"
 							variants={navContainerAnimation}
-							className="flex h-max items-center justify-between py-5 text-text-primary"
+							className={cn('flex h-max items-center justify-between py-5 transition-colors duration-300', navDark ? 'text-text-inverse' : 'text-text-primary')}
 						>
 							<motion.div
 								onClick={() => setMobileMenuOpen(false)}
@@ -121,10 +146,9 @@ export default function Navbar({ data }: SiteInfoProps) {
 									href="/"
 									aria-label="Back to homepage"
 									className={cn(
-										'relative transition delay-300 duration-300',
+										'relative transition-colors duration-500',
 										{
-											'text-text-inverse delay-0':
-												mobileMenuOpen,
+											'text-text-inverse': mobileMenuOpen || navDark,
 										},
 									)}
 								>
@@ -179,29 +203,23 @@ export default function Navbar({ data }: SiteInfoProps) {
 							<button
 								aria-label="Menu"
 								onClick={handleTray}
-								className="right-0 cursor-pointer space-y-2 text-text-inverse lg:hidden"
+								className="right-0 cursor-pointer space-y-2 lg:hidden"
 							>
-								<div
-									className={cn(
-										hamburgerLine,
-										mobileMenuOpen
-											? 'translate-y-[5.25px] rotate-45 bg-text-inverse delay-0'
-											: 'bg-text-primary',
-									)}
-								></div>
-								<div
-									className={cn(
-										hamburgerLine,
-										mobileMenuOpen
-											? '-translate-y-[5.25px] -rotate-45 bg-text-inverse delay-0'
-											: 'bg-text-primary',
-									)}
-								></div>
+								<motion.div
+									className={cn(hamburgerLine, navDark || mobileMenuOpen ? 'bg-text-inverse' : 'bg-text-primary')}
+									animate={{ rotate: mobileMenuOpen ? 45 : 0, y: mobileMenuOpen ? 5.25 : 0 }}
+									transition={{ duration: 0.5, delay: !mobileMenuOpen ? 0.3 : 0, ease: [0.45, 0, 0.55, 1] }}
+								/>
+								<motion.div
+									className={cn(hamburgerLine, navDark || mobileMenuOpen ? 'bg-text-inverse' : 'bg-text-primary')}
+									animate={{ rotate: mobileMenuOpen ? -45 : 0, y: mobileMenuOpen ? -5.25 : 0 }}
+									transition={{ duration: 0.5, delay: !mobileMenuOpen ? 0.3 : 0, ease: [0.45, 0, 0.55, 1] }}
+								/>
 							</button>
 						</motion.div>
 					</Container>
 				</div>
-				<div
+				{/* <div
 					className={cn(
 						'absolute inset-0 h-full w-full bg-bg-canvas transition-all duration-500',
 						{
@@ -209,7 +227,7 @@ export default function Navbar({ data }: SiteInfoProps) {
 							'z-200 opacity-100': show,
 						},
 					)}
-				></div>
+				></div> */}
 				<MobileMenu
 					closeTray={closeTray}
 					open={mobileMenuOpen}

@@ -15,3 +15,7 @@ export const startPageTransitionAtom = atom(false);
 export const newHrefAtom = atom('');
 
 export const mobileMenuOpenAtom = atom(false);
+
+export const navHeightAtom = atom(0);
+
+export const navDarkAtom = atom(false);

@@ -54,7 +54,7 @@ const mobileMenuContainer = {
 	animate: {
 		opacity: 1,
 		transition: {
-			ease: customEasing,
+			ease: 'easeInOut' as const,
 			duration: 0.4, //0.8
 			// when: 'beforeChildren',
 			staggerChildren: 0.08,
@@ -64,7 +64,7 @@ const mobileMenuContainer = {
 		opacity: 0,
 		transition: {
 			ease: 'easeInOut' as const,
-			delay: 0.5, //0.5
+			delay: 0.2, //0.5
 			duration: 0.4, //0.8
 		},
 	},

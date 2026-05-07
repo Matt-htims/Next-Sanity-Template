@@ -83,12 +83,14 @@ export const animateChildFadeIn = {
 // Button Animations
 export const animateButtonContainer = {
 	initial: {
-		opacity: 1,
+		opacity: 0,
 	},
 	animate: {
 		opacity: 1,
 		transition: {
-			staggerChildren: 0.1,
+			duration: 0.2,
+			when: 'beforeChildren',
+			staggerChildren: 0.08,
 		},
 	},
 };
@@ -101,7 +103,7 @@ export const animateButtonChild = {
 		opacity: 1,
 		transition: {
 			ease: 'easeInOut' as const,
-			duration: 1,
+			duration: 1.2,
 		},
 	},
 };
