@@ -44,7 +44,7 @@ function Card({ data }: { data: ImageType }) {
 	}
 	return (
 		<div
-			className={`relative mr-3 h-[300px] md:h-[700px] overflow-hidden rounded-site md:mr-5 ${imageStyle(
+			className={`relative mr-3 h-75 md:h-175 overflow-hidden rounded-site md:mr-5 ${imageStyle(
 				data.carouselSize ?? '',
 			)}`}
 		>

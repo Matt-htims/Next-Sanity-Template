@@ -71,6 +71,10 @@ const VideoBlock = dynamic(() => import('@/app/components/blocks/VideoBlock'), {
 	ssr: true,
 });
 
+const Section = dynamic(() => import('@/app/components/blocks/Section'), {
+	ssr: true,
+});
+
 type BlockData = {
 	_type?: string;
 	_key?: string;
@@ -80,6 +84,7 @@ type BlockData = {
 type BlockComponent = ComponentType<any>;
 
 const blockComponentMap: Record<string, BlockComponent> = {
+	Section,
 	WireframeBlock,
 	ImageCarousel,
 	PageIntro,

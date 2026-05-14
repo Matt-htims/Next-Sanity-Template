@@ -38,6 +38,7 @@ const page = {
 			title: 'Blocks',
 			type: 'array',
 			of: [
+				{ type: 'Section' },
 				{ type: 'WireframeBlock' },
 				{
 					type: 'PageIntro',
@@ -113,7 +114,7 @@ const page = {
 						{
 							name: 'misc',
 							title: 'Miscellaneous',
-							of: ['Spacer', 'ThemeSwitch'],
+							of: ['Section', 'Spacer', 'ThemeSwitch'],
 						},
 					],
 				},

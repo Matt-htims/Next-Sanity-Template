@@ -66,6 +66,23 @@
   If we ever want to remove these styles, we need to add an explicit border
   color utility to any element that depends on these defaults.
 */
+/* Section background utilities — edit values to match your brand */
+.section-bg-surface {
+	background: var(--semantic-bg-surface);
+}
+.section-bg-dark {
+	background: var(--black);
+}
+.section-bg-accent {
+	background: var(--accent);
+}
+.section-bg-gradient-light {
+	background: linear-gradient(to bottom, var(--white), var(--off-white));
+}
+.section-bg-gradient-dark {
+	background: linear-gradient(to bottom, var(--off-black), var(--black));
+}
+
 @layer base {
 	.text-nav {
 		@apply text-lg font-medium;

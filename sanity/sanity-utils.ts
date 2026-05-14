@@ -110,6 +110,81 @@ export async function getPages(): Promise<Page[]> {
 	);
 }
 
+const blockFields = groq`
+    ...,
+    pretitle[] {
+        ...,
+        markDefs[] {
+            ...,
+            page-> { "slug": slug.current, name, id }
+        }
+    },
+    headingRich[] {
+        ...,
+        markDefs[] {
+            ...,
+            page-> { "slug": slug.current, name, id }
+        }
+    },
+    bodyRich[] {
+        ...,
+        markDefs[] {
+            ...,
+            page-> { "slug": slug.current, name, id }
+        }
+    },
+    richText[] {
+        ...,
+        markDefs[] {
+            ...,
+            page-> { "slug": slug.current, name, id }
+        }
+    },
+    image {
+        ...,
+        asset-> {
+            _id, _type, url,
+            metadata { lqip, dimensions { width, height } }
+        }
+    },
+    logos[] {
+        ...,
+        asset-> {
+            _id, _type, url,
+            metadata { lqip, dimensions { width, height } }
+        }
+    },
+    buttons[] {
+        ...,
+        link {
+            ...,
+            page-> { "slug": slug.current, name, id }
+        }
+    },
+    form-> {
+        _id, title, formspreeFormId, submitLabel,
+        successMessage, errorMessage,
+        fields[] { ..., options[] }
+    },
+    images[] {
+        ...,
+        asset-> {
+            _id, _type, url,
+            metadata { lqip, dimensions { width, height } }
+        }
+    },
+    imageTextPairs[] {
+        ...,
+        image {
+            ...,
+            asset-> {
+                _id, _type, url,
+                metadata { lqip, dimensions { width, height } }
+            }
+        }
+    }
+`;
+
 export async function getPage(slug: string, options?: { preview?: boolean }): Promise<Page> {
 	const client = options?.preview
 		? createClient({ ...clientConfig, token: process.env.SANITY_API_READ_TOKEN })
@@ -121,136 +196,9 @@ export async function getPage(slug: string, options?: { preview?: boolean }): Pr
             name,
             "slug": slug.current,
             content[] {
-                ...,
-                pretitle[] {
-                    ...,
-                    markDefs[] {
-                        ...,
-                        page-> {
-                            "slug": slug.current,
-                            name,
-                            id,
-                        }
-                    }
-                },
-                headingRich[] {
-                    ...,
-                    markDefs[] {
-                        ...,
-                        page-> {
-                            "slug": slug.current,
-                            name,
-                            id,
-                        }
-                    }
-                },
-                bodyRich[] {
-                    ...,
-                    markDefs[] {
-                        ...,
-                        page-> {
-                            "slug": slug.current,
-                            name,
-                            id,
-                        }
-                    }
-                },
-                richText[] {
-                    ...,
-                    markDefs[] {
-                        ...,
-                        page-> {
-                            "slug": slug.current,
-                            name,
-                            id,
-                        }
-                    }
-                },
-                image{
-                    ...,
-                    asset-> {
-                        _id,
-                        _type,
-                        url,
-                        metadata {
-                            lqip,
-                            dimensions {
-                                    width,
-                                    height,
-                                }
-                        },
-                    },
-                },
-                logos[] {
-                    ...,
-                    asset-> {
-                        _id,
-                        _type,
-                        url,
-                        metadata {
-                            lqip,
-                            dimensions {
-                                width,
-                                height,
-                            },
-                        },
-                    },
-                },
-                buttons [] {
-                    ...,
-                    link {
-                        ...,
-                        page-> {
-                            "slug" : slug.current,
-                            name,
-                            id,
-                        },
-                    },
-                },
-                form-> {
-                    _id,
-                    title,
-                    formspreeFormId,
-                    submitLabel,
-                    successMessage,
-                    errorMessage,
-                    fields[] {
-                        ...,
-                        options[]
-                    }
-                },
-                images[] {
-                    ...,
-                    asset-> {
-                        _id,
-                        _type,
-                        url,
-                        metadata {
-                            lqip,
-                            dimensions {
-                                width,
-                                height,
-                            },
-                        },
-                    },
-                },
-                imageTextPairs[] {
-                    ...,
-                    image {
-                        ...,
-                        asset-> {
-                        _id,
-                        _type,
-                        url,
-                        metadata {
-                            lqip,
-                            dimensions {
-                                width,
-                                height,
-                            },
-                        },
-                    },
-                    }
+                ${blockFields},
+                content[] {
+                    ${blockFields}
                 }
             },
         }`,

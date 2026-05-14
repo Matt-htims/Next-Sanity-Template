@@ -73,7 +73,7 @@ export default function NavDropdownItem({
 									<InnerLink
 										innerLinkData={item.link}
 										noAnimation
-										className="block px-5 py-2 font-bold text-[24px] leading-[30px]"
+										className="block px-5 py-2 font-bold text-[24px] leading-7.5"
 									/>
 								</div>
 							))}
@@ -106,7 +106,7 @@ export default function NavDropdownItem({
 									key={item._key ?? index}
 									innerLinkData={item.link}
 									noAnimation
-									className="block px-4 py-2 font-bold text-[18px] leading-[22px] transition-opacity hover:opacity-60"
+									className="block px-4 py-2 font-bold text-[18px] leading-5.5 transition-opacity hover:opacity-60"
 								/>
 							))}
 						</div>
