@@ -14,8 +14,7 @@
 	--color-white: var(--white);
 	--color-off-white: var(--off-white);
 	--color-grey: var(--grey);
-	--color-accent: var(--accent);
-	--color-accent-alt: var(--accent-alt);
+	
 
 	/* Semantic utilities */
 	--color-bg-canvas: var(--semantic-bg-canvas);
@@ -27,6 +26,8 @@
 	--color-border-subtle: var(--semantic-border-subtle);
 	--color-border-strong: var(--semantic-border-strong);
 	--color-focus-ring: var(--semantic-focus-ring);
+	--color-accent: var(--semantic-accent);
+	--color-accent-alt: var(--semantic-accent-alt);
 
 	/* Button colors */
 	--color-button-primary: var(--semantic-button-primary);

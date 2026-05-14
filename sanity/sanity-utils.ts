@@ -32,6 +32,21 @@ export async function getSiteInfo(): Promise<SiteInfo> {
                             name,
                         },
                     },
+                    dropdownItems[] {
+                        _key,
+                        link {
+                            linkType,
+                            displayName,
+                            externalLink,
+                            pageTitle,
+                            anchorLink,
+                            page-> {
+                                _id,
+                                "slug" : slug.current,
+                                name,
+                            },
+                        },
+                    },
                 },
             siteLogo{
                 _type,

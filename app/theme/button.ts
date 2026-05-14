@@ -27,7 +27,7 @@ export const buttonVariants = {
 		secondary: 'bg-button-secondary text-button-secondary-text',
 		outline: 'border border-border-strong rounded-full',
 		link: 'text-text-primary underline underline-offset-4',
-		nav: 'text-text-primary font-bold text-underline-simple',
+		nav: 'font-bold transition-none',
 	},
 	size: {
 		// Example: default: 'text-base leading-none px-8 py-4',

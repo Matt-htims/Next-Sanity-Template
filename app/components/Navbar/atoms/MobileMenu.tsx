@@ -35,6 +35,7 @@ export default function MobileMenu({
 					>
 						<ButtonBlock
 							className="h-full flex-col items-center gap-8 text-white sm:px-16 md:gap-8"
+							mobile={true}
 							data={{
 								_key: 'sldkfj',
 								_type: 'buttons',

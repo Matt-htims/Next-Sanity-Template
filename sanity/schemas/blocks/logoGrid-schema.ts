@@ -14,6 +14,19 @@ const logoGrid = {
 			hidden: true,
 		},
 		{
+			name: 'style',
+			title: 'Style',
+			type: 'string',
+			options: {
+				list: [
+					{ title: 'Grid', value: 'grid' },
+					{ title: 'Carousel', value: 'carousel' },
+				],
+				layout: 'radio',
+			},
+			initialValue: 'grid',
+		},
+		{
 			name: 'logos',
 			title: 'Logos',
 			type: 'array',
