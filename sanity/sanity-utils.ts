@@ -185,9 +185,15 @@ const blockFields = groq`
     }
 `;
 
-export async function getPage(slug: string, options?: { preview?: boolean }): Promise<Page> {
+export async function getPage(
+	slug: string,
+	options?: { preview?: boolean },
+): Promise<Page> {
 	const client = options?.preview
-		? createClient({ ...clientConfig, token: process.env.SANITY_API_READ_TOKEN })
+		? createClient({
+				...clientConfig,
+				token: process.env.SANITY_API_READ_TOKEN,
+			})
 		: createClient(clientConfig);
 	return client.fetch(
 		groq`*[_type == "page" && slug.current == $slug][0]{
