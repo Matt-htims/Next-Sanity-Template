@@ -56,7 +56,7 @@ export default function Banner({
 												key={index}
 												href={bannerItem.bannerLink}
 												className={cn(
-													'bg-ice relative z-210 flex h-10 min-h-0 flex-[0_0_100%] items-center justify-center px-0 text-center md:h-15.5',
+													'relative z-210 flex h-10 min-h-0 flex-[0_0_100%] items-center justify-center bg-accent px-0 text-center md:h-15.5',
 													{
 														'bg-accent':
 															bannerItem.bannerColour ==
@@ -81,7 +81,7 @@ export default function Banner({
 												key={index}
 												href={bannerItem.bannerLink}
 												className={cn(
-													'bg-ice relative z-210 flex h-10 min-h-0 flex-[0_0_100%] items-center justify-center px-0 text-center md:h-15.5',
+													'relative z-210 flex h-10 min-h-0 flex-[0_0_100%] items-center justify-center bg-accent px-0 text-center md:h-15.5',
 													{
 														'bg-accent':
 															bannerItem.bannerColour ==
