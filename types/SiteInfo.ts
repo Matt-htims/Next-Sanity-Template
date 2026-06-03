@@ -1,5 +1,6 @@
 import { ImageType } from './Image';
 import { ButtonType } from './Button';
+import { FormDocumentType } from './Form';
 
 export type SiteLogo = {
 	_type: string;
@@ -22,6 +23,7 @@ export type SiteInfo = {
 	navMenu: Array<ButtonType>;
 	addBanner: boolean;
 	banner?: BannerItemType[];
+	footerForm?: FormDocumentType;
 };
 
 export type SiteInfoProps = {

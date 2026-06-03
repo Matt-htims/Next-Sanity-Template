@@ -12,6 +12,13 @@ const siteInfo = {
 	],
 	fields: [
 		{
+			name: 'footerForm',
+			title: 'Footer Form',
+			type: 'reference',
+			group: 'footer',
+			to: [{ type: 'form' }],
+		},
+		{
 			name: 'seo',
 			title: 'Site SEO',
 			type: 'siteSeo',

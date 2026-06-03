@@ -17,12 +17,12 @@ export const richTextColorDefinitions = [
 	{
 		title: 'Accent',
 		value: 'accent',
-		cssVar: '--accent',
+		cssVar: '--semantic-accent',
 	},
 	{
 		title: 'Accent Alt',
 		value: 'accentAlt',
-		cssVar: '--accent-alt',
+		cssVar: '--semantic-accent-alt',
 	},
 ] as const;
 

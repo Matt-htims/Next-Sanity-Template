@@ -7,6 +7,7 @@ import { siteFontClassName, siteFontHeadLinks } from '@/app/theme/_internal/font
 // Components
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import FooterFormSection from '../components/FooterFormSection';
 import SmoothScrolling from '../components/SmoothScrolling';
 import Providers from '../components/Providers';
 import GoogleAnalytics from '../components/GoogleAnalytics';
@@ -51,6 +52,7 @@ export default async function RootLayout({
 						</SmoothScrolling>
 						{/* {children} */}
 					</main>
+					<FooterFormSection data={siteInfo} />
 					<Footer data={siteInfo} />
 				</body>
 			</Providers>

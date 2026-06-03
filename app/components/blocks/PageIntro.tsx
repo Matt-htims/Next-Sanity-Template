@@ -5,8 +5,6 @@ import {
 	useTransform,
 } from 'framer-motion';
 import { useRef } from 'react';
-import { useAtomValue } from 'jotai';
-import { navHeightAtom } from '@/app/Atoms';
 import { useNavDark } from '@/lib/useNavDark';
 
 import { ImageType } from '@/types/Image';
@@ -83,7 +81,6 @@ export default function PageIntro({ data }: PageIntroProps) {
 	const isSimple = data.style === 'simple';
 	const sectionRef = useRef<HTMLElement>(null);
 	const containerRef = useRef(null);
-	const bannerHeight = useAtomValue(navHeightAtom);
 
 	useNavDark(sectionRef, !isSimple && !!data.image?.asset?.url);
 
@@ -100,7 +97,7 @@ export default function PageIntro({ data }: PageIntroProps) {
 		<section ref={sectionRef}>
 			<div
 				ref={containerRef}
-				style={{ marginTop: `-${bannerHeight}px` }}
+				style={{ marginTop: 'calc(-1 * var(--nav-height))' }}
 				className={cn(
 					'relative flex w-screen flex-col items-center overflow-hidden',
 					isSimple

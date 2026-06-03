@@ -12,6 +12,10 @@
 	  Surface radius tokens
 	  Use for cards, media, sections, and other container surfaces.
 	*/
+	/* Navbar height — adjust here if padding/logo size changes */
+	--nav-height-mobile: 80px;
+	--nav-height-desktop: 80px;
+	--nav-height: var(--nav-height-mobile);
 	--site-radius: 20px;
 	--site-radius-mobile: 12px;
 	--site-radius-mobile-breakpoint: 640px;
@@ -68,6 +72,12 @@
 	--semantic-feedback-warning-bg: var(--off-white);
 	--semantic-feedback-warning-text: var(--state-warning);
 	--semantic-feedback-warning-border: var(--state-warning);
+}
+
+@media (min-width: 1024px) {
+	:root {
+		--nav-height: var(--nav-height-desktop);
+	}
 }
 
 @supports (color: color(display-p3 0 0 0 / 1)) {

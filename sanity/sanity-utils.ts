@@ -48,6 +48,11 @@ export async function getSiteInfo(): Promise<SiteInfo> {
                         },
                     },
                 },
+            footerForm-> {
+                _id, title, formspreeFormId, submitLabel,
+                successMessage, errorMessage,
+                fields[] { ..., options[] }
+            },
             siteLogo{
                 _type,
                 textAsLogo,
