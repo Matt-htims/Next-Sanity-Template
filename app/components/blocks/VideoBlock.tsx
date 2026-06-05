@@ -4,17 +4,20 @@ import { motion, useInView } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import CornerSmoothing from '../atoms/CornerSmoothing';
 import { Container } from '../atoms/Container';
+import { getLayoutWidthClassName } from '@/lib/layoutWidth';
 
 type VideoBlockProps = {
 	data: {
 		_key: string;
 		_type: string;
+		layoutWidth?: string;
 		videoThumbnail: string;
 		videoSource: string;
 	};
 };
 
 export default function VideoBlock({ data }: VideoBlockProps) {
+	const widthClassName = getLayoutWidthClassName(data.layoutWidth);
 	const containerRef = useRef(null);
 	const videoRef = useRef<HTMLVideoElement>(null);
 	const isInView = useInView(containerRef, { once: false });
@@ -64,7 +67,7 @@ export default function VideoBlock({ data }: VideoBlockProps) {
 				initial="initial"
 				whileInView="animate"
 				viewport={{ once: true }}
-				className="aspect-35/23 w-full overflow-hidden"
+				className={`${widthClassName} aspect-35/23 overflow-hidden`}
 			>
 				<CornerSmoothing className="h-full w-full">
 					<div className="relative h-full w-full">

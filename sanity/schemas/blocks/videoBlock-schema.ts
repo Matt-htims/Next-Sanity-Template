@@ -1,4 +1,5 @@
 import { PlayIcon } from '@sanity/icons';
+import { sanityTextStackWidthOptions } from '@/app/theme/layoutConfig';
 
 const videoBlock = {
 	name: 'VideoBlock',
@@ -12,6 +13,13 @@ const videoBlock = {
 			type: 'string',
 			initialValue: 'Video Block',
 			hidden: true,
+		},
+		{
+			name: 'layoutWidth',
+			title: 'Width',
+			type: 'string',
+			initialValue: 'default',
+			options: { list: sanityTextStackWidthOptions },
 		},
 		{
 			name: 'videoThumbnail',

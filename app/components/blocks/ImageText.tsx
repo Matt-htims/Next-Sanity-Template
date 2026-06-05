@@ -1,11 +1,14 @@
 'use client';
 import CustomImage from '../atoms/CustomImage';
 import RichText from '../atoms/RichText';
+import ButtonBlock from './ButtonBlock';
 import { useRef } from 'react';
 
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { animateChildUp, animateContainer } from '@/lib/animations';
 
 import { ImageType } from '@/types/Image';
+import { ButtonType } from '@/types/Button';
 import { Container } from '../atoms/Container';
 
 type ImageTextProps = {
@@ -14,7 +17,10 @@ type ImageTextProps = {
 		_type: string;
 		imageSide: string;
 		image: ImageType;
-		richText: Array<any>;
+		pretitle?: Array<any>;
+		headingRich?: Array<any>;
+		bodyRich?: Array<any>;
+		buttons?: ButtonType[];
 	};
 };
 
@@ -49,34 +55,38 @@ export default function ImageText({ data }: ImageTextProps) {
 				/>
 			</motion.div>
 			<motion.div
-				variants={textAnimation}
+				variants={animateContainer}
 				initial="initial"
 				animate={isInViewText ? 'animate' : 'initial'}
 				ref={textRef}
-				className={`col-span-12 flex h-max items-center min-[980px]:col-span-5 min-[980px]:h-full min-[980px]:px-0 xl:col-span-4 ${
+				className={`col-span-12 flex h-max flex-col justify-center gap-3 min-[980px]:col-span-5 min-[980px]:h-full min-[980px]:px-0 xl:col-span-4 ${
 					data.imageSide == 'left'
 						? 'min-[980px]:col-start-8 xl:col-start-8'
 						: 'min-[980px]:order-1 min-[980px]:col-start-1 xl:col-start-2'
 				}`}
 			>
-				<RichText data={data.richText} />
+				{data.pretitle && (
+					<motion.div variants={animateChildUp} className="mb-0.5">
+						<RichText data={data.pretitle} />
+					</motion.div>
+				)}
+				{data.headingRich && (
+					<motion.div variants={animateChildUp} className="text-pretty">
+						<RichText data={data.headingRich} />
+					</motion.div>
+				)}
+				{data.bodyRich && (
+					<motion.div variants={animateChildUp} className="mt-2 space-y-4 text-pretty">
+						<RichText data={data.bodyRich} />
+					</motion.div>
+				)}
+				{data.buttons && data.buttons.length > 0 && (
+					<motion.div variants={animateChildUp} className="mt-4">
+						<ButtonBlock data={{ buttons: data.buttons }} />
+					</motion.div>
+				)}
 			</motion.div>
 		</Container>
 	);
 }
 
-// Animations
-const textAnimation = {
-	initial: {
-		opacity: 0,
-		y: 10,
-	},
-	animate: {
-		opacity: 1,
-		y: 0,
-		transition: {
-			duration: 0.8,
-			ease: 'easeInOut' as const,
-		},
-	},
-};

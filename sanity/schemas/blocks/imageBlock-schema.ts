@@ -1,4 +1,5 @@
 import { ImageIcon } from '@sanity/icons';
+import { sanityTextStackWidthOptions } from '@/app/theme/layoutConfig';
 
 const imageBlock = {
 	name: 'ImageBlock',
@@ -12,6 +13,13 @@ const imageBlock = {
 			type: 'string',
 			initialValue: 'Image Block',
 			hidden: true,
+		},
+		{
+			name: 'layoutWidth',
+			title: 'Width',
+			type: 'string',
+			initialValue: 'default',
+			options: { list: sanityTextStackWidthOptions },
 		},
 		{
 			name: 'images',

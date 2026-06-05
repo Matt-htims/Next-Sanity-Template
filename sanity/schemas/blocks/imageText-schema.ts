@@ -39,9 +39,26 @@ const imageText = {
 			],
 		},
 		{
-			name: 'richText',
-			title: 'Text',
+			name: 'pretitle',
+			title: 'Pretitle',
 			type: 'richText',
+			description: 'Leave blank if not needed',
+		},
+		{
+			name: 'headingRich',
+			title: 'Heading',
+			type: 'richText',
+		},
+		{
+			name: 'bodyRich',
+			title: 'Body',
+			type: 'richText',
+		},
+		{
+			name: 'buttons',
+			title: 'Buttons',
+			type: 'array',
+			of: [{ type: 'button' }],
 		},
 	],
 };

@@ -13,16 +13,19 @@ import { animateChildUp } from '@/lib/animations';
 import { useWindowSize } from '@uidotdev/usehooks';
 import CornerSmoothing from '../atoms/CornerSmoothing';
 import { Container } from '../atoms/Container';
+import { getLayoutWidthClassName } from '@/lib/layoutWidth';
 
 type ImageBlockProps = {
 	data: {
 		_key: string;
 		_type: string;
+		layoutWidth?: string;
 		images: ImageType[];
 	};
 };
 
 export default function ImageBlock({ data }: ImageBlockProps) {
+	const widthClassName = getLayoutWidthClassName(data.layoutWidth);
 	let desktopRef = useRef(null);
 	// let mobileRef = useRef(null);
 
@@ -82,7 +85,7 @@ export default function ImageBlock({ data }: ImageBlockProps) {
 						// borderRadius:
 						// 	width && width < 1024 ? borderRadiusMobile : '8px',
 					}}
-					className="flex h-max justify-center overflow-hidden"
+					className={`${widthClassName} flex h-max origin-top justify-center overflow-hidden`}
 				>
 					<div className="aspect-5/3 w-full overflow-hidden">
 						<CornerSmoothing className="h-full w-full">
