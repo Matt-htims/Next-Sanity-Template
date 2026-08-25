@@ -1,4 +1,4 @@
-import { PanelRightIcon } from '@sanity/icons';
+import { PanelRightIcon } from '@sanity/icons/PanelRight';
 
 const imageText = {
 	name: 'ImageText',

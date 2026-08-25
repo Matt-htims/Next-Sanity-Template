@@ -13,11 +13,12 @@ import schemas from './sanity/schemas';
 // import { netlifyWidget } from 'sanity-plugin-dashboard-widget-netlify';
 // import { visionTool } from '@sanity/vision';
 
-import { simplerColorInput } from 'sanity-plugin-simpler-color-input';
 import { PreviewAction } from './sanity/actions/PreviewAction';
 import PreviewPane from './sanity/components/PreviewPane';
 
-import { ControlsIcon, DocumentsIcon, ClipboardIcon } from '@sanity/icons';
+import { ControlsIcon } from '@sanity/icons/Controls';
+import { DocumentsIcon } from '@sanity/icons/Documents';
+import { ClipboardIcon } from '@sanity/icons/Clipboard';
 
 // Define the actions that should be available for singleton documents
 const singletonActions = new Set(['publish', 'discardChanges', 'restore']);
@@ -72,16 +73,6 @@ const config = defineConfig({
 					]),
 		}),
 		media(),
-		simplerColorInput({
-			defaultColorList: [
-				{ label: 'Lush', value: '#446959' },
-				{ label: 'Earth', value: '#E0D0B6' },
-				{ label: 'Moss', value: '#AEBAA3' },
-				{ label: 'Clay', value: '#C76647' },
-				{ label: 'Wood', value: '#7C6252' },
-			],
-			defaultColorFormat: 'hexa',
-		}),
 		// visionTool(),
 	],
 	tools: (prev) => prev.filter((tool) => tool.name !== 'releases'),

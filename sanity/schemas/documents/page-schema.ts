@@ -1,4 +1,4 @@
-import { DocumentIcon } from '@sanity/icons';
+import { DocumentIcon } from '@sanity/icons/Document';
 
 const page = {
 	name: 'page',

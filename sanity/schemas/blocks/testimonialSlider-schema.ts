@@ -1,4 +1,5 @@
-import { ArrowRightIcon, UserIcon } from '@sanity/icons';
+import { ArrowRightIcon } from '@sanity/icons/ArrowRight';
+import { UserIcon } from '@sanity/icons/User';
 
 const testimonialSlider = {
 	name: 'TestimonialSlider',

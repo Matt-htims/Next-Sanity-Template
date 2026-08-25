@@ -1,5 +1,5 @@
 import { sanityButtonSizes, sanityButtonVariants } from '@/app/theme/button';
-import { LaunchIcon } from '@sanity/icons';
+import { LaunchIcon } from '@sanity/icons/Launch';
 
 const button = {
 	name: 'button',

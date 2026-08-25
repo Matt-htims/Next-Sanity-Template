@@ -1,5 +1,5 @@
 import { sanityNavItemSizes, sanityNavItemVariants } from '@/app/theme/button';
-import { LinkIcon } from '@sanity/icons';
+import { LinkIcon } from '@sanity/icons/Link';
 
 const navItem = {
 	name: 'navItem',

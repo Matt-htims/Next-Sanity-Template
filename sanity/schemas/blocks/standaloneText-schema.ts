@@ -1,4 +1,4 @@
-import { BlockContentIcon } from '@sanity/icons';
+import { BlockContentIcon } from '@sanity/icons/BlockContent';
 import truncateText from '@/lib/truncateText';
 import { sanityTextStackWidthOptions } from '@/app/theme/layoutConfig';
 

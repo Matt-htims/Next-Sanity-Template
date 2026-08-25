@@ -1,4 +1,4 @@
-import { StopIcon } from '@sanity/icons';
+import { StopIcon } from '@sanity/icons/Stop';
 
 const spacer = {
 	name: 'Spacer',

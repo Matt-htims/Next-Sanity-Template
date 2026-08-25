@@ -1,4 +1,4 @@
-import { BlockquoteIcon } from '@sanity/icons';
+import { BlockquoteIcon } from '@sanity/icons/Blockquote';
 
 const pageIntro = {
 	name: 'PageIntro',

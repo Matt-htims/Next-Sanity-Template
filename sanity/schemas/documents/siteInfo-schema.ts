@@ -1,4 +1,5 @@
-import { InfoOutlineIcon, LaunchIcon } from '@sanity/icons';
+import { InfoOutlineIcon } from '@sanity/icons/InfoOutline';
+import { LaunchIcon } from '@sanity/icons/Launch';
 
 const siteInfo = {
 	name: 'siteInfo',

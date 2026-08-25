@@ -1,4 +1,4 @@
-import { TransferIcon } from '@sanity/icons';
+import { TransferIcon } from '@sanity/icons/Transfer';
 
 const themeSwitch = {
 	name: 'ThemeSwitch',

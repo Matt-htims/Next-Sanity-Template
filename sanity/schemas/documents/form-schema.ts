@@ -1,4 +1,4 @@
-import { ClipboardIcon } from '@sanity/icons';
+import { ClipboardIcon } from '@sanity/icons/Clipboard';
 
 const form = {
 	name: 'form',

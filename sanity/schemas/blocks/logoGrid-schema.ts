@@ -1,4 +1,4 @@
-import { LemonIcon } from '@sanity/icons';
+import { LemonIcon } from '@sanity/icons/Lemon';
 
 const logoGrid = {
 	name: 'LogoGrid',

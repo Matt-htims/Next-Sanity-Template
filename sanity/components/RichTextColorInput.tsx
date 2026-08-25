@@ -18,8 +18,8 @@ export default function RichTextColorInput(props: StringInputProps) {
 		: 'Default';
 
 	return (
-		<Stack space={3}>
-			<Grid columns={[1, 2]} gap={2}>
+		<Stack gap={3}>
+			<Grid gridTemplateColumns={[1, 2]} gap={2}>
 				<Card
 					as="button"
 					type="button"
@@ -51,7 +51,7 @@ export default function RichTextColorInput(props: StringInputProps) {
 								flexShrink: 0,
 							}}
 						/>
-						<Stack space={1}>
+						<Stack gap={1}>
 							<Text size={1} weight="medium">
 								Default
 							</Text>
@@ -103,7 +103,7 @@ export default function RichTextColorInput(props: StringInputProps) {
 										flexShrink: 0,
 									}}
 								/>
-								<Stack space={1}>
+								<Stack gap={1}>
 									<Text size={1} weight="medium">
 										{token.title}
 									</Text>
@@ -118,7 +118,7 @@ export default function RichTextColorInput(props: StringInputProps) {
 			</Grid>
 			{selectedPreviewColor && (
 				<Card padding={3} radius={2} border>
-					<Stack space={2}>
+					<Stack gap={2}>
 						<Text size={0} muted>
 							Preview: {selectedPreviewLabel}
 						</Text>

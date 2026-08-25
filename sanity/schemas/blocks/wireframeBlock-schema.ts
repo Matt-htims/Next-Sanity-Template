@@ -1,4 +1,4 @@
-import { TiersIcon } from '@sanity/icons';
+import { TiersIcon } from '@sanity/icons/Tiers';
 
 const wireFrameBlock = {
 	name: 'WireframeBlock',

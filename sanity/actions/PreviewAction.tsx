@@ -1,4 +1,4 @@
-import { EyeOpenIcon } from '@sanity/icons';
+import { EyeOpenIcon } from '@sanity/icons/EyeOpen';
 import type { DocumentActionComponent } from 'sanity';
 
 export const PreviewAction: DocumentActionComponent = ({ draft, published }) => {

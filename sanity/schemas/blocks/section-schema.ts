@@ -1,4 +1,4 @@
-import { StackCompactIcon } from '@sanity/icons';
+import { StackCompactIcon } from '@sanity/icons/StackCompact';
 import { sectionBgOptions } from '@/app/theme/sectionBg';
 
 const section = {

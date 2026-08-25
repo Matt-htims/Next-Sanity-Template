@@ -41,7 +41,12 @@ export default function Navbar({ data }: SiteInfoProps) {
 			if (mobileMenuOpenRef.current) return;
 			const bannerH = bannerRef.current?.offsetHeight ?? 0;
 			const headerH = headerRef.current?.offsetHeight ?? 0;
-			setNavHeight(bannerH + headerH);
+			const totalHeight = bannerH + headerH;
+			setNavHeight(totalHeight);
+			document.documentElement.style.setProperty(
+				'--nav-height',
+				`${totalHeight}px`,
+			);
 		};
 		const observer = new ResizeObserver(update);
 		if (bannerRef.current) observer.observe(bannerRef.current);

@@ -1,4 +1,4 @@
-import { TextIcon } from '@sanity/icons';
+import { TextIcon } from '@sanity/icons/Text';
 import { sanityTextOptions } from '@/app/theme/text';
 import { richTextColorOptions } from '@/app/theme/richTextColor';
 import RichTextColorInput from '@/sanity/components/RichTextColorInput';
@@ -54,12 +54,6 @@ const richText = {
 								options: {
 									list: richTextColorOptions,
 								},
-							},
-							{
-								name: 'color',
-								title: 'Legacy Text Color (Deprecated)',
-								type: 'textColor',
-								hidden: true,
 							},
 						],
 					},
